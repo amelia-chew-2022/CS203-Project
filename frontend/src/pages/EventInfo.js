@@ -46,7 +46,9 @@ const EventInfo = () => {
             <h1>Ticket Pricing</h1>
 
             <p>
-                
+            LIVE NATION PRESALE
+            Register for a FREE membership via www.livenation.sg to access the exclusive presale!⁠
+            Limited tickets available.
             </p>
 
             <h1>Seat Map</h1>
