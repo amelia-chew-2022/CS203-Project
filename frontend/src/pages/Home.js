@@ -21,7 +21,7 @@ import HPF2023 from "../assets/hallyupopfest.png";
 import RexOrangeCounty from "../assets/roc.png";
 import TaylorSwift from "../assets/taylorswift.png";
 
-// import { Link } from "react-router-dom";
+ import { Link } from "react-router-dom";
 // import { useNavigate } from 'react-router-dom';
 
 const dateStyle = {
