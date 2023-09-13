@@ -1,16 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// import Switch, { Routes } from 'react-router';
 import Home from './pages/Home';
-import EventInfo from './pages/EventInfo';
-import Login from './pages/Login'
+// import EventInfo from './pages/EventInfo';
 
-const App=()=>{
+function App(){
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Home/>} />
-                <Route path="/eventinfo" element={<EventInfo/>} />
-                <Route path="/login" element={<Login/>}/>
+                <Route path="/" component={Home} />
+                {/* <Route path="/eventinfo" component={EventInfo} /> */}
+                {/* <Route path="/login" component={Login}/> */}
             </Routes>
         </Router>
     );
