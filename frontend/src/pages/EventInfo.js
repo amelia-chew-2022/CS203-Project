@@ -1,5 +1,5 @@
-import { Breadcrumbs } from "@mui/material/Breadcrumbs";
-import NavigateNextIcon from "@mui/icons-material"
+// import { Breadcrumbs } from "@mui/material/Breadcrumbs";
+// import NavigateNextIcon from "@mui/icons-material"
 import { Fragment } from "react";
 
 
@@ -7,12 +7,12 @@ const EventInfo = () => {
 
     return (
         <Fragment>
-            <Breadcrumbs
+            {/* <Breadcrumbs
                 separator={<NavigateNextIcon fontSize="small" />}
                 aria-label="breadcrumb"
             >
                 {breadcrumbs}
-            </Breadcrumbs>
+            </Breadcrumbs> */}
 
             <h1>Event Details</h1>
 

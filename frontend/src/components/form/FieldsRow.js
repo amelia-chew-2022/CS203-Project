@@ -4,9 +4,6 @@ const FieldsRow = ({ children, gap="2rem" }) => {
             style={{
                 display: "flex",
                 flexDirection: "row",
-                justifyContent: "center",
-                display: "flex",
-                flexDirection: "row",
                 gap: gap,
                 justifyContent: "center",
                 marginTop: gap,
