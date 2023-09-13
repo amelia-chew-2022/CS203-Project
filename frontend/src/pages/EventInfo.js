@@ -1,7 +1,9 @@
 // import { Breadcrumbs } from "@mui/material/Breadcrumbs";
 // import NavigateNextIcon from "@mui/icons-material"
+import { Typography } from "@mui/material";
 import { Fragment } from "react";
-
+import HeadingOne from "../components/font/HeadingOne";
+import NavBar from "../components/navigation/NavBar";
 
 const EventInfo = () => {
 
@@ -13,10 +15,11 @@ const EventInfo = () => {
             >
                 {breadcrumbs}
             </Breadcrumbs> */}
+            <NavBar/>
 
-            <h1>Event Details</h1>
+            <HeadingOne>Event Details</HeadingOne>
 
-            <p>
+            <Typography>
                 Live Nation Singapore is thrilled to announce that South Korean multifaceted talent, LEE YOUNGJI, will be 
                 coming to Singapore to perform for the first time ever as part of her first Asia tour!
 
@@ -41,23 +44,23 @@ const EventInfo = () => {
                 till 11:59pm. Visit www.livenation.sg for free membership signup and presale access. Tickets to the public will be available 
                 from 25 Aug (Fri), 12pm onwards via www.ticketmaster.sg. All VIP ticket holders are entitled to attend the soundcheck and 
                 get priority entry into the standing pen!
-            </p>
+            </Typography>
             
-            <h1>Ticket Pricing</h1>
+            <HeadingOne>Ticket Pricing</HeadingOne>
 
-            <p>
+            <Typography>
             LIVE NATION PRESALE
             Register for a FREE membership via www.livenation.sg to access the exclusive presale!⁠
             Limited tickets available.
-            </p>
+            </Typography>
 
-            <h1>Seat Map</h1>
+            <HeadingOne>Seat Map</HeadingOne>
 
-            <h1>Exchange & Refund Policy</h1>
+            <HeadingOne>Exchange & Refund Policy</HeadingOne>
 
-            <h1>Admission Policy</h1>
+            <HeadingOne>Admission Policy</HeadingOne>
 
-            <h1>Ways To Buy Tickets</h1>
+            <HeadingOne>Ways To Buy Tickets</HeadingOne>
         </Fragment>
     );
 };

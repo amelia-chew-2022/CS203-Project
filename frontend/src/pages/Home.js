@@ -20,9 +20,9 @@ import P1Harmony from '../assets/p1harmony.png'
 import HPF2023 from '../assets/hallyupopfest.png'
 import RexOrangeCounty from '../assets/roc.png'
 import TaylorSwift from '../assets/taylorswift.png'
+import HeadingOne from "../components/font/HeadingOne";
 
-// import { Link } from "react-router-dom";
-// import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 
 const dateStyle = {
@@ -54,12 +54,12 @@ const Home = () => {
             </FieldsRow>
 
             <FieldsRow>
-                <h1>Upcoming Events</h1>
+            <HeadingOne>Upcoming Events</HeadingOne>
             </FieldsRow>
 
             {/* cards */}
             <FieldsRow>
-        {/* <Link to="/eventinfo"> */}
+        <Link to="/eventinfo">
         <Button>
             <Card sx={{ width: 400, height: 300 }}>
                 <CardMedia
@@ -78,7 +78,7 @@ const Home = () => {
                 </CardContent>
             </Card>
         </Button>
-        {/* </Link> */}
+        </Link>
 
         <Button>
             <Card sx={{ width: 400, height: 300 }}>
