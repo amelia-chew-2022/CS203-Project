@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import NavBar from "../components/navigation/NavBar";
-import ProgressBar from "../components/StepperComponent";
+import ProgressBar from "../components/seatselect/StepperComponent";
 import FieldsRow from "../components/form/FieldsRow";
 import vibes from "../assets/vibes.png"; // with import
-import Dropdown from "../components/DropDown";
-import ButtonGrid from "../components/ButtonGrid";
+import Dropdown from "../components/seatselect/DropDown";
+import ButtonGrid from "../components/seatselect/ButtonGrid";
 
 import {
   TextField,
