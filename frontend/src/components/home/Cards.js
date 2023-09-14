@@ -21,6 +21,7 @@ import { Link } from "react-router-dom";
 // import EventInfo from '../../pages/EventInfo';
 
 
+
 const dateStyle = {
     variant: "body1",
     color: "#5522cc",
