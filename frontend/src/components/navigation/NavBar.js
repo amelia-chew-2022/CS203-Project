@@ -5,7 +5,7 @@ import Tab from "@mui/material/Tab";
 import Stack from "@mui/material/Stack";
 import React from "react";
 import LoginIcon from '@mui/icons-material/Login';
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import Toolbar from "@mui/material/Toolbar";
 
 
@@ -99,6 +99,7 @@ const NavBar = ({ authenticated = false }) => {
                 />
 
                 <Stack direction="row" spacing={2}>
+                <Link to="/Login">
                 <Button 
                     variant="outlined"
                     size="large"
@@ -118,6 +119,7 @@ const NavBar = ({ authenticated = false }) => {
                 >
                     Login
                 </Button>
+                </Link>
                 </Stack>
             </Tabs>
 

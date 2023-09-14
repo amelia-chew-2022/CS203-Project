@@ -1,23 +1,15 @@
-import { Fragment } from 'react';
-import Box from '@mui/material/Box';
 import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 
 const Login = () => {
     return (
-        <Fragment>
-            <Box
-            sx={{
-            width: 300,
-            height: 300,
-            backgroundColor: 'primary.dark','&:hover': {
-                backgroundColor: 'primary.main',
-                opacity: [0.9, 0.8, 0.7],
-                },
-            }}
-            />
-            
-        </Fragment>
+        <Stack spacing={2} direction="row">
+            <Button variant="text">Text</Button>
+            <Button variant="contained">Contained</Button>
+            <Button variant="outlined">Outlined</Button>
+        </Stack>
     );
 };
 
