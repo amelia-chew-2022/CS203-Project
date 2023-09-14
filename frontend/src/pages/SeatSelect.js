@@ -28,7 +28,7 @@ function SeatSelect() {
       <div style={{ display: "flex", alignItems: "center" }}>
         {/* Image on the left */}
         <div style={{ marginRight: "20px" }}>
-          <img src={vibes} alt="Your Image" width="100%" height="150" />
+          <img src={vibes} alt="Your Image" width="350" height="150" />
         </div>
 
         {/* Text box and dropdown to the right */}
