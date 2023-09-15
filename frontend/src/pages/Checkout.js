@@ -1,21 +1,21 @@
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '@mui/material/AppBar';
+// import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
+// import Toolbar from '@mui/material/Toolbar';
 import Paper from '@mui/material/Paper';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
-import Link from '@mui/material/Link';
+// import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import AddressForm from './checkoutforms/AddressForm';
-import PaymentForm from './checkoutforms/PaymentForm';
+// import PaymentForm from './checkoutforms/PaymentForm';
 import Review from './checkoutforms/ReviewOrder';
 import SeatSelection from './checkoutforms/SeatSelection';
-import HeadingOne from "../components/font/HeadingOne";
+// import HeadingOne from "../components/font/HeadingOne";
 import NavBar from "../components/navigation/NavBar";
 
 const steps = ["Seat Selection", "Payment Details", "Order Summary"]; // TODO add "Seat Selection" maybe later
@@ -28,8 +28,6 @@ function getStepContent(step) {
         return <AddressForm />;  // TODO need to add the contents of Addressform.js and others later
     case 2:
         return <Review />;
-    case 3:
-        // return <Review />;
     default:
         throw new Error('Unknown step');
   }
@@ -49,7 +47,7 @@ export default function Checkout() {
     return (
         <React.Fragment>
           <CssBaseline />
-          <AppBar
+          {/* <AppBar
             position="absolute"
             color="default"
             elevation={0}
@@ -57,14 +55,14 @@ export default function Checkout() {
               position: 'relative',
               borderBottom: (t) => `1px solid ${t.palette.divider}`,
             }}
-          >
+          > */}
             {/* <Toolbar>
               <Typography variant="h6" color="inherit" noWrap>
                 Company name
               </Typography>
             </Toolbar> */}
             <NavBar></NavBar>
-          </AppBar>
+          {/* </AppBar> */}
           <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
             <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
               <Typography component="h1" variant="h4" align="center">
