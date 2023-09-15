@@ -7,13 +7,14 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import BasicSelect from "./BasicSelect";
+import { newClickCount } from './ButtonGrid'; // Adjust the path to your source file
 
-function createData(TicketType, Price, Quantity, TicketInfo) {
-  return { TicketType, Price, Quantity, TicketInfo };
+function createData(TicketType, Price, Quantity, TotalPrice) {
+  return { TicketType, Price, Quantity, TotalPrice };
 }
 
 const rows = [
-  createData('Standard', '$46.00',BasicSelect,),
+  createData('Standard', '46.00',BasicSelect,),
 
 ];
 
@@ -26,7 +27,7 @@ export default function BasicTable() {
             <TableCell>Ticket Type</TableCell>
             <TableCell align="right">Price</TableCell>
             <TableCell align="right">Quantity</TableCell>
-            <TableCell align="right">Ticket Info</TableCell>
+            <TableCell align="right">Total Price</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -38,9 +39,9 @@ export default function BasicTable() {
               <TableCell component="th" scope="row">
                 {row.TicketType}
               </TableCell>
-              <TableCell align="right">{row.Price}</TableCell>
-              <TableCell align="right">{<BasicSelect/>}</TableCell>
-              <TableCell align="right">{row.TicketInfo}</TableCell>
+              <TableCell align="right">${row.Price}</TableCell>
+              <TableCell align="right">{newClickCount}</TableCell>
+              <TableCell align="right">${newClickCount*row.Price}</TableCell>
             </TableRow>
           ))}
         </TableBody>
