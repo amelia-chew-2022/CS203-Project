@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 
 //Progress bar
-const steps = ["Seat Selection", "Confirmation", "Payment"];
+const steps = ["Seat Selection", "Payment Details", "Order Summary"];
 
 function SeatSelect() {
   return (

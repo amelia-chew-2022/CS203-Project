@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import EventInfo from './pages/EventInfo';
 import Login from './pages/Login';
 import SeatSelect from './pages/SeatSelect';
+import Checkout from './pages/Checkout';
 
 const App = () => {
     return (
@@ -13,6 +14,7 @@ const App = () => {
                 <Route path="/eventinfo" element={<EventInfo/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/seatselect" element={<SeatSelect/>}/>
+                <Route path="/checkout" element={<Checkout/>}/>
             </Routes>
         </Router>
     );
