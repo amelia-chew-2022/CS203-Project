@@ -5,16 +5,8 @@ import FieldsRow from "../components/form/FieldsRow";
 import vibes from "../assets/vibes.png"; // with import
 import Dropdown from "../components/seatselect/DropDown";
 import ButtonGrid from "../components/seatselect/ButtonGrid";
-import GridTable from "../components/seatselect/BasicTable";
 
-import {
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-} from "@mui/material";
+import { Button } from "@mui/material";
 
 //Progress bar
 const steps = ["Seat Selection", "Confirmation", "Payment"];
@@ -43,7 +35,7 @@ function SeatSelect() {
       >
         {/* Image on the left */}
         <div style={{ marginRight: "20px" }}>
-          <img src={vibes} alt="Your Image" width="350" height="150" />
+          <img src={vibes} alt="img" width="350" height="150" />
         </div>
 
         {/* Text box and dropdown to the right */}
@@ -63,15 +55,25 @@ function SeatSelect() {
       <div
         className="divider"
         style={{
-          width: "100%", // Adjust the width as needed
-          height: "40px", // Adjust the height as needed
-          backgroundColor: "#d3d3d3", // Change the background color
+          width: "100%",
+          backgroundColor: "lightgrey", // Background color (gold)
+          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
           margin: "20px 0",
           display: "flex",
+
           alignItems: "center",
+          height: "40px", // Height of the rectangular background
+          borderRadius: "4px", // Rounded corners for the rectangle
         }}
       >
-        <p>Choose Your Seat</p>
+        <p
+          style={{
+            fontWeight: "bold",
+            textTransform: "uppercase",
+          }}
+        >
+          Choose Your Seat
+        </p>
       </div>
 
       {/*Seat Select component*/}
@@ -79,7 +81,7 @@ function SeatSelect() {
       <div
         className="SeatSelect-Component"
         style={{
-          backgroundColor: "#808080",
+          backgroundColor: "#222222",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -88,32 +90,38 @@ function SeatSelect() {
         }}
       >
         <div
-          className="screen"
+          className="Stage"
           style={{
             backgroundColor: "#fff",
-            height: "80px",
+            height: "100px",
             width: "600px",
             margin: "5px 0",
-            transform: "rotateX(-45deg)",
+            transform: "rotateX(-30deg) scale(1.1)",
             boxShadow: "0 3px 10px rgba(255, 255, 255, 0.75)",
             display: "flex", // Use Flexbox
             alignItems: "center", // Center vertically
             justifyContent: "center", // Center horizontally
+            borderRadius: "0 0 50% 50%", // This creates a semi-circle
           }}
         >
-          <p style={{ fontSize: "20px" }}>Screen</p>
+          <p style={{ fontSize: "20px" }}>Stage</p>
         </div>
 
-        <ButtonGrid onButtonClick={handleButtonClick}></ButtonGrid>
+        <ButtonGrid
+          onButtonClick={handleButtonClick}
+          style={{ marginBottom: "20px" }}
+        ></ButtonGrid>
         {clickCount > 0 && (
           <div
             style={{
               backgroundColor: "lightgray",
               width: "100%",
               display: "flex",
-              justifyContent: "center", // Center horizontally
-              alignItems: "center", // Center vertically
-              height: "50px", // Set a height to center the text vertically
+              justifyContent: "center",
+              alignItems: "center",
+              height: "50px",
+              fontSize: "18px", // Set the font size
+              fontWeight: "bold", // Set the font weight to bold
             }}
           >
             You selected &nbsp; <b>{clickCount} </b>&nbsp;<p>tickets</p>
@@ -138,7 +146,7 @@ function SeatSelect() {
             style={{
               width: "20px",
               height: "20px",
-              backgroundColor: "lightgray",
+              backgroundColor: "#626262",
               marginRight: "5px",
             }}
           ></div>
@@ -151,7 +159,7 @@ function SeatSelect() {
             style={{
               width: "20px",
               height: "20px",
-              backgroundColor: "red",
+              backgroundColor: "#222222",
               marginRight: "5px",
             }}
           ></div>
@@ -162,7 +170,7 @@ function SeatSelect() {
             style={{
               width: "20px",
               height: "20px",
-              backgroundColor: "green",
+              backgroundColor: "#7bc47f",
               marginRight: "5px",
             }}
           ></div>
@@ -227,22 +235,20 @@ function SeatSelect() {
 
               <p>{displayText}</p>
               <div>
-          <Button
-            variant="contained"
-            color="primary"
-            style={{
-              left: "92%", // Adjust the horizontal position as needed
-              marginBottom:"20px"
-            }}
-          >
-            CheckOut
-          </Button>
-        </div>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={{
+                    left: "92%", // Adjust the horizontal position as needed
+                    marginBottom: "20px",
+                  }}
+                >
+                  CheckOut
+                </Button>
+              </div>
             </div>
           )}
         </div>
-
-       
       </div>
     </>
   );
