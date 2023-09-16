@@ -18,14 +18,14 @@ import SeatSelection from './checkoutforms/SeatSelection';
 // import HeadingOne from "../components/font/HeadingOne";
 import NavBar from "../components/navigation/NavBar";
 
-const steps = ["Seat Selection", "Payment Details", "Order Summary"]; // TODO add "Seat Selection" maybe later
+const steps = ["Seat Selection", "Payment Details", "Order Summary"]; 
 
 function getStepContent(step) {
   switch (step) {
     case 0:
         return <SeatSelection />;
     case 1:
-        return <AddressForm />;  // TODO need to add the contents of Addressform.js and others later
+        return <AddressForm />; 
     case 2:
         return <Review />;
     default:
@@ -47,23 +47,9 @@ export default function Checkout() {
     return (
         <React.Fragment>
           <CssBaseline />
-          {/* <AppBar
-            position="absolute"
-            color="default"
-            elevation={0}
-            sx={{
-              position: 'relative',
-              borderBottom: (t) => `1px solid ${t.palette.divider}`,
-            }}
-          > */}
-            {/* <Toolbar>
-              <Typography variant="h6" color="inherit" noWrap>
-                Company name
-              </Typography>
-            </Toolbar> */}
             <NavBar></NavBar>
-          {/* </AppBar> */}
-          <Container component="main" maxWidth="sm" sx={{ mb: 4 }}>
+
+          <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
             <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
               <Typography component="h1" variant="h4" align="center">
                 Checkout
@@ -85,6 +71,8 @@ export default function Checkout() {
                     confirmation, and will send you an update when your order has
                     shipped.
                   </Typography>
+
+                
                 </React.Fragment>
               ) : (
                 <React.Fragment>
