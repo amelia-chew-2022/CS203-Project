@@ -1,21 +1,16 @@
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
-// import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-// import Toolbar from '@mui/material/Toolbar';
 import Paper from '@mui/material/Paper';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
-// import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import AddressForm from './checkoutforms/AddressForm';
-// import PaymentForm from './checkoutforms/PaymentForm';
 import Review from './checkoutforms/ReviewOrder';
 import SeatSelection from './checkoutforms/SeatSelection';
-// import HeadingOne from "../components/font/HeadingOne";
 import NavBar from "../components/navigation/NavBar";
 
 const steps = ["Seat Selection", "Payment Details", "Order Summary"]; 
@@ -72,6 +67,18 @@ export default function Checkout() {
                     shipped.
                   </Typography>
 
+                  <React.Fragment>
+                  {/* {getStepContent(activeStep)} */}
+                  <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Button
+                      variant="contained"
+                      href="../"
+                      sx={{ mt: 3, ml: 1 }}
+                    >
+                        Back to Home
+                    </Button>
+                  </Box>
+                  </React.Fragment>
                 
                 </React.Fragment>
               ) : (
