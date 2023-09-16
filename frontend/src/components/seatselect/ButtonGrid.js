@@ -12,6 +12,7 @@ function ButtonGrid({ onButtonClick }) {
     alignItems: "center",
     minHeight: "10vh",
     padding: "0 20px",
+    width: "800px", // Set a fixed width for the grid container
   };
 
   const buttonStyle = {
@@ -20,13 +21,13 @@ function ButtonGrid({ onButtonClick }) {
     margin: "5px",
     borderRadius: "20px 20px 0 0",
     borderBottom: "none",
-    backgroundColor: "lightgray",
+    backgroundColor: "#626262",
     border: "1px solid #ccc",
   };
 
   const selectedButtonStyle = {
     ...buttonStyle,
-    backgroundColor: "green",
+    backgroundColor: "#7bc47f",
   };
 
   // Create a 2D array to represent the button grid
@@ -47,7 +48,9 @@ function ButtonGrid({ onButtonClick }) {
     [false, false, false, false, false, false, false, false],
   ];
 
-  const [disabledButtons, setDisabledButtons] = useState(initialDisabledButtons);
+  const [disabledButtons, setDisabledButtons] = useState(
+    initialDisabledButtons
+  );
 
   const handleButtonClick = (row, col) => {
     const updatedButtons = [...buttons];
@@ -55,7 +58,7 @@ function ButtonGrid({ onButtonClick }) {
     setButtons(updatedButtons);
 
     // Update the click count
-     newClickCount = updatedButtons
+    newClickCount = updatedButtons
       .flat()
       .filter((isButtonSelected) => isButtonSelected).length;
     setClickCount(newClickCount);
@@ -94,9 +97,10 @@ function ButtonGrid({ onButtonClick }) {
                         isButtonSelected
                           ? selectedButtonStyle
                           : disabledButtons[rowIndex][colIndex]
-                          ? { ...buttonStyle, backgroundColor: "gray" }
+                          ? { ...buttonStyle, backgroundColor: "pink" }
                           : buttonStyle
                       }
+            
                       onClick={() => handleButtonClick(rowIndex, colIndex)}
                       disabled={disabledButtons[rowIndex][colIndex]}
                     >
