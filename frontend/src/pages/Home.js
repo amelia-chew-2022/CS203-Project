@@ -6,6 +6,7 @@ import Cards from "../components/home/Cards";
 import Button from "@mui/material/Button";
 import * as React from 'react';
 import HeadingOne from "../components/font/HeadingOne";
+import Footer from "../components/footer/Footer";
 
 const Home = () => {
     return (
@@ -43,7 +44,7 @@ const Home = () => {
                         Load More
                 </Button>
             </FieldsRow>
-
+            <Footer></Footer>
         </Fragment>
     );
 };
