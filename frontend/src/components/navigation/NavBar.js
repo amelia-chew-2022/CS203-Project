@@ -6,9 +6,7 @@ import Stack from "@mui/material/Stack";
 import React from "react";
 import LoginIcon from '@mui/icons-material/Login';
 import { Link } from "react-router-dom";
-// import Toolbar from "@mui/material/Toolbar";
-
-
+import Logo from "../../assets/applogo.svg";
 
 // Function to generate accessibility properties for a tab
 function a11yProps(index) {
@@ -33,11 +31,13 @@ const NavBar = ({ authenticated = false }) => {
                 height: "50px",
                 display: "flex",
                 flexDirection: "row",
-                justifyContent: "space-between",
                 alignItems: "center",
             }}
             position="sticky"
         >
+            <Link to="/">
+            <img src={Logo} alt="Logo"/>
+            </Link>
 
             <Tabs 
                     value={value}
