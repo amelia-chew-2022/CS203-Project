@@ -136,7 +136,7 @@ const EventInfo = () => {
                     sx={{tabStyle}}
                 />
 
-                <Link to="/seatselect">
+                <Link to="/checkout">
                 <Button 
                 variant="contained" 
                 sx={{backgroundColor: "#5522cc",
