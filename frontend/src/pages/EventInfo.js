@@ -15,6 +15,7 @@ import Vibes from '../assets/vibes.png';
 import { Link } from 'react-router-dom';
 import React, { useRef } from 'react';
 import './EventInfo.css';
+import CssBaseline from '@mui/material/CssBaseline';
 
 
 function handleClick(event) {
@@ -89,6 +90,7 @@ const EventInfo = () => {
 
     return (
         <Fragment>
+            <CssBaseline />
             <NavBar/>
 
             {/* breadcrumbs */}
