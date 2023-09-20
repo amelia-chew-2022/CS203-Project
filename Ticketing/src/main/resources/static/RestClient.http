@@ -1,0 +1,55 @@
+GET http://localhost:8080/tickets
+Accept: application/json
+
+###
+GET http://localhost:8080/tickets/2
+
+###
+DELETE http://localhost:8080/tickets/2
+Authorization: Basic Shawn hello123
+
+
+###
+POST http://localhost:8080/tickets
+Content-Type: application/json
+Authorization: Basic Shawn hello123
+
+{
+    "title": "Lee Youngji",
+    "ticket_number": "789",
+    "seat_number": "1cxCV6",
+    "unit_price": "150"
+}
+
+###
+PUT http://localhost:8080/tickets/3
+Content-Type: application/json
+Authorization: Basic Nicholas bye123
+
+{
+    "title": "TXT Concert",
+    "ticket_number": "789",
+    "seat_number": "1cxCV6",
+    "unit_price": "150"
+}
+
+###
+GET http://localhost:8080/users
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+    "username": "Janaaaaa",
+    "password": "badpassword",
+    "authorities": "ROLE_USER",
+    "email": "jana@gmail.com",
+    "credit_card_num": "56987452",
+    "address": "SMU building",
+    "phone_num": "32165498"
+}
+
+###
+GET http://localhost:8080/tickets/1/3/buy
+Authorization: Basic Janaaaaa badpassword
