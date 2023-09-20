@@ -11,8 +11,11 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Vibes from '../assets/vibes.png';
-import * as React from 'react';
+// import * as React from 'react';
 import { Link } from 'react-router-dom';
+import React, { useRef } from 'react';
+import './EventInfo.css';
+
 
 function handleClick(event) {
     event.preventDefault();
@@ -26,6 +29,8 @@ function a11yProps(index) {
         "aria-controls": `tabpanel-${index}`,
     };
 }
+
+
 
 const breadcrumbs = [
     <Link 
@@ -65,6 +70,22 @@ const EventInfo = () => {
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
+
+    const section1Ref = useRef(null);
+    const section2Ref = useRef(null);
+    const section3Ref = useRef(null);
+    const section4Ref = useRef(null);
+    const section5Ref = useRef(null);
+    const section6Ref = useRef(null);
+
+
+  function scrollToSection(ref) {
+    if (ref.current) {
+      ref.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+
 
     return (
         <Fragment>
@@ -106,34 +127,47 @@ const EventInfo = () => {
                 }}
                 >
                 <Tab 
+                    class='nav-link'
                     label="Event Details" 
                     {...a11yProps(0)} 
-                    sx={{tabStyle}}
+                    sx={{tabStyle}} 
+                    onClick={() => scrollToSection(section1Ref)}
                 />
                 <Tab 
+                    class='nav-link'
                     label="Ticket Pricing" 
                     {...a11yProps(1)} 
                     sx={{tabStyle}}
+                    onClick={() => scrollToSection(section2Ref)}
                 />
                 <Tab 
+                    class='nav-link'
                     label="Seat Map" 
                     {...a11yProps(2)} 
                     sx={{tabStyle}}
+                    onClick={() => scrollToSection(section3Ref)}
                 />
                 <Tab 
+                    class='nav-link'
                     label="Exchange & Refund Policy" 
                     {...a11yProps(3)} 
                     sx={{tabStyle}}
+                    onClick={() => scrollToSection(section4Ref)}
                 />
                 <Tab 
+                    class='nav-link'
                     label="Admissions Policy" 
                     {...a11yProps(4)} 
                     sx={{tabStyle}}
+                    onClick={() => scrollToSection(section5Ref)}
                 />
                 <Tab 
+        
+                    class='nav-link'
                     label="Ways To Buy Tickets" 
                     {...a11yProps(5)} 
                     sx={{tabStyle}}
+                    onClick={() => scrollToSection(section6Ref)}
                 />
 
                 <Link to="/seatselect">
@@ -155,7 +189,8 @@ const EventInfo = () => {
             </Box>
 
             {/* event details */}
-            <HeadingOne>Event Details</HeadingOne>
+            <a ref={section1Ref} class='header'>Event Details</a>
+
 
             <Typography paragraph>
             Art Republic proudly presents VIBES! An extraordinary festival, destined to ignite passions and capture hearts on September 23, 
@@ -187,7 +222,9 @@ const EventInfo = () => {
                 backgroundColor: "#ececec",
               }}
             >
-            <HeadingOne>Ticket Pricing</HeadingOne>
+
+            <a ref={section2Ref} class='header'>Ticket Pricing</a>
+            
 
             <Typography style={{fontWeight: "bold", color: "#5522cc"}} paragraph>
             GENERAL SALE
@@ -226,8 +263,7 @@ const EventInfo = () => {
             </Box>
 
             {/* seat map */}
-            <HeadingOne>Seat Map</HeadingOne>
-
+            <a ref={section3Ref} class='header'>Seat Map</a>
             {/* exchange and refund policy */}
             <Box
             sx={{
@@ -236,7 +272,10 @@ const EventInfo = () => {
                 backgroundColor: "#ececec",
               }}
             >
-            <HeadingOne>Exchange & Refund Policy</HeadingOne>
+
+                
+    
+            <a ref={section4Ref} class='header'>Exchange & Refund Policy</a>
             <Typography>
             <ol type="1">
                 <li>The Organiser/Venue Owner reserves the right without refund or compensation to refuse admission/evict any person(s) whose 
@@ -254,7 +293,7 @@ const EventInfo = () => {
             </Box>
 
             {/* admission policy */}
-            <HeadingOne>Admission Policy</HeadingOne>
+            <a ref={section5Ref} class='header'>Admission Policy</a>
             <Typography>
             <b>Admission Rules:</b><br/>
             <ol type="1">
@@ -280,7 +319,8 @@ const EventInfo = () => {
                 backgroundColor: "#ececec",
               }}
             >
-            <HeadingOne>Ways To Buy Tickets</HeadingOne>
+
+            <a ref={section6Ref} class='header'>Ways To Buy Tickets</a>
             <Typography>
             <b>► ONLINE & MOBILE:</b><br/>
             24 x 7 x 365 days of the year! Visit us on our website at ticketmaster.sg to purchase tickets.<br/>
