@@ -46,10 +46,11 @@ public class SecurityConfig {
         .httpBasic()
             .and()
         .authorizeRequests()
-            .antMatchers(HttpMethod.GET, "/tickets", "/tickets/**").permitAll()
+            .antMatchers(HttpMethod.GET, "/tickets").permitAll()
             .antMatchers(HttpMethod.POST, "/tickets", "tickets/").hasRole("ADMIN")
             .antMatchers(HttpMethod.PUT, "/tickets/*").hasRole("ADMIN")
             .antMatchers(HttpMethod.DELETE, "/tickets/*").hasRole("ADMIN")
+            .antMatchers(HttpMethod.GET, "/tickets/*/*/buy").hasAnyRole("USER", "ADMIN")
             
             .and()
         .authenticationProvider(authenticationProvider())

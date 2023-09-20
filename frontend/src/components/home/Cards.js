@@ -16,11 +16,6 @@ import HPF2023 from '../../assets/hallyupopfest.png'
 import RexOrangeCounty from '../../assets/roc.png'
 import TaylorSwift from '../../assets/taylorswift.png'
 import { Link } from "react-router-dom";
-// import CardActions from '@mui/material/CardActions';
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import EventInfo from '../../pages/EventInfo';
-
-
 
 const dateStyle = {
     variant: "body1",

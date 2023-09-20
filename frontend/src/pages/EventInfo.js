@@ -170,7 +170,7 @@ const EventInfo = () => {
                     onClick={() => scrollToSection(section6Ref)}
                 />
 
-                <Link to="/seatselect">
+                <Link to="/checkout">
                 <Button 
                 variant="contained" 
                 sx={{backgroundColor: "#5522cc",

@@ -18,8 +18,8 @@ public class Week5Application {
 
         // JPA book repository init
         TicketRepository books = ctx.getBean(TicketRepository.class);
-        System.out.println("[Add ticket]: " + books.save(new Ticket("Twice")).getTitle());
-        System.out.println("[Add ticket]: " + books.save(new Ticket("Bornpink")).getTitle());
+        System.out.println("[Add ticket]: " + books.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
+        System.out.println("[Add ticket]: " + books.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
 
         // JPA user repository init
         UserRepository users = ctx.getBean(UserRepository.class);

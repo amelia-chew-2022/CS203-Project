@@ -25,14 +25,14 @@ public class TicketController {
     }
 
     @GetMapping("/tickets")
-    public List<Ticket> getBooks(){
+    public List<Ticket> getTickets(){
         return ticketService.listTickets();
     }
 
     @GetMapping("/tickets/{id}")
-    public Ticket getBook(@PathVariable Long id){
-        Ticket book = ticketService.getTicket(id);
-        if(book == null) throw new TicketNotFoundException(id);
+    public Ticket getTicket(@PathVariable Long id){
+        Ticket ticket = ticketService.getTicket(id);
+        if(ticket == null) throw new TicketNotFoundException(id);
         return ticketService.getTicket(id);
 
     }
@@ -44,19 +44,24 @@ public class TicketController {
     }
 
     @PutMapping("/tickets/{id}")
-    public Ticket updateBook(@PathVariable Long id, @Valid @RequestBody Ticket newTicketInfo){
-        Ticket book = ticketService.updateTicket(id, newTicketInfo);
-        if(book == null) throw new TicketNotFoundException(id);
+    public Ticket updateTicket(@PathVariable Long id, @Valid @RequestBody Ticket newTicketInfo){
+        Ticket ticket = ticketService.updateTicket(id, newTicketInfo);
+        if(ticket == null) throw new TicketNotFoundException(id);
         
-        return book;
+        return ticket;
     }
 
     @DeleteMapping("/tickets/{id}")
-    public void deleteBook(@PathVariable Long id){
+    public void deleteTicket(@PathVariable Long id){
         try{
             ticketService.deleteTicket(id);
          }catch(EmptyResultDataAccessException e) {
             throw new TicketNotFoundException(id);
          }
+    }
+
+    @GetMapping("/tickets/{id}/{userID}/buy")
+    public void buyTicket(@PathVariable Long id, @PathVariable Long userID){
+        ticketService.buyTicket(id, userID);
     }
 }
