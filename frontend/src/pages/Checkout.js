@@ -12,7 +12,7 @@ import AddressForm from './checkoutforms/AddressForm';
 import Review from './checkoutforms/ReviewOrder';
 import SeatSelection from './checkoutforms/SeatSelection';
 import NavBar from "../components/navigation/NavBar";
-
+import Footer from "../components/footer/Footer";
 const steps = ["Seat Selection", "Payment Details", "Order Summary"]; 
 
 function getStepContent(step) {
@@ -46,9 +46,9 @@ export default function Checkout() {
 
           <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
             <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-              <Typography component="h1" variant="h4" align="center">
+              {/* <Typography component="h1" variant="h4" align="center">
                 Checkout
-              </Typography>
+              </Typography> */}
               <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
                 {steps.map((label) => (
                   <Step key={label}>
@@ -103,7 +103,9 @@ export default function Checkout() {
               )}
             </Paper>
           </Container>
+          <Footer></Footer>
         </React.Fragment>
+     
       );
 }
 
