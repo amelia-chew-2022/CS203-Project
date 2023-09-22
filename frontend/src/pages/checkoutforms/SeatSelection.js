@@ -58,7 +58,7 @@ function SeatSelect() {
           className="divider"
           style={{
             width: "100%",
-            backgroundColor: "lightgrey", // Background color (gold)
+            backgroundColor: "#5522CC", // Background color (gold)
             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
             margin: "20px 0",
             display: "flex",
@@ -72,6 +72,7 @@ function SeatSelect() {
             style={{
               fontWeight: "bold",
               textTransform: "uppercase",
+             color:'#FFF'
             }}
           >
             Choose Your Seat
@@ -180,8 +181,9 @@ function SeatSelect() {
           </div>
         </div>
   
+  {/*Cat Prices not sure if we including this */}
         <div className="Cat-Price">
-          <div>
+         {/*  <div>
             <h2>Ticket Categories and Prices</h2>
             <table>
               <tbody>
@@ -220,12 +222,12 @@ function SeatSelect() {
                 </tr>
               </tbody>
             </table>
-          </div>
+          </div> */}
           <div>
             <h2>Additional Information</h2>
             <ul>
               <li>Seat plan is not drawn to scale</li>
-              <li>Colour indicates price category</li>
+              {/* <li>Colour indicates price category</li> */}
               <li>Ticket prices exclude booking fees</li>
               <li>Seating layout subject to change</li>
             </ul>
