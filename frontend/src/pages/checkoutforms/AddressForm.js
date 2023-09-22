@@ -56,7 +56,7 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="saveCard" value="yes" />}
+            control={<Checkbox name="saveCard" value="yes" />}
             label="Remember credit card details for next time"
           />
         </Grid>
@@ -155,7 +155,7 @@ export default function AddressForm() {
         </Grid>
         <Grid item xs={12}>
           <FormControlLabel
-            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
+            control={<Checkbox name="saveAddress" value="yes" />}
             label="Use this address for payment details"
           />
         </Grid>

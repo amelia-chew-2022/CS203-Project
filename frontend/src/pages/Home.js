@@ -5,12 +5,14 @@ import SearchBox from "../components/home/SearchBox";
 import Cards from "../components/home/Cards";
 import Button from "@mui/material/Button";
 import * as React from 'react';
-import HeadingOne from "../components/font/HeadingOne";
+import Typography from "@mui/material/Typography";
+import CssBaseline from '@mui/material/CssBaseline';
 import Footer from "../components/footer/Footer";
 
 const Home = () => {
     return (
         <Fragment>
+            <CssBaseline />
             <NavBar/>
 
             <FieldsRow>
@@ -18,7 +20,9 @@ const Home = () => {
             </FieldsRow>
 
             <FieldsRow>
-            <HeadingOne>Upcoming Events</HeadingOne>
+            <Typography variant="h3" gutterBottom sx={{fontWeight: "bold"}}>
+                Upcoming Events
+            </Typography>
             </FieldsRow>
 
             {/* cards */}
