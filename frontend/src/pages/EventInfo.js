@@ -15,6 +15,8 @@ import Vibes from '../assets/vibes.png';
 import { Link } from 'react-router-dom';
 import React, { useRef } from 'react';
 import './EventInfo.css';
+import './MakeSeatMap.js'
+import CreateSeatMap from './MakeSeatMap.js';
 
 
 function handleClick(event) {
@@ -88,9 +90,10 @@ const EventInfo = () => {
 
 
     return (
+        
         <Fragment>
             <NavBar/>
-
+            <CreateSeatMap/>
             {/* breadcrumbs */}
             <Stack spacing={2}>
             <Breadcrumbs
@@ -227,6 +230,7 @@ const EventInfo = () => {
             
 
             <Typography style={{fontWeight: "bold", color: "#5522cc"}} paragraph>
+                
             GENERAL SALE
             </Typography>
 
@@ -264,6 +268,7 @@ const EventInfo = () => {
 
             {/* seat map */}
             <a ref={section3Ref} class='header'>Seat Map</a>
+            
             {/* exchange and refund policy */}
             <Box
             sx={{

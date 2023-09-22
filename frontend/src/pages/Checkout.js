@@ -12,16 +12,20 @@ import AddressForm from './checkoutforms/AddressForm';
 import Review from './checkoutforms/ReviewOrder';
 import SeatSelection from './checkoutforms/SeatSelection';
 import NavBar from "../components/navigation/NavBar";
+import Verification from "./checkoutforms/Verification"
 
-const steps = ["Seat Selection", "Payment Details", "Order Summary"]; 
+const steps = ["Seat Selection", "Verification" ,"Payment Details", "Order Summary"]; 
+
 
 function getStepContent(step) {
   switch (step) {
     case 0:
         return <SeatSelection />;
     case 1:
-        return <AddressForm />; 
+        return <Verification />; 
     case 2:
+        return <AddressForm />; 
+    case 3:
         return <Review />;
     default:
         throw new Error('Unknown step');
@@ -29,7 +33,7 @@ function getStepContent(step) {
 }
 
 export default function Checkout() {
-    const [activeStep, setActiveStep] = React.useState(0);
+    const [activeStep, setActiveStep] = React.useState(1);
 
     const handleNext = () => {
       setActiveStep(activeStep + 1);
@@ -49,7 +53,7 @@ export default function Checkout() {
               <Typography component="h1" variant="h4" align="center">
                 Checkout
               </Typography>
-              <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
+              <Stepper activeStep={activeStep} sx={{ pt: 4, pb: 5 }}>
                 {steps.map((label) => (
                   <Step key={label}>
                     <StepLabel>{label}</StepLabel>
