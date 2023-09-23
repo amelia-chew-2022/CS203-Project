@@ -223,12 +223,10 @@ function SeatSelect() {
           <div>
             <p>
             <Typography variant="h5" fontWeight="bold">Additional Information</Typography>
-            <ul style={{ margin: '0' }}>
               <li>Seat plan is not drawn to scale</li>
               {/* <li>Colour indicates price category</li> */}
               <li>Ticket prices exclude booking fees</li>
               <li>Seating layout subject to change</li>
-            </ul>
             </p>
           </div>
           </Container>

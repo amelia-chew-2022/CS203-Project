@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Vibes from '../assets/vibes.png';
 import { Link } from 'react-router-dom';
-import React, { useRef, Fragment } from 'react';
+import React, { useRef } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Footer from '../components/footer/Footer';
 import Container from '@mui/material/Container';
@@ -22,7 +22,6 @@ import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Fab from '@mui/material/Fab';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Fade from '@mui/material/Fade';
-import FieldsRow from "../components/form/FieldsRow";
 
 function handleClick(event) {
     event.preventDefault();
@@ -30,13 +29,16 @@ function handleClick(event) {
 }
 
 const breadcrumbs = [
+
     <Link 
         underline="hover" 
         key="1" 
         color="inherit" 
         onClick={handleClick}
     >
+    <Link to="/">
         Home
+    </Link>
     </Link>,
     <Link
         underline="hover"
@@ -45,7 +47,9 @@ const breadcrumbs = [
         href="/material-ui/getting-started/installation/"
         onClick={handleClick}
     >
+    <Link to="/">
         Events
+    </Link>
     </Link>,
     <Typography key="3" color="text.primary">
         VIBES
