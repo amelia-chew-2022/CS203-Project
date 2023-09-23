@@ -2,6 +2,8 @@ import Button from "@mui/material/Button";
 import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import Container from '@mui/material/Container';
+import Toolbar from '@mui/material/Toolbar';
 import React from "react";
 import LoginIcon from '@mui/icons-material/Login';
 import { Link } from "react-router-dom";
@@ -26,6 +28,9 @@ const NavBar = ({ authenticated = false }) => {
             }}
             position="sticky"
         >
+            <Container>
+            <Toolbar disableGutters>
+
             <Link to="/">
             <img src={Logo} alt="Logo"/>
             </Link>
@@ -67,7 +72,7 @@ const NavBar = ({ authenticated = false }) => {
 
             </Tabs>
 
-            <Link to="/Login">
+            <Link to="/login">
             <Button 
                 variant="outlined"
                 size="large"
@@ -79,7 +84,8 @@ const NavBar = ({ authenticated = false }) => {
                 Login
             </Button>
             </Link>
-
+            </Toolbar>
+            </Container>
         </AppBar>
     );
 };

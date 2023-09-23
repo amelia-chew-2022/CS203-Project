@@ -29,26 +29,12 @@ const Home = () => {
             <Cards/>
 
             <FieldsRow>
-                <Button 
-                    variant="outlined"
-                    size="large"
-                    sx={{ 
-                        "&.Mui-selected": {
-                            color: "#5522cc",
-                            borderColor: "#5522cc",
-                        },
-                        "&:hover": {
-                            borderColor: "#5522cc",
-                            backgroundColor: "transparent",
-                        },
-                        color: "#5522cc",
-                        borderColor: "#5522cc",
-                    }}
-                >
-                        Load More
+                <Button variant="outlined" size="large">
+                    Load More
                 </Button>
             </FieldsRow>
-            <Footer></Footer>
+
+            <Footer/>
         </Fragment>
     );
 };

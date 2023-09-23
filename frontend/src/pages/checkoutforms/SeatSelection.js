@@ -1,20 +1,10 @@
 import React, { useState } from "react";
-// import NavBar from "../components/navigation/NavBar";
-// import ProgressBar from "../components/seatselect/StepperComponent";
-// import FieldsRow from "../components/form/FieldsRow";
-import vibes from "../../assets/vibes.png"; // with import
+import vibes from "../../assets/vibes.png";
 import Dropdown from "../../components/seatselect/DropDown";
 import ButtonGrid from "../../components/seatselect/ButtonGrid";
-
-import {
-  TextField,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
-  Button,
-  Box
-} from "@mui/material";
+import { Container } from "@mui/system";
+import FieldsColumn from "../../components/form/FieldsRow";
+import Typography from "@mui/material/Typography";
 
 function SeatSelect() {
     const [displayText, setGridTable] = useState(""); // State for the text to be displayed
@@ -27,7 +17,6 @@ function SeatSelect() {
   
     return (
       <>
-  
         <div
           style={{
             display: "flex",
@@ -37,20 +26,26 @@ function SeatSelect() {
         >
           {/* Image on the left */}
           <div style={{ marginRight: "20px" }}>
-            <img src={vibes} alt="img" width="350" height="150" />
+          <FieldsColumn>
+            <img src={vibes} alt="img" width="flex" height="110" />
+          </FieldsColumn>
           </div>
   
           {/* Text box and dropdown to the right */}
-          <div style={{ margin: "10px 0" }}>
+          <div>
             {/* Text box */}
-            <p style={{ fontSize: "40px" }}>
+            <p>
+            <Typography variant="h4">
               <b>Vibes</b>
+            </Typography>
             </p>
   
             {/* Dropdown box */}
-            <div style={{ margin: "36px 0" }}>
-              <Dropdown></Dropdown>
+            <p>
+            <div>
+              <Dropdown/>
             </div>
+            </p>
           </div>
         </div>
   
@@ -62,25 +57,26 @@ function SeatSelect() {
             boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
             margin: "20px 0",
             display: "flex",
-  
             alignItems: "center",
             height: "40px", // Height of the rectangular background
             borderRadius: "4px", // Rounded corners for the rectangle
           }}
         >
+          <Container>
           <p
             style={{
               fontWeight: "bold",
               textTransform: "uppercase",
-             color:'#FFF'
+              color:'#FFF',
+              textAlign: "center",
             }}
           >
             Choose Your Seat
           </p>
+          </Container>
         </div>
   
         {/*Seat Select component*/}
-  
         <div
           className="SeatSelect-Component"
           style={{
@@ -107,13 +103,13 @@ function SeatSelect() {
               borderRadius: "0 0 50% 50%", // This creates a semi-circle
             }}
           >
-            <p style={{ fontSize: "20px" }}>Stage</p>
+            <Typography variant="h4">STAGE</Typography>
           </div>
   
           <ButtonGrid
             onButtonClick={handleButtonClick}
             style={{ marginBottom: "20px" }}
-          ></ButtonGrid>
+          />
           {clickCount > 0 && (
             <div
               style={{
@@ -223,25 +219,29 @@ function SeatSelect() {
               </tbody>
             </table>
           </div> */}
+          <Container>
           <div>
-            <h2>Additional Information</h2>
-            <ul>
+            <p>
+            <Typography variant="h5" fontWeight="bold">Additional Information</Typography>
+            <ul style={{ margin: '0' }}>
               <li>Seat plan is not drawn to scale</li>
               {/* <li>Colour indicates price category</li> */}
               <li>Ticket prices exclude booking fees</li>
               <li>Seating layout subject to change</li>
             </ul>
+            </p>
           </div>
+          </Container>
+          <Container>
           <div className="Price-table">
             {displayText && (
               <div>
-                <h2>Ticket Price</h2>
-  
+                <Typography variant="h5" fontWeight="bold">Ticket Price</Typography>
                 <p>{displayText}</p>
-
               </div>
             )}
           </div>
+          </Container>
         </div>
       </>
     );

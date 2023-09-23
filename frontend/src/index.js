@@ -8,7 +8,6 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -18,9 +17,7 @@ const theme = createTheme({
         main: "#fff"
                 }
            },
-
-    fontFamily: 'Roboto, sans-serif', // Specify Roboto as the first choice and fallback to a generic sans-serif font
-
+    fontFamily: 'Roboto, sans-serif',
 });
 
 ReactDOM.render(

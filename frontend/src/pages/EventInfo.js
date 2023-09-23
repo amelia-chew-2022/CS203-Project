@@ -1,7 +1,6 @@
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import Typography from "@mui/material/Typography";
-import { Fragment } from "react";
 import NavBar from "../components/navigation/NavBar";
 import Divider from "@mui/material/Divider"
 import Stack from '@mui/material/Stack';
@@ -11,9 +10,19 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Vibes from '../assets/vibes.png';
 import { Link } from 'react-router-dom';
-import React, { useRef } from 'react';
+import React, { useRef, Fragment } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Footer from '../components/footer/Footer';
+import Container from '@mui/material/Container';
+import Seatmap from '../assets/seatmap.png';
+import PropTypes from 'prop-types';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
+import Fab from '@mui/material/Fab';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Fade from '@mui/material/Fade';
+import FieldsRow from "../components/form/FieldsRow";
 
 function handleClick(event) {
     event.preventDefault();
@@ -43,7 +52,45 @@ const breadcrumbs = [
     </Typography>,
 ];
 
-const EventInfo = () => {
+// scroll to top 
+function ScrollTop(props) {
+    const { children, window } = props;
+    const trigger = useScrollTrigger({
+      target: window ? window() : undefined,
+      disableHysteresis: true,
+      threshold: 100,
+    });
+  
+    const handleClick = (event) => {
+      const anchor = (event.target.ownerDocument || document).querySelector(
+        '#back-to-top-anchor',
+      );
+  
+      if (anchor) {
+        anchor.scrollIntoView({
+          block: 'center',
+        });
+      }
+    };
+    return (
+      <Fade in={trigger}>
+        <Box
+          onClick={handleClick}
+          role="presentation"
+          sx={{ position: 'fixed', bottom: 16, right: 16 }}
+        >
+          {children}
+        </Box>
+      </Fade>
+    );
+  }
+  
+  ScrollTop.propTypes = {
+    children: PropTypes.element.isRequired,
+    window: PropTypes.func,
+  };
+
+const EventInfo = (props) => {
     const [value, setValue] = React.useState('one');
 
     const handleChange = (event, newValue) => {
@@ -64,11 +111,20 @@ const EventInfo = () => {
     }
 
     return (
-        <Fragment>
+        <React.Fragment>
+            <div id="back-to-top-anchor" />
+
             <CssBaseline />
             <NavBar/>
 
             {/* breadcrumbs */}
+            <div
+            style={{
+                marginTop: "10px",
+                marginBottom: "10px",
+            }}
+            >
+            <Container>
             <Stack spacing={2}>
             <Breadcrumbs
             separator={<NavigateNextIcon fontSize="small" />}
@@ -76,28 +132,40 @@ const EventInfo = () => {
             {breadcrumbs}
             </Breadcrumbs>
             </Stack>
+            </Container>
+            </div>
 
             {/* image */}
-            <Box sx={{ maxHeight: "flex", maxWidth: "flex", backgroundColor: "#000" }}>
-
+            <Box sx={{ backgroundColor: "#000" }}>
+                <Container sx={{ backgroundColor: "000" }}>
                 <img src={Vibes} alt="Vibes" width="100%"/>
 
                 <Typography variant="h4" gutterBottom sx={{color: "#fff"}}>
                     23 Sep 2023 (Sat.) / University Cultural Centre Ho Bee Auditorium
                 </Typography>
 
-                <Typography variant="h3" gutterBottom sx={{fontWeight: "bold", color: "#fff"}}>
+                <Typography variant="h3" sx={{fontWeight: "bold", color: "#fff"}}>
                     VIBES
                 </Typography>
-
+                </Container>
             </Box>
 
             {/* tabs */}
-            <Box sx={{ width: '100%' }} position="sticky">
-            <Tabs
-                value={value}
-                onChange={handleChange}
+            <AppBar 
+                position="sticky"
+                color="secondary"
+                sx={{
+                    minHeight: "50px",
+                    height: "50px",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                }}
             >
+            <Container>
+            <Toolbar disableGutters>
+            
+            <Tabs value={value} onChange={handleChange} centered>
                 <Tab 
                     label="Event Details" 
                     onClick={() => scrollToSection(section1Ref)}
@@ -122,19 +190,17 @@ const EventInfo = () => {
                     label="Ways To Buy Tickets" 
                     onClick={() => scrollToSection(section6Ref)}
                 />
-
-            <Link to="/checkout">
-                <Button 
-                variant="contained" 
-                >
-                    Buy Tickets
-                </Button>
-            </Link>
             </Tabs>
-
-            </Box>
+            <Link to="/checkout">
+                <Button variant="contained" size="large">Buy Tickets</Button>
+            </Link>
+            </Toolbar>
+            </Container>
+            </AppBar>
 
             {/* event details */}
+            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
+            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
             <Typography variant="h3" gutterBottom a ref={section1Ref}>Event Details</Typography>
 
             <Typography variant="body1" gutterBottom paragraph>
@@ -158,15 +224,12 @@ const EventInfo = () => {
             extravaganza will leave you craving for more. The stage is set, and the anticipation is mounting! Don't miss this opportunity to 
             experience the magic firsthand. Secure your tickets for VIBES now! We eagerly await your presence. See you there!
             </Typography>
-            
+            </Container>
+            </Box>
+
             {/* ticket pricing */}
-            <Box
-            sx={{
-                width: "flex",
-                height: "flex",
-                backgroundColor: "#ececec",
-              }}
-            >
+            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
+            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
             <Typography variant="h3" gutterBottom a ref={section2Ref}>Ticket Pricing</Typography>
 
             <Typography variant="body1" gutterBottom style={{fontWeight: "bold", color: "#5522cc"}} paragraph>
@@ -182,8 +245,8 @@ const EventInfo = () => {
             <Divider/>
 
             <Typography variant="body1" gutterBottom>
-            <ul>
             <b>STANDARD</b>
+            <ul style={{ margin: '0' }}>
             <li>CAT 1: $55</li>
             <li>CAT 2: $48</li>
             <li>CAT 3: $32</li>
@@ -193,32 +256,31 @@ const EventInfo = () => {
             <Divider/>
 
             <Typography variant="body1" gutterBottom>
-            
-            <ul>
             <b>NOTE:</b>
+            <ul style={{ margin: '0' }}>
             <li>Limited to <u><b>20</b></u> tickets per transaction.</li>
             <li>Ticket Pricing excludes Booking Fee. Booking Fee is as follows:</li>
-                <ul>
+            <ul >
                 <li>$4 booking fee per ticket for tickets $30 and above</li>
                 <li>$2 booking fee per ticket for tickets between $20 and $29.99</li>
                 <li>$1 booking fee per ticket for tickets priced below $20.00</li>
-                </ul>
+            </ul>
             </ul>
             </Typography>
+            </Container>
             </Box>
 
             {/* seat map */}
+            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
+            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
             <Typography variant="h3" gutterBottom a ref={section3Ref}>Seat Map</Typography>
-
+            <img src={Seatmap} alt="Seatmap" width="100%"/>
+            </Container>
+            </Box>
 
             {/* exchange and refund policy */}
-            <Box
-            sx={{
-                width: "flex",
-                height: "flex",
-                backgroundColor: "#ececec",
-              }}
-            >
+            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }} >
+            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
             <Typography variant="h3" gutterBottom a ref={section4Ref}>Exchange & Refund Policy</Typography>
             <Typography variant="body1" gutterBottom>
             <ol type="1">
@@ -233,10 +295,13 @@ const EventInfo = () => {
                 cannot be guaranteed, with no refunds possible.⁠</li>
             </ol>
             </Typography>
-
+            </Container>
             </Box>
 
             {/* admission policy */}
+            <Box
+            sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
+            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
             <Typography variant="h3" gutterBottom a ref={section5Ref}>Admission Policy</Typography>
             <Typography variant="body1" gutterBottom>
             <b>Admission Rules:</b><br/>
@@ -254,6 +319,8 @@ const EventInfo = () => {
                 <li>No outside food and beverage are allowed into the venue.</li>
             </ol>
             </Typography>
+            </Container>
+            </Box>
 
             {/* ways to buy tickets */}
             <Box
@@ -263,12 +330,17 @@ const EventInfo = () => {
                 backgroundColor: "#ececec",
               }}
             >
-
+            <Container
+            sx={{
+                width: "flex",
+                height: "flex",
+                backgroundColor: "#ececec",
+              }}
+            >
             <Typography variant="h3" gutterBottom a ref={section6Ref}>Ways To Buy Tickets</Typography>
             <Typography variant="body1" gutterBottom>
             <b>► ONLINE & MOBILE:</b><br/>
             24 x 7 x 365 days of the year! Visit us on our website at ticketmaster.sg to purchase tickets.<br/>
-
 
             <b>► HOTLINE:</b>
             +65 3158 8588
@@ -284,10 +356,17 @@ const EventInfo = () => {
             Click here to check for available branches and operating hours.<br/>
             </Typography>
 
+            </Container>
             </Box>
 
             <Footer/>
-        </Fragment>
+
+            <ScrollTop {...props}>
+            <Fab size="small" aria-label="scroll back to top">
+            <KeyboardArrowUpIcon />
+            </Fab>
+            </ScrollTop>
+        </React.Fragment>
     );
 };
 
