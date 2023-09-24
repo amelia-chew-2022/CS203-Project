@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import FieldsRow from '../form/FieldsRow';
 import { Fragment } from 'react';
-import LeeYoungJi from '../../assets/leeyoungji.png';
 import Coldplay from '../../assets/coldplay.png';
 import Twice from '../../assets/twice.png';
 import Ateez from '../../assets/ateez.png'
@@ -15,6 +14,7 @@ import P1Harmony from '../../assets/p1harmony.png'
 import HPF2023 from '../../assets/hallyupopfest.png'
 import RexOrangeCounty from '../../assets/roc.png'
 import TaylorSwift from '../../assets/taylorswift.png'
+import Vibes from '../../assets/vibes.png'
 import { Link } from "react-router-dom";
 
 const dateStyle = {
@@ -47,15 +47,15 @@ export default function Cards() {
                 <CardMedia
                     component="img"
                     height="175"
-                    image={LeeYoungJi}
-                    alt="Lee Youngji"
+                    image={Vibes}
+                    alt="Vibes"
                 />
                 <CardContent>
                     <Typography sx={ dateStyle }>
-                    20 Oct 2023 (Fri)
+                    23 Sep 2023 (Sat)
                     </Typography>
                     <Typography sx={ eventStyle }>
-                    LEE YOUNGJI 1st ASIA TOUR 'THE MAIN CHARACTER' - SINGAPORE
+                    VIBES
                     </Typography>
                 </CardContent>
             </Card>

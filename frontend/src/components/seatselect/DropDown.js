@@ -18,7 +18,7 @@ function DropDown() {
         style={{width:'300px'}}
       >
         <MenuItem value="" disabled>
-          Select an date
+          Select a date
         </MenuItem>
         <MenuItem value="option1">23 Sep 2023 07:30pm</MenuItem>
         <MenuItem value="option2">24 Sep 2023 07:30pm</MenuItem>

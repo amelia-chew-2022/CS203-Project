@@ -12,21 +12,73 @@ import AddressForm from './checkoutforms/AddressForm';
 import Review from './checkoutforms/ReviewOrder';
 import SeatSelection from './checkoutforms/SeatSelection';
 import NavBar from "../components/navigation/NavBar";
+import Footer from "../components/footer/Footer";
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import Stack from '@mui/material/Stack';
+import { Link } from 'react-router-dom';
+import Verification from "./checkoutforms/Verification"
 
-const steps = ["Seat Selection", "Payment Details", "Order Summary"]; 
+const steps = ["Seat Selection", "Verification" ,"Payment Details", "Order Summary"]; 
 
 function getStepContent(step) {
   switch (step) {
     case 0:
         return <SeatSelection />;
     case 1:
-        return <AddressForm />; 
+        return <Verification />; 
     case 2:
+        return <AddressForm />; 
+    case 3:
         return <Review />;
     default:
         throw new Error('Unknown step');
   }
 }
+
+// breadcrumbs 
+function handleClick(event) {
+  event.preventDefault();
+  console.info('You clicked a breadcrumb.');
+}
+
+const breadcrumbs = [
+  <Link 
+      underline="hover" 
+      key="1" 
+      color="inherit" 
+      onClick={handleClick}
+  >
+  <Link to="/">
+      Home
+  </Link>
+  </Link>,
+  <Link
+      underline="hover"
+      key="2"
+      color="inherit"
+      href="/material-ui/getting-started/installation/"
+      onClick={handleClick}
+  >
+  <Link to="/">
+      Events
+  </Link>
+  </Link>,
+    <Link
+    underline="hover"
+    key="3"
+    color="inherit"
+    href="/material-ui/getting-started/installation/"
+    onClick={handleClick}
+  >
+  <Link to="/eventinfo">
+    VIBES
+  </Link>
+  </Link>,
+  <Typography key="4" color="text.primary">
+      Checkout
+  </Typography>,
+];
 
 export default function Checkout() {
     const [activeStep, setActiveStep] = React.useState(0);
@@ -44,11 +96,29 @@ export default function Checkout() {
           <CssBaseline />
             <NavBar></NavBar>
 
-          <Container component="main" maxWidth="md" sx={{ mb: 4 }}>
+            {/* breadcrumbs  */}
+            <div
+            style={{
+                marginTop: "10px",
+                marginBottom: "10px",
+            }}
+            >
+            <Container>
+            <Stack spacing={2}>
+            <Breadcrumbs
+            separator={<NavigateNextIcon fontSize="small" />}
+            >
+            {breadcrumbs}
+            </Breadcrumbs>
+            </Stack>
+            </Container>
+            </div>
+
+          <Container>
             <Paper variant="outlined" sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
-              <Typography component="h1" variant="h4" align="center">
+              {/* <Typography component="h1" variant="h4" align="center">
                 Checkout
-              </Typography>
+              </Typography> */}
               <Stepper activeStep={activeStep} sx={{ pt: 3, pb: 5 }}>
                 {steps.map((label) => (
                   <Step key={label}>
@@ -103,7 +173,9 @@ export default function Checkout() {
               )}
             </Paper>
           </Container>
+          <Footer></Footer>
         </React.Fragment>
+     
       );
 }
 

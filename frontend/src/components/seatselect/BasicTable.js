@@ -21,13 +21,13 @@ const rows = [
 export default function BasicTable() {
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
+      <Table sx={{ minWidth: 650 }}>
+        <TableHead sx={{backgroundColor: "#5522CC",}}>
           <TableRow>
-            <TableCell>Ticket Type</TableCell>
-            <TableCell align="right">Price</TableCell>
-            <TableCell align="right">Quantity</TableCell>
-            <TableCell align="right">Total Price</TableCell>
+            <TableCell sx={{ color: 'white' }}>Ticket Type</TableCell>
+            <TableCell align="right" sx={{ color: 'white' }}>Price</TableCell>
+            <TableCell align="right" sx={{ color: 'white' }}>Quantity</TableCell>
+            <TableCell align="right" sx={{ color: 'white' }}>Total Price</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

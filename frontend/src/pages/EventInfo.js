@@ -1,8 +1,6 @@
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import Typography from "@mui/material/Typography";
-import { Fragment } from "react";
-import HeadingOne from "../components/font/HeadingOne";
 import NavBar from "../components/navigation/NavBar";
 import Divider from "@mui/material/Divider"
 import Stack from '@mui/material/Stack';
@@ -11,30 +9,37 @@ import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Vibes from '../assets/vibes.png';
-import * as React from 'react';
 import { Link } from 'react-router-dom';
+import React, { useRef } from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+import Footer from '../components/footer/Footer';
+import Container from '@mui/material/Container';
+import Seatmap from '../assets/seatmap.png';
+import PropTypes from 'prop-types';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
+import Fab from '@mui/material/Fab';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import Fade from '@mui/material/Fade';
+
 
 function handleClick(event) {
     event.preventDefault();
     console.info('You clicked a breadcrumb.');
 }
 
-// Function to generate accessibility properties for a tab
-function a11yProps(index) {
-    return {
-        id: `tab-${index}`,
-        "aria-controls": `tabpanel-${index}`,
-    };
-}
-
 const breadcrumbs = [
+
     <Link 
         underline="hover" 
         key="1" 
         color="inherit" 
         onClick={handleClick}
     >
+    <Link to="/">
         Home
+    </Link>
     </Link>,
     <Link
         underline="hover"
@@ -43,121 +48,167 @@ const breadcrumbs = [
         href="/material-ui/getting-started/installation/"
         onClick={handleClick}
     >
+    <Link to="/">
         Events
+    </Link>
     </Link>,
     <Typography key="3" color="text.primary">
         VIBES
     </Typography>,
 ];
 
-const tabStyle={
-    "&.Mui-selected": {
-        color: "#5522cc",
-        fontColor: "#5522cc",
-        backgroundColor: "#5522cc",
-    },
-    color: "#5522cc" 
-}
+// scroll to top 
+function ScrollTop(props) {
+    const { children, window } = props;
+    const trigger = useScrollTrigger({
+      target: window ? window() : undefined,
+      disableHysteresis: true,
+      threshold: 100,
+    });
+  
+    const handleClick = (event) => {
+      const anchor = (event.target.ownerDocument || document).querySelector(
+        '#back-to-top-anchor',
+      );
+  
+      if (anchor) {
+        anchor.scrollIntoView({
+          block: 'center',
+        });
+      }
+    };
+    return (
+      <Fade in={trigger}>
+        <Box
+          onClick={handleClick}
+          role="presentation"
+          sx={{ position: 'fixed', bottom: 16, right: 16 }}
+        >
+          {children}
+        </Box>
+      </Fade>
+    );
+  }
+  
+  ScrollTop.propTypes = {
+    children: PropTypes.element.isRequired,
+    window: PropTypes.func,
+  };
 
-const EventInfo = () => {
-    const [value, setValue] = React.useState(0);
+const EventInfo = (props) => {
+    const [value, setValue] = React.useState('one');
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
 
-    return (
-        <Fragment>
-            <NavBar/>
+    const section1Ref = useRef(null);
+    const section2Ref = useRef(null);
+    const section3Ref = useRef(null);
+    const section4Ref = useRef(null);
+    const section5Ref = useRef(null);
+    const section6Ref = useRef(null);
 
+    function scrollToSection(ref) {
+        if (ref.current) {
+            ref.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    return (
+        <React.Fragment>
+            <div id="back-to-top-anchor" />
+
+            <CssBaseline />
+            <NavBar/>
+            {/* <CreateSeatMap/> */}
             {/* breadcrumbs */}
+            <div
+            style={{
+                marginTop: "10px",
+                marginBottom: "10px",
+            }}
+            >
+            <Container>
             <Stack spacing={2}>
             <Breadcrumbs
             separator={<NavigateNextIcon fontSize="small" />}
-            aria-label="breadcrumb"
             >
             {breadcrumbs}
             </Breadcrumbs>
             </Stack>
+            </Container>
+            </div>
 
             {/* image */}
-            <Box sx={{ maxHeight: "flex", maxWidth: "flex", backgroundColor: "#000" }}>
+            <Box sx={{ backgroundColor: "#000" }}>
+                <Container sx={{ backgroundColor: "000" }}>
                 <img src={Vibes} alt="Vibes" width="100%"/>
 
-                <Typography sx={{fontSize: "32px", color: "#fff"}}>23 Sep 2023 (Sat.) / University Cultural Centre Ho Bee Auditorium</Typography>
-                <Typography sx={{fontWeight: "bold", fontSize: "48px", color: "#fff"}}>VIBES</Typography>
+                <Typography variant="h4" gutterBottom sx={{color: "#fff"}}>
+                    23 Sep 2023 (Sat.) / University Cultural Centre Ho Bee Auditorium
+                </Typography>
+
+                <Typography variant="h3" sx={{fontWeight: "bold", color: "#fff"}}>
+                    VIBES
+                </Typography>
+                </Container>
             </Box>
 
             {/* tabs */}
-            <Box sx={{ maxWidth: "flex", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)"}}>
-                <Tabs
-
-                value={value}
-                onChange={handleChange}
-                aria-label="basic tabs example"
-                TabIndicatorProps={{
-                    sx: { backgroundColor: "#5522cc" }, // Set the indicator color to white
-                    fontColor: "#5522cc",
-                }}
+            <AppBar 
+                position="sticky"
+                color="secondary"
                 sx={{
-                    "&.MuiTabs-root": {
-                        marginBottom: "0px", // Remove the default margin-bottom
-                    },
+                    minHeight: "50px",
+                    height: "50px",
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
                 }}
-                >
+            >
+            <Container>
+            <Toolbar disableGutters>
+            
+            <Tabs value={value} onChange={handleChange} centered>
                 <Tab 
                     label="Event Details" 
-                    {...a11yProps(0)} 
-                    sx={{tabStyle}}
+                    onClick={() => scrollToSection(section1Ref)}
                 />
                 <Tab 
                     label="Ticket Pricing" 
-                    {...a11yProps(1)} 
-                    sx={{tabStyle}}
+                    onClick={() => scrollToSection(section2Ref)}
                 />
                 <Tab 
                     label="Seat Map" 
-                    {...a11yProps(2)} 
-                    sx={{tabStyle}}
+                    onClick={() => scrollToSection(section3Ref)}
                 />
                 <Tab 
                     label="Exchange & Refund Policy" 
-                    {...a11yProps(3)} 
-                    sx={{tabStyle}}
+                    onClick={() => scrollToSection(section4Ref)}
                 />
                 <Tab 
                     label="Admissions Policy" 
-                    {...a11yProps(4)} 
-                    sx={{tabStyle}}
+                    onClick={() => scrollToSection(section5Ref)}
                 />
                 <Tab 
                     label="Ways To Buy Tickets" 
-                    {...a11yProps(5)} 
-                    sx={{tabStyle}}
+                    onClick={() => scrollToSection(section6Ref)}
                 />
-
-                <Link to="/checkout">
-                <Button 
-                variant="contained" 
-                sx={{backgroundColor: "#5522cc",
-                "&.Mui-selected": {
-                    color: "#5522cc",
-                },
-                "&:hover": {
-                    borderColor: "#5522cc",
-                    backgroundColor: "#5522cc",
-                },
-                }}>
-                    Buy Tickets
-                </Button>
-                </Link>
-                </Tabs>
-            </Box>
+            </Tabs>
+            <Link to="/checkout">
+                <Button variant="contained" size="large">Buy Tickets</Button>
+            </Link>
+            </Toolbar>
+            </Container>
+            </AppBar>
 
             {/* event details */}
-            <HeadingOne>Event Details</HeadingOne>
+            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
+            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
+            <Typography variant="h3" gutterBottom a ref={section1Ref}>Event Details</Typography>
 
-            <Typography paragraph>
+            <Typography variant="body1" gutterBottom paragraph>
             Art Republic proudly presents VIBES! An extraordinary festival, destined to ignite passions and capture hearts on September 23, 
             2023. Get ready for an epic celebration of music, dance, and fun at VIBES! Enchanting performances await you, featuring the 
             sensational Singaporean artist, Alfred Sun, and the mesmerizing dance choreographer from China, Orangie, whose captivating moves 
@@ -165,35 +216,32 @@ const EventInfo = () => {
             Teo from YES933FM, whose magnetic energy will light up the party as the ultimate MC!
             </Typography>
 
-            <Typography paragraph>
+            <Typography variant="body1" gutterBottom paragraph>
             This grand spectacle involves over 200 tireless talents who have poured their hearts into crafting the show of a lifetime. 
             These extraordinary individuals worked hand in hand with creative and gifted dance and music instructors, taking you on a 
             captivating journey through their artistry. You'll be left breathless with every move, note, and beat as they showcase their 
             passion and skill on stage.
             </Typography>
 
-            <Typography paragraph>
+            <Typography variant="body1" gutterBottom paragraph>
             At Art Republic, we dare to dream without bounds. Looking ahead, VIBES will evolve into a massive celebration, embracing legendary 
             dancers, acclaimed rappers, and celebrated entertainers from across the globe. The promise of an even more dynamic and mesmerizing 
             extravaganza will leave you craving for more. The stage is set, and the anticipation is mounting! Don't miss this opportunity to 
             experience the magic firsthand. Secure your tickets for VIBES now! We eagerly await your presence. See you there!
             </Typography>
-            
-            {/* ticket pricing */}
-            <Box
-            sx={{
-                width: "flex",
-                height: "flex",
-                backgroundColor: "#ececec",
-              }}
-            >
-            <HeadingOne>Ticket Pricing</HeadingOne>
+            </Container>
+            </Box>
 
-            <Typography style={{fontWeight: "bold", color: "#5522cc"}} paragraph>
+            {/* ticket pricing */}
+            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
+            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
+            <Typography variant="h3" gutterBottom a ref={section2Ref}>Ticket Pricing</Typography>
+
+            <Typography variant="body1" gutterBottom style={{fontWeight: "bold", color: "#5522cc"}} paragraph>
             GENERAL SALE
             </Typography>
 
-            <Typography>
+            <Typography variant="body1" gutterBottom>
             <b>START DATE</b><br/>
             10 AUGUST 2023<br/>
             10:00AM onwards via online, hotline and SingPost outlets
@@ -201,43 +249,45 @@ const EventInfo = () => {
 
             <Divider/>
 
-            <Typography>
-            <b>STANDARD</b><br/>
-            CAT 1: $55<br/>
-            CAT 2: $48<br/>
-            CAT 3: $32
+            <Typography variant="body1" gutterBottom>
+            <b>STANDARD</b>
+            <ul style={{ margin: '0' }}>
+            <li>CAT 1: $55</li>
+            <li>CAT 2: $48</li>
+            <li>CAT 3: $32</li>
+            </ul>
             </Typography>
 
             <Divider/>
 
-            <Typography>
-            <b>NOTE:</b><br/>
-
-            <ul>
+            <Typography variant="body1" gutterBottom>
+            <b>NOTE:</b>
+            <ul style={{ margin: '0' }}>
             <li>Limited to <u><b>20</b></u> tickets per transaction.</li>
             <li>Ticket Pricing excludes Booking Fee. Booking Fee is as follows:</li>
-                <ul>
+            <ul >
                 <li>$4 booking fee per ticket for tickets $30 and above</li>
                 <li>$2 booking fee per ticket for tickets between $20 and $29.99</li>
                 <li>$1 booking fee per ticket for tickets priced below $20.00</li>
-                </ul>
+            </ul>
             </ul>
             </Typography>
+            </Container>
             </Box>
 
             {/* seat map */}
-            <HeadingOne>Seat Map</HeadingOne>
+            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
+            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
+            <Typography variant="h3" gutterBottom a ref={section3Ref}>Seat Map</Typography>
+            <img src={Seatmap} alt="Seatmap" width="100%"/>
+            </Container>
+            </Box>
 
             {/* exchange and refund policy */}
-            <Box
-            sx={{
-                width: "flex",
-                height: "flex",
-                backgroundColor: "#ececec",
-              }}
-            >
-            <HeadingOne>Exchange & Refund Policy</HeadingOne>
-            <Typography>
+            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }} >
+            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
+            <Typography variant="h3" gutterBottom a ref={section4Ref}>Exchange & Refund Policy</Typography>
+            <Typography variant="body1" gutterBottom>
             <ol type="1">
                 <li>The Organiser/Venue Owner reserves the right without refund or compensation to refuse admission/evict any person(s) whose 
                 conduct is disorderly or inappropriate or who poses a threat to security, or to the enjoyment of the Event by others.</li>
@@ -250,12 +300,15 @@ const EventInfo = () => {
                 cannot be guaranteed, with no refunds possible.⁠</li>
             </ol>
             </Typography>
-
+            </Container>
             </Box>
 
             {/* admission policy */}
-            <HeadingOne>Admission Policy</HeadingOne>
-            <Typography>
+            <Box
+            sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
+            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
+            <Typography variant="h3" gutterBottom a ref={section5Ref}>Admission Policy</Typography>
+            <Typography variant="body1" gutterBottom>
             <b>Admission Rules:</b><br/>
             <ol type="1">
                 <li>The seats on the third floor are relatively high. Please choose carefully if you are under 12 years old, over 60 years old, 
@@ -271,6 +324,8 @@ const EventInfo = () => {
                 <li>No outside food and beverage are allowed into the venue.</li>
             </ol>
             </Typography>
+            </Container>
+            </Box>
 
             {/* ways to buy tickets */}
             <Box
@@ -280,11 +335,17 @@ const EventInfo = () => {
                 backgroundColor: "#ececec",
               }}
             >
-            <HeadingOne>Ways To Buy Tickets</HeadingOne>
-            <Typography>
+            <Container
+            sx={{
+                width: "flex",
+                height: "flex",
+                backgroundColor: "#ececec",
+              }}
+            >
+            <Typography variant="h3" gutterBottom a ref={section6Ref}>Ways To Buy Tickets</Typography>
+            <Typography variant="body1" gutterBottom>
             <b>► ONLINE & MOBILE:</b><br/>
             24 x 7 x 365 days of the year! Visit us on our website at ticketmaster.sg to purchase tickets.<br/>
-
 
             <b>► HOTLINE:</b>
             +65 3158 8588
@@ -300,8 +361,17 @@ const EventInfo = () => {
             Click here to check for available branches and operating hours.<br/>
             </Typography>
 
+            </Container>
             </Box>
-        </Fragment>
+
+            <Footer/>
+
+            <ScrollTop {...props}>
+            <Fab size="small" aria-label="scroll back to top">
+            <KeyboardArrowUpIcon />
+            </Fab>
+            </ScrollTop>
+        </React.Fragment>
     );
 };
 
