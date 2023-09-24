@@ -1,0 +1,35 @@
+/* YourComponent.css */
+
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .content {
+    /* Add styles for your content container */
+    padding: 20px; /* Add padding or margins to separate content from the edges */
+    display: flex;
+    flex-direction: column; /* Display content in a column layout */
+    align-items: center; /* Center content horizontally within the column */
+    text-align: center; /* Center text content horizontally */
+  }
+
+  .terms-and-conditions
+  {
+    width: 200px; /* Set the width of the box */
+    height: 100px; /* Set the height of the box */
+    border-top: 1px solid #000; /* Add a 1px solid black border at the top */
+  }
+
+  .verification
+
+  {
+    padding-bottom: 20px;
+    transform: rotate(180deg); /* Rotate the text by 180 degrees */
+    writing-mode: vertical-rl; /* Set vertical writing mode */
+    text-orientation: upright; /* Keep the text orientation upright */
+   
+  }
+  

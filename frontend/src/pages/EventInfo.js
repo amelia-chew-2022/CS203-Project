@@ -23,6 +23,7 @@ import Fab from '@mui/material/Fab';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Fade from '@mui/material/Fade';
 
+
 function handleClick(event) {
     event.preventDefault();
     console.info('You clicked a breadcrumb.');
@@ -120,7 +121,7 @@ const EventInfo = (props) => {
 
             <CssBaseline />
             <NavBar/>
-
+            {/* <CreateSeatMap/> */}
             {/* breadcrumbs */}
             <div
             style={{
