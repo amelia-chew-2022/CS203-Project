@@ -11,6 +11,11 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import ReCAPTCHA from 'react-google-recaptcha';
+
+function onChange(value) {
+    console.log("Captcha value:", value);
+}
 
 const Login = () => {
     return (
@@ -51,6 +56,7 @@ const Login = () => {
                         id="password"
                         autoComplete="current-password"
                     />
+                    <ReCAPTCHA sitekey="6LdH1UwoAAAAAO8hLo9y8SkrWpKT3W7VR0xHVD3S" onChange={onChange}></ReCAPTCHA>
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
                         label="Remember me"
