@@ -1,15 +1,13 @@
+### show all tickets
 GET http://localhost:8080/tickets
 Accept: application/json
 
-###
-GET http://localhost:8080/tickets/2
-
-###
+### delete ticket
 DELETE http://localhost:8080/tickets/2
 Authorization: Basic Shawn hello123
 
 
-###
+### add ticket
 POST http://localhost:8080/tickets
 Content-Type: application/json
 Authorization: Basic Shawn hello123
@@ -21,7 +19,7 @@ Authorization: Basic Shawn hello123
     "unit_price": "150"
 }
 
-###
+### update ticket
 PUT http://localhost:8080/tickets/3
 Content-Type: application/json
 Authorization: Basic Nicholas bye123
@@ -33,16 +31,16 @@ Authorization: Basic Nicholas bye123
     "unit_price": "150"
 }
 
-###
+### show all users
 GET http://localhost:8080/users
 
-###
+### add user
 POST http://localhost:8080/users
 Content-Type: application/json
 
 {
     "username": "Janaaaaa",
-    "password": "badpassword",
+    "password": "goodpassword",
     "authorities": "ROLE_USER",
     "email": "jana@gmail.com",
     "credit_card_num": "56987452",
@@ -50,6 +48,9 @@ Content-Type: application/json
     "phone_num": "32165498"
 }
 
-###
+### user buys ticket
 GET http://localhost:8080/tickets/1/3/buy
-Authorization: Basic Janaaaaa badpassword
+Authorization: Basic Janaaaaa goodpassword
+
+### show specific ticket
+GET http://localhost:8080/tickets/1
