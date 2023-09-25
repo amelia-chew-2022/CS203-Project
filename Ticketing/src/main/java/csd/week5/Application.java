@@ -10,16 +10,16 @@ import csd.week5.user.User;
 import csd.week5.user.UserRepository;
 
 @SpringBootApplication
-public class Week5Application {
+public class Application {
 
 	public static void main(String[] args) {
 		
-		ApplicationContext ctx = SpringApplication.run(Week5Application.class, args);
+		ApplicationContext ctx = SpringApplication.run(Application.class, args);
 
         // JPA book repository init
-        TicketRepository books = ctx.getBean(TicketRepository.class);
-        System.out.println("[Add ticket]: " + books.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
-        System.out.println("[Add ticket]: " + books.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
+        TicketRepository tickets = ctx.getBean(TicketRepository.class);
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
 
         // JPA user repository init
         UserRepository users = ctx.getBean(UserRepository.class);
