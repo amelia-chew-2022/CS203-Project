@@ -12,7 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import ReCAPTCHA from 'react-google-recaptcha';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function onChange(value) {
     console.log("Captcha value:", value);
@@ -23,6 +23,7 @@ const Login = () => {
     const [password, setPassword] = React.useState('');
     const [emailError, setEmailError] = React.useState(false);
     const [passwordError, setPasswordError] = React.useState(false);
+    const navigate = useNavigate();
 
     const handleEmailChange = (event) => {
         const emailValue = event.target.value;
@@ -45,7 +46,11 @@ const Login = () => {
             setEmailError(email === '');
             setPasswordError(password === '');
         } else {
-            
+            event.preventDefault();
+            let authHeader = window.btoa(email + ':' + password);
+            let user = {'username': email, 'authHeader': authHeader};
+            localStorage.setItem('user', JSON.stringify(user));
+            navigate('/');
         }
     };
 
