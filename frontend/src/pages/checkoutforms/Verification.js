@@ -105,7 +105,7 @@ function Verification() {
 
                         {/* <button onClick={generateVerificationText}>Generate Image</button> */}
                         <p align="center">
-                        <span style={{ fontSize: '50px' }}>
+                        <span style={{ fontSize: '50px', userSelect: 'none' }}>
                         <Zalgo className='verification' textData={verificationText} glitchParams={param}/>
                         </span>
                         </p>
