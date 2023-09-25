@@ -18,6 +18,36 @@ function onChange(value) {
 }
 
 const Login = () => {
+    const [email, setEmail] = React.useState('');
+    const [password, setPassword] = React.useState('');
+    const [emailError, setEmailError] = React.useState(false);
+    const [passwordError, setPasswordError] = React.useState(false);
+
+    const handleEmailChange = (event) => {
+        const emailValue = event.target.value;
+        setEmail(emailValue);
+        // Check if email is empty and set error state accordingly
+        setEmailError(emailValue === '');
+    };
+
+    const handlePasswordChange = (event) => {
+        const passwordValue = event.target.value;
+        setPassword(passwordValue);
+        // Check if password is empty and set error state accordingly
+        setPasswordError(passwordValue === '');
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // Check if email and password are empty before submitting
+        if (email === '' || password === '') {
+            setEmailError(email === '');
+            setPasswordError(password === '');
+        } else {
+            // Perform your login logic here
+        }
+    };
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -35,7 +65,7 @@ const Login = () => {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                <Box component="form" noValidate sx={{ mt: 1 }}>
+                <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
                     <TextField
                         margin="normal"
                         required
@@ -45,6 +75,10 @@ const Login = () => {
                         name="email"
                         autoComplete="email"
                         autoFocus
+                        value={email}
+                        onChange={handleEmailChange}
+                        error={emailError}
+                        helperText={emailError ? 'Email is required' : ''}
                     />
                     <TextField
                         margin="normal"
@@ -55,6 +89,10 @@ const Login = () => {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        value={password}
+                        onChange={handlePasswordChange}
+                        error={passwordError}
+                        helperText={passwordError ? 'Password is required' : ''}
                     />
                     <ReCAPTCHA sitekey="6LdH1UwoAAAAAO8hLo9y8SkrWpKT3W7VR0xHVD3S" onChange={onChange}></ReCAPTCHA>
                     <FormControlLabel

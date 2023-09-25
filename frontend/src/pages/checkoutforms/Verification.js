@@ -1,13 +1,35 @@
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import React, { useState } from 'react';
-import './Verification.css'
+import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Divider from '@mui/material/Divider'
+import Typography from '@mui/material/Typography'
 
 function Verification() {
 
     const [isChecked, setIsChecked] = useState(false);
+    const [verificationText, setVerificationText] = useState('');
+    const [userInput, setUserInput] = useState('');
+    const [isVerified, setIsVerified] = useState(false);
+
+    useEffect(() => {
+        generateVerificationText(); // Call the function when the component loads
+    }, []); // The empty array ensures it's called only once when the component mounts
+
+    const generateVerificationText = () => {
+        // In a real implementation, you would generate a random verification text on the server.
+        // For simplicity, we'll hardcode it here.
+        // Generate a random 4-character alphanumeric string
+        const charset = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        let generatedText = '';
+        
+        for (let i = 0; i < 4; i++) {
+            const randomIndex = Math.floor(Math.random() * charset.length);
+            generatedText += charset.charAt(randomIndex);
+        }
+        setVerificationText(generatedText);
+    };
 
     function Checkboxes() {
         const handleCheckboxChange = () => {
@@ -27,17 +49,6 @@ function Verification() {
             </div>
         );
     }
-
-    const [verificationText, setVerificationText] = useState('');
-    const [userInput, setUserInput] = useState('');
-    const [isVerified, setIsVerified] = useState(false);
-
-    const generateVerificationText = () => {
-        // In a real implementation, you would generate a random verification text on the server.
-        // For simplicity, we'll hardcode it here.
-        const generatedText = 'ABCD1234';
-        setVerificationText(generatedText);
-    };
 
     const handleInputChange = (e) => {
         setUserInput(e.target.value);
@@ -89,8 +100,8 @@ function Verification() {
                     <div className='centered-container'>
 
                         {/* <button onClick={generateVerificationText}>Generate Image</button> */}
-                        <p classname='verification'> ABCD1234</p>
-                        <p>Please type the verification code 
+                        <p className='verification' align="center">{verificationText}</p>
+                        <p align="center">Please type the verification code 
                             {/* <input
                                 type="text"
                                 value={userInput}
@@ -98,29 +109,35 @@ function Verification() {
                                 placeholder="Type here" /> */}
 
                                 <YourComponent/>
-                                
                         </p>
 
-                        <p>
+                        <p align="center">
                             The verification code consists of only alphabetic letters and can be refreshed by clicking the on its image
-                            <br/>
                             <br/>
                             Please do not operate on more than one window and submit this page as soon as possible to avoid verification failure
                         </p>
 
                     </div>
 
+                    <Divider></Divider>
+
                     <p classname='terms-and-conditions'>
                         If you are already opted-in you will receive updates by electronic means (email, SMS, etc.) about events, activities, news, products and special offers from the organisers, sponsors, and/or venue of this event.
-                        <br />
                         <br />
                         If you want to receive updates or manage your preference, go to My Profile. You can unsubscribe at any time by contacting the event partner.
                     </p>
 
 
-                    <FormControlLabel control={<Checkboxes />}
-                        label='I hereby acknowledge that I have read and agreed to Purchase Policy and the terms and conditions of this event (including the Exchange and Refund Policy, Admission Policy and Conditions of Entry for the event), 
-                        and authorize Ticketmaster to collect, process, utilize and internationally transmit my personal data in accordance with the Privacy Policy and within the scope of specific purposes set forth therein.'
+                    <FormControlLabel 
+                        control={<Checkboxes />}
+                        label={
+                        <Typography sx={{ fontWeight: "bold" }}>
+                        I hereby acknowledge that I have read and agreed to Purchase Policy and the terms and conditions of this event 
+                        (including the Exchange and Refund Policy, Admission Policy and Conditions of Entry for the event), 
+                        and authorize Ticketmaster to collect, process, utilize and internationally transmit my personal data in accordance 
+                        with the Privacy Policy and within the scope of specific purposes set forth therein.
+                        </Typography>
+                        }
                     />
                 </div>
 
