@@ -17,7 +17,8 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import Stack from '@mui/material/Stack';
 import { Link } from 'react-router-dom';
-import Verification from "./checkoutforms/Verification"
+import Verification from "./checkoutforms/Verification";
+
 
 const steps = ["Seat Selection", "Verification" ,"Payment Details", "Order Summary"]; 
 
@@ -29,6 +30,7 @@ function getStepContent(step) {
         return <Verification />; 
     case 2:
         return <AddressForm />; 
+        
     case 3:
         return <Review />;
     default:
