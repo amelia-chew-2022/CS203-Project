@@ -3,8 +3,9 @@ import Checkbox from '@mui/material/Checkbox';
 import React, { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import Divider from '@mui/material/Divider'
-import Typography from '@mui/material/Typography'
+import Divider from '@mui/material/Divider';
+import Typography from '@mui/material/Typography';
+import { Zalgo, GlitchParams } from '@h.yoshida/react-zalgo';
 
 function Verification() {
 
@@ -21,7 +22,7 @@ function Verification() {
         // In a real implementation, you would generate a random verification text on the server.
         // For simplicity, we'll hardcode it here.
         // Generate a random 4-character alphanumeric string
-        const charset = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         let generatedText = '';
         
         for (let i = 0; i < 4; i++) {
@@ -30,6 +31,11 @@ function Verification() {
         }
         setVerificationText(generatedText);
     };
+    const param: GlitchParams = {
+        topGlitchAmount: () => Math.ceil(2 * Math.random()),
+        midGlitchAmount: () => Math.ceil(2 * Math.random()),
+        btmGlitchAmount: () => Math.ceil(2 * Math.random()),
+      }
 
     function Checkboxes() {
         const handleCheckboxChange = () => {
@@ -100,14 +106,12 @@ function Verification() {
                     <div className='centered-container'>
 
                         {/* <button onClick={generateVerificationText}>Generate Image</button> */}
-                        <p className='verification' align="center">{verificationText}</p>
-                        <p align="center">Please type the verification code 
-                            {/* <input
-                                type="text"
-                                value={userInput}
-                                onChange={handleInputChange}
-                                placeholder="Type here" /> */}
-
+                        <p align="center">
+                        <span style={{ fontSize: '50px' }}>
+                        <Zalgo className='verification' textData={verificationText} glitchParams={param}/>
+                        </span>
+                        </p>
+                        <p align="center">Please enter the verification code 
                                 <YourComponent/>
                         </p>
 
