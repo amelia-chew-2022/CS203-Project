@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import { Zalgo, GlitchParams } from '@h.yoshida/react-zalgo';
+import { Zalgo } from '@h.yoshida/react-zalgo';
 
 function Verification() {
 
@@ -19,8 +19,6 @@ function Verification() {
     }, []); // The empty array ensures it's called only once when the component mounts
 
     const generateVerificationText = () => {
-        // In a real implementation, you would generate a random verification text on the server.
-        // For simplicity, we'll hardcode it here.
         // Generate a random 4-character alphanumeric string
         const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         let generatedText = '';
@@ -31,11 +29,11 @@ function Verification() {
         }
         setVerificationText(generatedText);
     };
-    const param: GlitchParams = {
+    const param = {
         topGlitchAmount: () => Math.ceil(2 * Math.random()),
         midGlitchAmount: () => Math.ceil(2 * Math.random()),
         btmGlitchAmount: () => Math.ceil(2 * Math.random()),
-      }
+    };
 
     function Checkboxes() {
         const handleCheckboxChange = () => {
