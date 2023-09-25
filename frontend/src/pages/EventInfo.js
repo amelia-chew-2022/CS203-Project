@@ -1,4 +1,4 @@
-import Breadcrumbs from '@mui/material/Breadcrumbs';
+ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import Typography from "@mui/material/Typography";
 import NavBar from "../components/navigation/NavBar";
