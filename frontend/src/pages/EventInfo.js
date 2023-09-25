@@ -151,6 +151,7 @@ const EventInfo = (props) => {
                 <Typography variant="h3" sx={{fontWeight: "bold", color: "#fff"}}>
                     VIBES
                 </Typography>
+                <Box sx={{ width: "flex", height: "20px" }}></Box>
                 </Container>
             </Box>
 
