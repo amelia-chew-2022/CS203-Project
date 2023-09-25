@@ -64,7 +64,7 @@ export default function AddressForm() {
 
       <Divider variant="middle" />
 
-      <Typography variant="h6" gutterBottom>
+      <Typography variant="h6" gutterBottom style={{ margin: '20px 0' }}>
         Shipping address
       </Typography>
       <Grid container spacing={3}>
