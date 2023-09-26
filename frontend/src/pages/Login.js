@@ -13,23 +13,24 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function onChange(value) {
     console.log("Captcha value:", value);
 }
 
 const Login = () => {
-    const [email, setEmail] = React.useState('');
+    const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
-    const [emailError, setEmailError] = React.useState(false);
+    const [usernameError, setUsernameError] = React.useState(false);
     const [passwordError, setPasswordError] = React.useState(false);
     const navigate = useNavigate();
 
-    const handleEmailChange = (event) => {
-        const emailValue = event.target.value;
-        setEmail(emailValue);
-        // Check if email is empty and set error state accordingly
-        setEmailError(emailValue === '');
+    const handleUsernameChange = (event) => {
+        const usernameValue = event.target.value;
+        setUsername(usernameValue);
+        // Check if username is empty and set error state accordingly
+        setUsernameError(usernameValue === '');
     };
 
     const handlePasswordChange = (event) => {
@@ -41,14 +42,14 @@ const Login = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Check if email and password are empty before submitting
-        if (email === '' || password === '') {
-            setEmailError(email === '');
+        // Check if username and password are empty before submitting
+        if (username === '' || password === '') {
+            setUsernameError(username === '');
             setPasswordError(password === '');
         } else {
             event.preventDefault();
-            let authHeader = window.btoa(email + ':' + password);
-            let user = {'username': email, 'authHeader': authHeader};
+            let authHeader = window.btoa(username + ':' + password);
+            let user = {'username': username, 'authHeader': authHeader};
             localStorage.setItem('user', JSON.stringify(user));
             navigate('/');
         }
@@ -76,15 +77,15 @@ const Login = () => {
                         margin="normal"
                         required
                         fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
+                        id="username"
+                        label="Username"
+                        name="username"
+                        autoComplete="username"
                         autoFocus
-                        value={email}
-                        onChange={handleEmailChange}
-                        error={emailError}
-                        helperText={emailError ? 'Email is required' : ''}
+                        value={username}
+                        onChange={handleUsernameChange}
+                        error={usernameError}
+                        helperText={usernameError ? 'Username is required' : ''}
                     />
                     <TextField
                         margin="normal"
