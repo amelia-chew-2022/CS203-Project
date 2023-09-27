@@ -12,6 +12,7 @@ import Container from "@mui/material/Container"
 import Heropage from "../assets/heropage.png";
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import IconButton from "@mui/material/IconButton";
+import Box from "@mui/material/Box";
 
 const Home = () => {
     const eventslist = useRef(null);
@@ -38,7 +39,7 @@ const Home = () => {
             <img
             src={Heropage}
             alt="Background"
-            style={{ width: '100%', height: '550px' }}
+            style={{ width: '100%', height: '600px' }}
             />
 
             <div
@@ -52,6 +53,7 @@ const Home = () => {
                 justifyContent: 'center',
             }}
             >
+            <Box height="50px"></Box>
 
             <FieldsRow>
             <Container>

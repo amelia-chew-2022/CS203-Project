@@ -23,7 +23,6 @@ import Fab from '@mui/material/Fab';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Fade from '@mui/material/Fade';
 
-
 function handleClick(event) {
     event.preventDefault();
     console.info('You clicked a breadcrumb.');
@@ -152,6 +151,7 @@ const EventInfo = (props) => {
                 <Typography variant="h3" sx={{fontWeight: "bold", color: "#fff"}}>
                     VIBES
                 </Typography>
+                <Box sx={{ width: "flex", height: "20px" }}></Box>
                 </Container>
             </Box>
 
@@ -204,8 +204,9 @@ const EventInfo = (props) => {
             </AppBar>
 
             {/* event details */}
-            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
-            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
+            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
+            <Box sx={{ width: "flex", height: "20px", backgroundColor: "#ececec" }}></Box>
+            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
             <Typography variant="h3" gutterBottom a ref={section1Ref}>Event Details</Typography>
 
             <Typography variant="body1" gutterBottom paragraph>
@@ -230,11 +231,13 @@ const EventInfo = (props) => {
             experience the magic firsthand. Secure your tickets for VIBES now! We eagerly await your presence. See you there!
             </Typography>
             </Container>
+            <Box sx={{ width: "flex", height: "20px", backgroundColor: "#ececec" }}></Box>
             </Box>
 
             {/* ticket pricing */}
-            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
-            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
+            <Box sx={{ width: "flex", height: "20px", backgroundColor: "#fff" }}></Box>
+            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
+            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
             <Typography variant="h3" gutterBottom a ref={section2Ref}>Ticket Pricing</Typography>
 
             <Typography variant="body1" gutterBottom style={{fontWeight: "bold", color: "#5522cc"}} paragraph>
@@ -273,19 +276,24 @@ const EventInfo = (props) => {
             </ul>
             </Typography>
             </Container>
+            <Box sx={{ width: "flex", height: "20px", backgroundColor: "#fff" }}></Box>
             </Box>
+            
 
             {/* seat map */}
-            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
-            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
+            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
+            <Box sx={{ width: "flex", height: "20px", backgroundColor: "#ececec" }}></Box>
+            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
             <Typography variant="h3" gutterBottom a ref={section3Ref}>Seat Map</Typography>
             <img src={Seatmap} alt="Seatmap" width="100%"/>
             </Container>
+            <Box sx={{ width: "flex", height: "20px", backgroundColor: "#ececec" }}></Box>
             </Box>
 
             {/* exchange and refund policy */}
-            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }} >
-            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
+            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }} >
+            <Box sx={{ width: "flex", height: "20px", backgroundColor: "#fff" }}></Box>
+            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
             <Typography variant="h3" gutterBottom a ref={section4Ref}>Exchange & Refund Policy</Typography>
             <Typography variant="body1" gutterBottom>
             <ol type="1">
@@ -301,12 +309,13 @@ const EventInfo = (props) => {
             </ol>
             </Typography>
             </Container>
+            <Box sx={{ width: "flex", height: "20px", backgroundColor: "#fff" }}></Box>
             </Box>
 
             {/* admission policy */}
-            <Box
-            sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
-            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
+            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
+            <Box sx={{ width: "flex", height: "20px", backgroundColor: "#ececec" }}></Box>
+            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
             <Typography variant="h3" gutterBottom a ref={section5Ref}>Admission Policy</Typography>
             <Typography variant="body1" gutterBottom>
             <b>Admission Rules:</b><br/>
@@ -325,23 +334,13 @@ const EventInfo = (props) => {
             </ol>
             </Typography>
             </Container>
+            <Box sx={{ width: "flex", height: "20px", backgroundColor: "#ececec" }}></Box>
             </Box>
 
             {/* ways to buy tickets */}
-            <Box
-            sx={{
-                width: "flex",
-                height: "flex",
-                backgroundColor: "#ececec",
-              }}
-            >
-            <Container
-            sx={{
-                width: "flex",
-                height: "flex",
-                backgroundColor: "#ececec",
-              }}
-            >
+            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }} >
+            <Box sx={{ width: "flex", height: "20px", backgroundColor: "#fff" }}></Box>
+            <Container sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
             <Typography variant="h3" gutterBottom a ref={section6Ref}>Ways To Buy Tickets</Typography>
             <Typography variant="body1" gutterBottom>
             <b>► ONLINE & MOBILE:</b><br/>
@@ -360,8 +359,8 @@ const EventInfo = (props) => {
             The sale of tickets will be available at All SingPost outlets.<br/>
             Click here to check for available branches and operating hours.<br/>
             </Typography>
-
             </Container>
+            <Box sx={{ width: "flex", height: "20px", backgroundColor: "#fff" }}></Box>
             </Box>
 
             <Footer/>

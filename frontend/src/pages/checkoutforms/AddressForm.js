@@ -7,6 +7,30 @@ import Checkbox from '@mui/material/Checkbox';
 import Divider from '@mui/material/Divider';
 
 export default function AddressForm() {
+  const [fieldValidations, setFieldValidations] = React.useState({
+    cardName: true,
+    cardNumber: true,
+    expDate: true,
+    cvv: true,
+    firstName: true,
+    lastName: true,
+    address1: true,
+    city: true,
+    zip: true,
+    country: true,
+  });
+
+  // Validation function
+  const validateField = (field, value) => {
+    // You can add your validation logic here
+    // For example, check if the value is empty or not
+    const isValid = value.trim() !== '';
+    setFieldValidations((prevValidations) => ({
+      ...prevValidations,
+      [field]: isValid,
+    }));
+  };
+
   return (
     <React.Fragment>
         <Typography variant="h6" gutterBottom>
@@ -21,6 +45,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="cc-name"
             variant="standard"
+            error={!fieldValidations.cardName}
+            onBlur={(e) => validateField('cardName', e.target.value)}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -31,6 +57,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="cc-number"
             variant="standard"
+            error={!fieldValidations.cardNumber}
+            onBlur={(e) => validateField('cardNumber', e.target.value)}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -41,6 +69,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="cc-exp"
             variant="standard"
+            error={!fieldValidations.expDate}
+            onBlur={(e) => validateField('expDate', e.target.value)}
           />
         </Grid>
         <Grid item xs={12} md={6}>
@@ -52,6 +82,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="cc-csc"
             variant="standard"
+            error={!fieldValidations.cvv}
+            onBlur={(e) => validateField('cvv', e.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
@@ -63,7 +95,6 @@ export default function AddressForm() {
       </Grid>
 
       <Divider variant="middle" />
-
       <Typography variant="h6" gutterBottom>
         Shipping address
       </Typography>
@@ -77,6 +108,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="given-name"
             variant="standard"
+            error={!fieldValidations.firstName}
+            onBlur={(e) => validateField('firstName', e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -88,6 +121,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="family-name"
             variant="standard"
+            error={!fieldValidations.lastName}
+            onBlur={(e) => validateField('lastName', e.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
@@ -99,6 +134,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
+            error={!fieldValidations.address1}
+            onBlur={(e) => validateField('address1', e.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
@@ -120,6 +157,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address-level2"
             variant="standard"
+            error={!fieldValidations.city}
+            onBlur={(e) => validateField('city', e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -140,6 +179,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping postal-code"
             variant="standard"
+            error={!fieldValidations.zip}
+            onBlur={(e) => validateField('zip', e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -151,6 +192,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping country"
             variant="standard"
+            error={!fieldValidations.country}
+            onBlur={(e) => validateField('country', e.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
