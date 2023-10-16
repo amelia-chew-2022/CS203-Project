@@ -1,5 +1,7 @@
 package csd.week5.ticket;
 import csd.week5.ticket.*;
+import csd.week5.user.User;
+import csd.week5.user.UserRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -23,12 +25,14 @@ public class TicketServiceTest {
 
     @Mock
     private TicketRepository tickets;
+    @Mock
+    private UserRepository users;
 
     @InjectMocks
     private TicketServiceImpl ticketService;
 
     @Test
-    void addBook_NewTitle_ReturnSavedBook() {
+    void addTicket_NewTitle_ReturnSavedTicket() {
         // arrange ***
         Ticket ticket = new Ticket("Dummy", "123", "1ac23V", "100");
         // mock the "save" operation
@@ -54,4 +58,37 @@ public class TicketServiceTest {
         verify(tickets).findById(ticketId);
     }
 
+    @Test
+    void updateTicket_Found_ReturnTicket() {
+        Ticket ticket = new Ticket("Updated", "123", "1ac23V", "100");
+        Long ticketId = 10L;
+        Optional<Ticket> original = Optional.of(new Ticket("Original", "123", "1ac23V", "100"));
+        when(tickets.findById(ticketId)).thenReturn(original);
+        when(tickets.save(ticket)).thenReturn(ticket);
+
+        Ticket updatedTicket = ticketService.updateTicket(ticketId, ticket);
+
+        assertNotNull(updatedTicket);
+        verify(tickets).findById(ticketId);
+        verify(tickets).save(ticket);
+    }
+
+    @Test
+    void buyTicket_Successful_ReturnTicket() {
+        Ticket ticket = new Ticket("Ticket", "123", "1ac23V", "100");
+        Long ticketId = 10L;
+        User user = new User("Dummy", null, "ROLE_ADMIN", "nic@gmail.com", "23698745", "SMU building", "87654321");
+        Long userId = 11L;
+
+        when(tickets.findById(ticketId)).thenReturn(Optional.of(ticket));
+        when(users.findById(userId)).thenReturn(Optional.of(user));
+        when(tickets.save(ticket)).thenReturn(ticket);
+
+        Ticket updatedTicket = ticketService.buyTicket(ticketId, userId);
+
+        assertNotNull(updatedTicket);
+        verify(tickets).findById(ticketId);
+        verify(users).findById(userId);
+        verify(tickets).save(ticket);
+    }
 }
