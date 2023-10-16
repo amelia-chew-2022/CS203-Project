@@ -30,8 +30,8 @@ public class TicketServiceImpl implements TicketService {
     }
     
     @Override
-    public Ticket addTicket(Ticket book) {
-        return tickets.save(book);
+    public Ticket addTicket(Ticket ticket) {
+        return tickets.save(ticket);
     }
     
     @Override
