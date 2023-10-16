@@ -18,6 +18,28 @@ public class Application {
 
         // JPA book repository init
         TicketRepository tickets = ctx.getBean(TicketRepository.class);
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100",false)).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100",false)).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200",false)).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100",false)).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200",false)).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200",false)).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
+        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
         System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
         System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
 
