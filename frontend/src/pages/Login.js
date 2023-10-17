@@ -51,7 +51,7 @@ const Login = () => {
             let authHeader = window.btoa(username + ':' + password);
             let user = {'username': username, 'authHeader': authHeader};
             localStorage.setItem('user', JSON.stringify(user));
-            navigate('/');
+            navigate('/eventinfo');
         }
     };
 

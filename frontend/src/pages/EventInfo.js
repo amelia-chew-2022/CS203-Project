@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Vibes from '../assets/vibes.png';
 import { Link } from 'react-router-dom';
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Footer from '../components/footer/Footer';
 import Container from '@mui/material/Container';
@@ -22,6 +22,8 @@ import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Fab from '@mui/material/Fab';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import Fade from '@mui/material/Fade';
+import TicketService from '../services/TicketService';
+import { useNavigate } from 'react-router-dom';
 
 function handleClick(event) {
     event.preventDefault();
@@ -95,6 +97,18 @@ function ScrollTop(props) {
   };
 
 const EventInfo = (props) => {
+    const navigate = useNavigate();
+    const [tickets, setTickets] = useState([]);
+    useEffect(() => {
+        TicketService.getTickets()
+            .then((res) => {
+                setTickets(res.data);
+            })
+            .catch(() => {
+                navigate('/error');
+            });
+    }, []);
+
     const [value, setValue] = React.useState('one');
 
     const handleChange = (event, newValue) => {

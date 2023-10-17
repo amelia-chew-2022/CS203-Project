@@ -54,6 +54,7 @@ public class User implements UserDetails{
     @Size(min = 8, message = "Email should be at least 8 characters")
     private String email;
 
+    //To delete
     @NotNull(message = "Credit card number should not be null")
     @Size(min = 8, message = "Credit card number should be 8 digits")
     private String credit_card_num;
