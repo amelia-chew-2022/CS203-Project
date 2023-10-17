@@ -35,6 +35,7 @@ public class TicketServiceTest {
     void addTicket_NewTitle_ReturnSavedTicket() {
         // arrange ***
         Ticket ticket = new Ticket("Dummy", "123", "1ac23V", "100");
+        
         // mock the "save" operation
         when(tickets.save(any (Ticket.class))).thenReturn(ticket);
 

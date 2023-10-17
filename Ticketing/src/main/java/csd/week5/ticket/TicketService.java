@@ -4,12 +4,18 @@ import java.util.List;
 
 public interface TicketService {
     List<Ticket> listTickets();
+
     Ticket getTicket(Long id);
+
     Ticket addTicket(Ticket book);
+
     Ticket updateTicket(Long id, Ticket book);
+
+    Ticket updateAvailabilityById(Long id, Boolean available);
 
     /**
      * Change method's signature: do not return a value for delete operation
+     * 
      * @param id
      */
     void deleteTicket(Long id);

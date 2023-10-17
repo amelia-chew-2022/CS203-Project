@@ -18,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import csd.week5.user.*;
 
-
 @Entity
 @Getter
 @Setter
@@ -27,8 +26,7 @@ import csd.week5.user.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class Ticket {
-    private @Id @GeneratedValue (strategy = GenerationType.IDENTITY) Long id;
-    
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
     @NotNull(message = "Ticket's title should not be null")
     @Size(min = 5, max = 200, message = "Ticket title should be at least 5 characters long")
@@ -40,24 +38,34 @@ public class Ticket {
     @NotNull(message = "Seat number should not be null")
     @Size(min = 5, max = 200, message = "Seat number should be at least 5 characters long")
     private String seat_number;
-    
+
     private String unit_price;
 
-    private boolean available = true;
+    private Boolean available=true;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = true)
     private User user;
-    
-    public Ticket(String title, String ticket_number, String seat_number, String unit_price){
+
+    public Ticket(String title, String ticket_number, String seat_number, String unit_price, boolean available) {
         this.title = title;
         this.ticket_number = ticket_number;
         this.seat_number = seat_number;
         this.unit_price = unit_price;
+        this.available = available;
+    }
+
+
+    public Ticket(String title, String ticket_number, String seat_number, String unit_price) {
+        this.title = title;
+        this.ticket_number = ticket_number;
+        this.seat_number = seat_number;
+        this.unit_price = unit_price;
+
     }
 
     public void setAvailability(boolean b) {
         available = b;
     }
-    
+
 }

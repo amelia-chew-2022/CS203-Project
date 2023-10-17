@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 // import org.springframework.web.bind.annotation.ResponseStatus;
 // import org.springframework.web.bind.annotation.RestController;
 
-@CrossOrigin(origins = "http://localhost:3030")
+@CrossOrigin(origins = "http://localhost:3000")
 
 @RestController
 public class TicketController {
@@ -54,6 +54,14 @@ public class TicketController {
         return ticket;
     }
 
+    @PutMapping("/tickets/updateAvailability/{id}")
+    public Ticket updateAvailabilityById(@PathVariable Long id, @Valid @RequestBody Boolean available){
+        Ticket ticket = ticketService.updateAvailabilityById(id, available);
+        if(ticket == null) throw new TicketNotFoundException(id);
+        
+        return ticket;
+    }
+    
     @DeleteMapping("/tickets/{id}")
     public void deleteTicket(@PathVariable Long id){
         try{
