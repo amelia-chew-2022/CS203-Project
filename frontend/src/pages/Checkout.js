@@ -31,6 +31,8 @@ function getStepContent(step) {
         return <AddressForm />; 
     case 3:
         return <Review />;
+    // case 4: 
+    //     return <SeatSelection />;
     default:
         throw new Error('Unknown step');
   }
@@ -167,6 +169,8 @@ export default function Checkout() {
                       sx={{ mt: 3, ml: 1 }}
                     >
                       {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+
+                      
                     </Button>
                   </Box>
                 </React.Fragment>

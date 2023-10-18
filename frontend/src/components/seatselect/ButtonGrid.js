@@ -22,6 +22,8 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
 
+// export const [selectedSeats, setSelectedSeats] = useState([]);
+
 function ButtonGrid({ onButtonClick }) {
   const [buttons, setButtons] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -166,3 +168,4 @@ function ButtonGrid({ onButtonClick }) {
 }
 
 export default ButtonGrid;
+// export { selectedSeats, setSelectedSeats };
