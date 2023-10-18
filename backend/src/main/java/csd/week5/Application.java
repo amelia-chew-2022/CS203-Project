@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import csd.week5.ticket.*;
 import csd.week5.user.User;
 import csd.week5.user.UserRepository;
+import csd.week5.transaction.*;
 
 @SpringBootApplication
 public class Application {
@@ -50,6 +51,12 @@ public class Application {
             new User("Shawn", encoder.encode("hello123"), "ROLE_ADMIN", "shawn@gmail.com", "15465658", "SMU building", "12345678")).getUsername());
         System.out.println("[Add user]: " + users.save(
             new User("Nicholas", encoder.encode("bye123"), "ROLE_ADMIN", "nic@gmail.com", "23698745", "SMU building", "87654321")).getUsername());
+
+
+         //JPA transaction repository init
+        TransactionRepository transaction = ctx.getBean(TransactionRepository.class);
+        transaction.save(new Transaction("transaction",100.0,"helllo","here"));
+        // System.out.println("[Add transaction]: " + transaction.save(new Transaction("100","helllo","here")));
     }
     
 }
