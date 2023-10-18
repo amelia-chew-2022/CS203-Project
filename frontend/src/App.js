@@ -7,6 +7,7 @@ import Venues from "./pages/Venues";
 import Login from './pages/Login';
 import Checkout from './pages/Checkout';
 import Error from './pages/Error';
+import Registration from './pages/Registration';
 
 class App extends Component {
     render() {
@@ -15,6 +16,7 @@ class App extends Component {
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
+                    <Route path="/registration" element={<Registration/>}/>
                     <Route path="/eventinfo" element={<EventInfo/>}/>
                     <Route path="/categories" element={<Categories/>}/>
                     <Route path="/venues" element={<Venues/>}/>
