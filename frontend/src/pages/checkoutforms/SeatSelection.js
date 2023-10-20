@@ -5,245 +5,208 @@ import ButtonGrid from "../../components/seatselect/ButtonGrid";
 import { Container } from "@mui/system";
 import FieldsColumn from "../../components/form/FieldsRow";
 import Typography from "@mui/material/Typography";
-
 function SeatSelect() {
-    const [displayText, setGridTable] = useState(""); // State for the text to be displayed
-  
-    const [clickCount, setClickCount] = useState(""); // State for the text to be displayed
-    const handleButtonClick = (data) => {
-      setClickCount(data.clickCount);
-      setGridTable(data.gridTable);
-    };
-  
-    return (
-      <>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          {/* Image on the left */}
-          <div style={{ marginRight: "20px" }}>
+  const [displayText, setGridTable] = useState(""); // State for the text to be displayed
+
+  const [clickCount, setClickCount] = useState(""); // State for the text to be displayed
+  const handleButtonClick = (data) => {
+    setClickCount(data.clickCount);
+    setGridTable(data.gridTable);
+  };
+
+  return (
+    <>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {/* Image on the left */}
+        <div style={{ marginRight: "20px" }}>
           <FieldsColumn>
             <img src={vibes} alt="img" width="flex" height="110" />
           </FieldsColumn>
-          </div>
-  
-          {/* Text box and dropdown to the right */}
-          <div>
-            {/* Text box */}
-            <p>
+        </div>
+
+        {/* Text box and dropdown to the right */}
+        <div>
+          {/* Text box */}
+          <p>
             <Typography variant="h4">
               <b>Vibes</b>
             </Typography>
-            </p>
-  
-            {/* Dropdown box */}
-            <p>
+          </p>
+
+          {/* Dropdown box */}
+          <p>
             <div>
-              <Dropdown/>
+              <Dropdown />
             </div>
-            </p>
-          </div>
+          </p>
         </div>
-  
-        <div
-          className="divider"
-          style={{
-            width: "100%",
-            backgroundColor: "#5522CC", // Background color (gold)
-            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
-            margin: "20px 0",
-            display: "flex",
-            alignItems: "center",
-            height: "40px", // Height of the rectangular background
-            borderRadius: "4px", // Rounded corners for the rectangle
-          }}
-        >
-          <Container>
+      </div>
+
+      <div
+        className="divider"
+        style={{
+          width: "100%",
+          backgroundColor: "#5522CC", // Background color (gold)
+          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+          margin: "20px 0",
+          display: "flex",
+          alignItems: "center",
+          height: "40px", // Height of the rectangular background
+          borderRadius: "4px", // Rounded corners for the rectangle
+        }}
+      >
+        <Container>
           <p
             style={{
               fontWeight: "bold",
               textTransform: "uppercase",
-              color:'#FFF',
+              color: "#FFF",
               textAlign: "center",
             }}
           >
             Choose Your Seat
           </p>
-          </Container>
-        </div>
-  
-        {/*Seat Select component*/}
+        </Container>
+      </div>
+
+      {/*Seat Select component*/}
+      <div
+        className="SeatSelect-Component"
+        style={{
+          backgroundColor: "#222222",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minHeight: "10vh", // Use minHeight to cover the entire viewport height
+          flexDirection: "column",
+        }}
+      >
         <div
-          className="SeatSelect-Component"
+          className="Stage"
           style={{
-            backgroundColor: "#222222",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            minHeight: "10vh", // Use minHeight to cover the entire viewport height
-            flexDirection: "column",
+            backgroundColor: "#fff",
+            height: "100px",
+            width: "600px",
+            margin: "5px 0",
+            transform: "rotateX(-30deg) scale(1.1)",
+            boxShadow: "0 3px 10px rgba(255, 255, 255, 0.75)",
+            display: "flex", // Use Flexbox
+            alignItems: "center", // Center vertically
+            justifyContent: "center", // Center horizontally
+            borderRadius: "0 0 50% 50%", // This creates a semi-circle
           }}
         >
+          <Typography variant="h4">STAGE</Typography>
+        </div>
+
+        <ButtonGrid
+          onButtonClick={handleButtonClick}
+          style={{ marginBottom: "20px" }}
+        />
+        {clickCount > 0 && (
           <div
-            className="Stage"
             style={{
-              backgroundColor: "#fff",
-              height: "100px",
-              width: "600px",
-              margin: "5px 0",
-              transform: "rotateX(-30deg) scale(1.1)",
-              boxShadow: "0 3px 10px rgba(255, 255, 255, 0.75)",
-              display: "flex", // Use Flexbox
-              alignItems: "center", // Center vertically
-              justifyContent: "center", // Center horizontally
-              borderRadius: "0 0 50% 50%", // This creates a semi-circle
+              backgroundColor: "lightgray",
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "50px",
+              fontSize: "18px", // Set the font size
+              fontWeight: "bold", // Set the font weight to bold
             }}
           >
-            <Typography variant="h4">STAGE</Typography>
+            You selected &nbsp; <b>{clickCount} </b>&nbsp;<p>tickets</p>
           </div>
-  
-          <ButtonGrid
-            onButtonClick={handleButtonClick}
-            style={{ marginBottom: "20px" }}
-          />
-          {clickCount > 0 && (
-            <div
-              style={{
-                backgroundColor: "lightgray",
-                width: "100%",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "50px",
-                fontSize: "18px", // Set the font size
-                fontWeight: "bold", // Set the font weight to bold
-              }}
-            >
-              You selected &nbsp; <b>{clickCount} </b>&nbsp;<p>tickets</p>
-            </div>
-          )}
-        </div>
-  
-        {/* Legend */}
+        )}
+      </div>
+
+      {/* Legend */}
+      <div
+        className="legend"
+        style={{
+          marginTop: "20px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <div
-          className="legend"
-          style={{
-            marginTop: "20px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+          style={{ display: "flex", alignItems: "center", marginRight: "20px" }}
         >
           <div
-            style={{ display: "flex", alignItems: "center", marginRight: "20px" }}
-          >
-            <div
-              style={{
-                width: "20px",
-                height: "20px",
-                backgroundColor: "#626262",
-                marginRight: "5px",
-              }}
-            ></div>
-            <span>Available</span>
-          </div>
-          <div
-            style={{ display: "flex", alignItems: "center", marginRight: "20px" }}
-          >
-            <div
-              style={{
-                width: "20px",
-                height: "20px",
-                backgroundColor: "#222222",
-                marginRight: "5px",
-              }}
-            ></div>
-            <span>Occupied</span>
-          </div>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <div
-              style={{
-                width: "20px",
-                height: "20px",
-                backgroundColor: "#7bc47f",
-                marginRight: "5px",
-              }}
-            ></div>
-            <span>Selected</span>
-          </div>
+            style={{
+              width: "20px",
+              height: "20px",
+              backgroundColor: "#626262",
+              marginRight: "5px",
+            }}
+          ></div>
+          <span>Available</span>
         </div>
-  
-  {/*Cat Prices not sure if we including this */}
-        <div className="Cat-Price">
-         {/*  <div>
-            <h2>Ticket Categories and Prices</h2>
-            <table>
-              <tbody>
-                <tr>
-                  <td
-                    style={{
-                      backgroundColor: "red",
-                      width: "30px",
-                      height: "5px",
-                    }}
-                  ></td>
-                  <td>CAT 1</td>
-                  <td>$55</td>
-                </tr>
-                <tr>
-                  <td
-                    style={{
-                      backgroundColor: "green",
-                      width: "30px",
-                      height: "5px",
-                    }}
-                  ></td>
-                  <td>CAT 2</td>
-                  <td>$46</td>
-                </tr>
-                <tr>
-                  <td
-                    style={{
-                      backgroundColor: "blue",
-                      width: "30px",
-                      height: "5px",
-                    }}
-                  ></td>
-                  <td>CAT 3</td>
-                  <td>$32</td>
-                </tr>
-              </tbody>
-            </table>
-          </div> */}
-          <Container>
+        <div
+          style={{ display: "flex", alignItems: "center", marginRight: "20px" }}
+        >
+          <div
+            style={{
+              width: "20px",
+              height: "20px",
+              backgroundColor: "#222222",
+              marginRight: "5px",
+            }}
+          ></div>
+          <span>Occupied</span>
+        </div>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <div
+            style={{
+              width: "20px",
+              height: "20px",
+              backgroundColor: "#7bc47f",
+              marginRight: "5px",
+            }}
+          ></div>
+          <span>Selected</span>
+        </div>
+      </div>
+
+      {/*Cat Prices not sure if we including this */}
+      <div className="Cat-Price">
+
+        <Container>
           <div>
             <p>
-            <Typography variant="h5" fontWeight="bold">Additional Information</Typography>
+              <Typography variant="h5" fontWeight="bold">
+                Additional Information
+              </Typography>
               <li>Seat plan is not drawn to scale</li>
               {/* <li>Colour indicates price category</li> */}
               <li>Ticket prices exclude booking fees</li>
               <li>Seating layout subject to change</li>
             </p>
           </div>
-          </Container>
-          <Container>
+        </Container>
+        <Container>
           <div className="Price-table">
             {displayText && (
               <div>
-                <Typography variant="h5" fontWeight="bold">Ticket Price</Typography>
+                <Typography variant="h5" fontWeight="bold">
+                  Ticket Price
+                </Typography>
                 <p>{displayText}</p>
               </div>
             )}
           </div>
-          </Container>
-        </div>
-      </>
-    );
-  }
-  
-  export default SeatSelect;
-  
+        </Container>
+      </div>
+    </>
+  );
+}
+
+export default SeatSelect;

@@ -1,12 +1,9 @@
+import React, { useState, useEffect } from "react";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import axios from "axios";
 
-/* const containerStyle = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  minHeight: "10vh",
-  padding: "0 20px",
-  width: "800px", // Set a fixed width for the grid container
-};
+// Styles for the buttons
 
 const buttonStyle = {
   width: "60px",
@@ -16,22 +13,19 @@ const buttonStyle = {
   borderBottom: "none",
   backgroundColor: "#626262",
   border: "1px solid #ccc",
-}; */
-import React, { useState, useEffect } from "react";
-import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
-import axios from "axios";
+};
 
 function ButtonGrid({ onButtonClick }) {
   const [buttons, setButtons] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
-  let revertTimeout; // Declare a variable to store the timeout ID
 
   useEffect(() => {
+    // Fetch ticket data from the server
     axios
       .get("http://localhost:8080/tickets")
       .then((res) => {
         const data = res.data;
+
         // Ensure that data is correctly structured as a 2D array with 6 rows
         const formattedData = [];
         for (let i = 0; i < 6; i++) {
@@ -49,7 +43,6 @@ function ButtonGrid({ onButtonClick }) {
     // Toggle the 'available' property for the selected seat
     updatedSeat.available = !updatedSeat.available;
 
-
     // Send a PUT request to update the seat's 'available' property in the database
     axios
       .put(
@@ -62,31 +55,16 @@ function ButtonGrid({ onButtonClick }) {
       .then((res) => {
         // If the update is successful, update the state with the new button data
         setButtons(updatedButtons);
-
-        // Set a timer to revert the update after 5 seconds
-        revertTimeout = setTimeout(() => {
-          updatedSeat.available = !updatedSeat.available;
-          axios
-            .put(
-              `http://localhost:8080/tickets/updateAvailability/${updatedSeat.id}`,
-              updatedSeat.available,
-              {
-                headers: { "Content-Type": "application/json" },
-              }
-            )
-            .then((res) => {
-              setButtons(updatedButtons);
-            })
-            .catch((err) => console.log(err));
-        }, 10000); // 5000 milliseconds = 5 seconds
       })
       .catch((err) => console.log(err));
   };
+
   const updateSelectedSeats = () => {
     // Loop through selected seats and trigger handleUpdateClick for each
     selectedSeats.forEach((seat) => {
       handleUpdateClick(seat.row, seat.col);
     });
+    setSelectedSeats([]); // Clear the selected seats
   };
 
   const handleButtonClick = (rowIndex, colIndex) => {
@@ -113,10 +91,10 @@ function ButtonGrid({ onButtonClick }) {
       ]);
     }
   };
-
+  const selectedSeatsCount = selectedSeats.length;
   return (
     <div>
-      <Grid container>
+      <Grid>
         {buttons.map((row, rowIndex) => (
           <Grid container item key={rowIndex} justifyContent="center">
             {row.map((seat, colIndex) => (
@@ -124,14 +102,13 @@ function ButtonGrid({ onButtonClick }) {
                 <Button
                   variant="contained"
                   style={{
-                    width: "60px",
-                    height: "60px",
+                    ...buttonStyle, // Apply the buttonStyle here
                     backgroundColor: isSeatSelected(rowIndex, colIndex)
-                      ? "red" // Change the background color when selected
-                      : "green", // Default background color
+                      ? "green"
+                      : "#626262",
                   }}
                   onClick={() => handleButtonClick(rowIndex, colIndex)}
-                  disabled={!seat.available} // Adjust based on your logic
+                  disabled={!seat.available}
                 >
                   {seat.seat_number}
                 </Button>
@@ -140,15 +117,19 @@ function ButtonGrid({ onButtonClick }) {
           </Grid>
         ))}
       </Grid>
-      <div>
+
+      {/* Display selected tickets */}
+      <div
+        style={{
+          border: "1px solid #000",
+          padding: "10px",
+          borderRadius: "5px",
+          backgroundColor: "#f0f0f0",
+          margin: "10px",
+        }}
+      >
         <h3>Selected Seats:</h3>
-        <ul>
-          {selectedSeats.map((seat, index) => (
-            <li key={index}>
-              Row: {seat.row + 1}, Col: {seat.col + 1}
-            </li>
-          ))}
-        </ul>
+        <p>Number of Seats Selected: {selectedSeatsCount}</p>
       </div>
 
       {/* Create a button to update the seat availability for selected seats */}
@@ -159,8 +140,6 @@ function ButtonGrid({ onButtonClick }) {
       >
         Update Selected Seats
       </Button>
-
-      
     </div>
   );
 }
