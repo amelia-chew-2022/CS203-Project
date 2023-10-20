@@ -55,7 +55,7 @@ public class Application {
 
          //JPA transaction repository init
         TransactionRepository transaction = ctx.getBean(TransactionRepository.class);
-        transaction.save(new Transaction("transaction",100.0,"helllo","here"));
+        transaction.save(new Transaction("transaction",100.0,null,"here"));
         // System.out.println("[Add transaction]: " + transaction.save(new Transaction("100","helllo","here")));
     }
     

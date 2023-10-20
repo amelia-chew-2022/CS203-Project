@@ -36,14 +36,14 @@ public class Transaction {
 
     private double total_price;
 
-    // Add the ManyToOne annotation to create a foreign key relationship with the
-    // User entity
-    private String user;
+    @ManyToOne // Use @ManyToOne to create a many-to-one relationship with the User entity
+    @JoinColumn(name = "user_id") // Specify the foreign key column name
+    private User user; // Change the user field to be of type User
 
     @NotBlank(message = "Transaction date should not be blank")
     private String transaction_date;
 
-    public Transaction(String title, double total_price, String user, String transaction_date) {
+    public Transaction(String title, double total_price, User user, String transaction_date) {
         this.title = title;
         this.total_price = total_price;
         this.user = user;
