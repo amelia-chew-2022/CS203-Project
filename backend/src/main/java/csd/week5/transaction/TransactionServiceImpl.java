@@ -33,12 +33,16 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Transaction updateTransaction(Long id, Transaction newTransactionInfo) {
-        return Transactions.findById(id).map(Transaction -> {
-            Transaction.setTitle(newTransactionInfo.getTitle());
-            return Transactions.save(Transaction);
+        return Transactions.findById(id).map(existingTransaction -> {
+            // Update the user field only if newTransactionInfo.getUser() is not null
+            User newUser = newTransactionInfo.getUser();
+            if (newUser != null) {
+                existingTransaction.setUser(newUser);
+            }
+            return Transactions.save(existingTransaction);
         }).orElse(null);
-
     }
+    
 
     /**
      * Remove a book with the given id
@@ -49,7 +53,5 @@ public class TransactionServiceImpl implements TransactionService {
     public void deleteTransaction(Long id) {
         Transactions.deleteById(id);
     }
-
-
 
 }

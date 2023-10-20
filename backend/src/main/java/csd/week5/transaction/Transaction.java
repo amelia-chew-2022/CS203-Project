@@ -30,9 +30,7 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Ticket's title should not be null")
-    @Size(min = 5, max = 200, message = "Ticket title should be at least 5 characters long")
-    private String title;
+
 
     private double total_price;
 
@@ -43,8 +41,7 @@ public class Transaction {
     @NotBlank(message = "Transaction date should not be blank")
     private String transaction_date;
 
-    public Transaction(String title, double total_price, User user, String transaction_date) {
-        this.title = title;
+    public Transaction( double total_price, User user, String transaction_date) {
         this.total_price = total_price;
         this.user = user;
         this.transaction_date = transaction_date;
