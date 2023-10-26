@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne; // Import the ManyToOne annotation
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -43,10 +45,13 @@ public class Transaction {
     @Temporal(TemporalType.TIMESTAMP)
     private Date transaction_date;
 
-    public Transaction(double total_price) {
+    public Transaction(double total_price,User user) {
         this.total_price = total_price;
-        this.user = new User("Shawn", encoder.encode("hello123"), "ROLE_ADMIN", "shawn@gmail.com", "15465658", "SMU building", "12345678");
+        this.user = user;
         this.status = false;
-        this.transaction_date = new Date().getTime();
+        this.transaction_date = new Date();
+    }
+
+    public void setTitle(Long id2) {
     }
 }

@@ -13,22 +13,27 @@ import csd.week5.transaction.*;
 @SpringBootApplication
 public class Application {
 
-	public static void main(String[] args) {
-		
-		ApplicationContext ctx = SpringApplication.run(Application.class, args);
+    public static void main(String[] args) {
+
+        ApplicationContext ctx = SpringApplication.run(Application.class, args);
 
         // JPA book repository init
         TicketRepository tickets = ctx.getBean(TicketRepository.class);
-        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100",false)).getTitle());
+        System.out.println(
+                "[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100", false)).getTitle());
         System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
         System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
         System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
-        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100",false)).getTitle());
+        System.out.println(
+                "[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100", false)).getTitle());
         System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
         System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
-        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200",false)).getTitle());
-        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100",false)).getTitle());
-        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200",false)).getTitle());
+        System.out.println(
+                "[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200", false)).getTitle());
+        System.out.println(
+                "[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100", false)).getTitle());
+        System.out.println(
+                "[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200", false)).getTitle());
         System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
         System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
         System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
@@ -38,7 +43,8 @@ public class Application {
         System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
         System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
         System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
-        System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200",false)).getTitle());
+        System.out.println(
+                "[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200", false)).getTitle());
         System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
         System.out.println("[Add ticket]: " + tickets.save(new Ticket("Bornpink", "456", "2zc15C", "200")).getTitle());
         System.out.println("[Add ticket]: " + tickets.save(new Ticket("Twice", "123", "1ac23V", "100")).getTitle());
@@ -48,15 +54,19 @@ public class Application {
         UserRepository users = ctx.getBean(UserRepository.class);
         BCryptPasswordEncoder encoder = ctx.getBean(BCryptPasswordEncoder.class);
         System.out.println("[Add user]: " + users.save(
-            new User("Shawn", encoder.encode("hello123"), "ROLE_ADMIN", "shawn@gmail.com", "15465658", "SMU building", "12345678")).getUsername());
+                new User("Shawn", encoder.encode("hello123"), "ROLE_ADMIN", "shawn@gmail.com", "15465658",
+                        "SMU building", "12345678"))
+                .getUsername());
         System.out.println("[Add user]: " + users.save(
-            new User("Nicholas", encoder.encode("bye123"), "ROLE_ADMIN", "nic@gmail.com", "23698745", "SMU building", "87654321")).getUsername());
+                new User("Nicholas", encoder.encode("bye123"), "ROLE_ADMIN", "nic@gmail.com", "23698745",
+                        "SMU building", "87654321"))
+                .getUsername());
 
-
-         //JPA transaction repository init
+        // JPA transaction repository init
         TransactionRepository transaction = ctx.getBean(TransactionRepository.class);
-        transaction.save(new Transaction(100.0));
-        // System.out.println("[Add transaction]: " + transaction.save(new Transaction("100","helllo","here")));
+        transaction.save(new Transaction(100.0, null));
+        // System.out.println("[Add transaction]: " + transaction.save(new
+        // Transaction("100","helllo","here")));
     }
-    
+
 }
