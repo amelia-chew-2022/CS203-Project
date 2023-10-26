@@ -11,6 +11,11 @@ public interface TransactionService {
 
     Transaction updateTransaction(Long id, Transaction book);
 
+    boolean isTransactionExpired(Transaction transaction);
+
+    void handleTimeoutTransactions();
+
+    void checkTimeoutTransactions();
 
     /**
      * Change method's signature: do not return a value for delete operation

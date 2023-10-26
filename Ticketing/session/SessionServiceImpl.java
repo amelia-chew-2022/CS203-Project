@@ -11,16 +11,13 @@ import csd.week5.transaction.*;
 @Service
 public class SessionServiceImpl implements SessionService {
 
-    private SessionRepository session;
+    private SessionRepository sessions;
     private TransactionRepository transaction;
 
     public SessionServiceImpl(SessionRepository sessions, TransactionRepository transaction) {
         this.sessions = sessions;
         this.transaction = transaction;
     }
-
-    @Override
-
 
     @Override
     public List<Session> listSessions() {

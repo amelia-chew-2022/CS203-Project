@@ -1,5 +1,6 @@
 package csd.week5.transaction;
 
+import java.sql.Date;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,28 @@ public class TransactionServiceImpl implements TransactionService {
             return Transactions.save(Transaction);
         }).orElse(null);
 
+    }
+
+    public boolean isTransactionExpired(Transaction transaction) {
+        Date currentTime = new Date();
+        long elapsedTime = currentTime.getTime() - transaction.getTransaction_date().getTime();
+        return elapsedTime >= 10000;
+    }
+
+    public void handleTimeoutTransactions() {
+        List<Transaction> transactions = transactionRepository.findAll();
+
+        for (Transaction transaction : transactions) {
+            if (isTransactionExpired(transaction)) {
+                // Handle the expired transaction (e.g., cancel it or take appropriate action).
+                deleteTransaction(transaction.getId());
+            }
+        }
+    }
+
+    @Scheduled(fixedRate = 2000) // Runs every minute
+    public void checkTimeoutTransactions() {
+        handleTimeoutTransactions();
     }
 
     /**

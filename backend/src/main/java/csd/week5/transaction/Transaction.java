@@ -1,6 +1,7 @@
 package csd.week5.transaction;
 
 import java.util.List;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -30,23 +31,22 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Ticket's title should not be null")
-    @Size(min = 5, max = 200, message = "Ticket title should be at least 5 characters long")
-    private String title;
-
     private double total_price;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
-    @NotBlank(message = "Transaction date should not be blank")
-    private String transaction_date;
+    // @Enumerated(EnumType.STRING)
+    private boolean status;
 
-    public Transaction(String title, double total_price, User user, String transaction_date) {
-        this.title = title;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date transaction_date;
+
+    public Transaction(double total_price) {
         this.total_price = total_price;
-        this.user = user;
-        this.transaction_date = transaction_date;
+        this.user = new User("Shawn", encoder.encode("hello123"), "ROLE_ADMIN", "shawn@gmail.com", "15465658", "SMU building", "12345678");
+        this.status = false;
+        this.transaction_date = new Date().getTime();
     }
 }
