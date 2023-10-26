@@ -24,25 +24,34 @@ const Login = () => {
     const [password, setPassword] = React.useState('');
     const [usernameError, setUsernameError] = React.useState(false);
     const [passwordError, setPasswordError] = React.useState(false);
+    const [isCaptchaVerified, setCaptchaVerified] = React.useState(false);
     const navigate = useNavigate();
 
     const handleUsernameChange = (event) => {
         const usernameValue = event.target.value;
         setUsername(usernameValue);
-        // Check if username is empty and set error state accordingly
         setUsernameError(usernameValue === '');
     };
 
     const handlePasswordChange = (event) => {
         const passwordValue = event.target.value;
         setPassword(passwordValue);
-        // Check if password is empty and set error state accordingly
         setPasswordError(passwordValue === '');
+    };
+
+    const handleCaptchaChange = (value) => {
+        console.log("Captcha value:", value);
+        setCaptchaVerified(true);
     };
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Check if username and password are empty before submitting
+
+        if (!isCaptchaVerified) {
+            console.log("Please complete the ReCAPTCHA");
+            return;
+        }
+
         if (username === '' || password === '') {
             setUsernameError(username === '');
             setPasswordError(password === '');
@@ -51,7 +60,7 @@ const Login = () => {
             let authHeader = window.btoa(username + ':' + password);
             let user = {'username': username, 'authHeader': authHeader};
             localStorage.setItem('user', JSON.stringify(user));
-            navigate('/eventinfo');
+            navigate('/');
         }
     };
 
@@ -101,7 +110,7 @@ const Login = () => {
                         error={passwordError}
                         helperText={passwordError ? 'Password is required' : ''}
                     />
-                    <ReCAPTCHA sitekey="6LdH1UwoAAAAAO8hLo9y8SkrWpKT3W7VR0xHVD3S" onChange={onChange}></ReCAPTCHA>
+                    <ReCAPTCHA sitekey="6LdH1UwoAAAAAO8hLo9y8SkrWpKT3W7VR0xHVD3S" onChange={handleCaptchaChange}></ReCAPTCHA>
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
                         label="Remember me"
@@ -111,7 +120,7 @@ const Login = () => {
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
-                        onClick={handleSubmit}
+                        // onClick={handleSubmit}
                     >
                         Sign In
                     </Button>
