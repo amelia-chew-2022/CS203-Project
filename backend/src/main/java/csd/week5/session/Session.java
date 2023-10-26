@@ -1,6 +1,7 @@
-package csd.week5.transaction;
+package csd.week5.session;
 
 import java.util.List;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne; // Import the ManyToOne annotation
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -17,6 +19,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import csd.week5.user.*;
+import csd.week5.transaction.*;
 
 @Entity
 @Getter
@@ -25,28 +28,24 @@ import csd.week5.user.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Transaction {
+public class Session {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull(message = "Ticket's title should not be null")
-    @Size(min = 5, max = 200, message = "Ticket title should be at least 5 characters long")
-    private String title;
+    private long startTime;
 
-    private double total_price;
+    private long duration;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = true)
-    private User user;
+    @OneToOne
+    @JoinColumn(name = "transaction_id", nullable = true)
+    private Transaction transaction;
 
-    @NotBlank(message = "Transaction date should not be blank")
-    private String transaction_date;
 
-    public Transaction(String title, double total_price, User user, String transaction_date) {
-        this.title = title;
-        this.total_price = total_price;
-        this.user = user;
-        this.transaction_date = transaction_date;
+
+    public Session(long startTime, long duration, Transaction transaction) {
+        this.startTime = System.currentTimeMillis();
+        this.duration = 10000; // TODO: change to actual duration time when code works
+        this.transaction = transaction;
     }
 }

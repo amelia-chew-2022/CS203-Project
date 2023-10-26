@@ -5,6 +5,10 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 
+// import {selectedSeats} from '../../components/seatselect/ButtonGrid';
+
+// console.log(selectedSeats);
+
 const products = [
   {
     name: 'Product 1',
