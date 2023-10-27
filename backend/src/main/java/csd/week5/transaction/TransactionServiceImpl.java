@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import csd.week5.ticket.*;
+// import csd.week5.ticket.TicketRepository;
 import csd.week5.user.*;
 
 @Service
@@ -13,15 +15,23 @@ public class TransactionServiceImpl implements TransactionService {
 
     private TransactionRepository Transactions;
     private UserRepository users;
+    private TicketRepository tickets;
 
-    public TransactionServiceImpl(TransactionRepository Transactions, UserRepository users) {
+    public TransactionServiceImpl(TransactionRepository Transactions, UserRepository users, TicketRepository tickets) {
         this.Transactions = Transactions;
         this.users = users;
+        this.tickets = tickets;
     }
 
     @Override
     public List<Transaction> listTransactions() {
         return Transactions.findAll();
+    }
+
+    // i assumed JPA automatically created this findAllByStatus method
+    @Override
+    public List<Transaction> listActiveTransactions() {
+        return Transactions.findAllByStatus(false);
     }
 
     @Override
@@ -30,27 +40,47 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction addTransaction(Transaction Transaction) {
-        return Transactions.save(Transaction);
+    public Transaction addTransaction(Transaction Transaction, Ticket[] tickets) {
+        // create transaction
+        Transaction transaction = Transactions.save(Transaction);
+
+        // update selected tickets in the array: availability and transaction_id
+        for (Ticket ticket : tickets) {
+            ticket.setAvailable = false;
+            // change transaction to transaction_id if we changed the foreign key in Ticket.java
+            ticket.setTransaction = transaction;
+        }
+
+        return transaction;
     }
 
+    // confirms that the transaction is completed and the seats selected are final and paid for
     @Override
-    public Transaction updateTransaction(Long id, Transaction newTransactionInfo) {
+    public Transaction confirmTransaction(Long id) {
+        // not sure if i have to still check if transaction time has expired in this method or not, since the transaction validity is periodically checked
         return Transactions.findById(id).map(Transaction -> {
-            Transaction.setTitle(newTransactionInfo.getId());
+            Transaction.setStatus(true);
             return Transactions.save(Transaction);
         }).orElse(null);
-
     }
 
+    // @Override
+    // public Transaction updateTransaction(Long id, Transaction newTransactionInfo) {
+    //     return Transactions.findById(id).map(Transaction -> {
+    //         Transaction.setTitle(newTransactionInfo.getId());
+    //         return Transactions.save(Transaction);
+    //     }).orElse(null);
+
+    // }
+
     public boolean isTransactionExpired(Transaction transaction) {
-        Date currentTime = new Date(0);
+        Date currentTime = new Date();
         long elapsedTime = currentTime.getTime() - transaction.getTransaction_date().getTime();
         return elapsedTime >= 10000;
     }
 
     public void handleTimeoutTransactions() {
-        List<Transaction> transactions = Transactions.findAll();
+        List<Transaction> transactions = listActiveTransactions();
 
         for (Transaction transaction : transactions) {
             if (isTransactionExpired(transaction)) {
@@ -72,6 +102,16 @@ public class TransactionServiceImpl implements TransactionService {
      */
     @Override
     public void deleteTransaction(Long id) {
+        Transaction transaction = Transactions.findById(id).orElse(null);
+        List<Ticket> ticketList = tickets.listTicketsByTransactionId(transaction);
+
+        // revert availability and transaction_id attributes
+        for (Ticket ticket : ticketList) {
+            ticket.setAvailable = true;
+            // change transaction to transaction_id if we changed the foreign key in Ticket.java
+            ticket.setTransaction = null;
+        }
+
         Transactions.deleteById(id);
     }
 

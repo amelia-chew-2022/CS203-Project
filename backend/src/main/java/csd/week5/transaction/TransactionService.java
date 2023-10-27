@@ -2,14 +2,20 @@ package csd.week5.transaction;
 
 import java.util.List;
 
+import csd.week5.ticket.Ticket;
+
 public interface TransactionService {
     List<Transaction> listTransactions();
 
+    List<Transaction> listActiveTransactions();
+
     Transaction getTransaction(Long id);
 
-    Transaction addTransaction(Transaction book);
+    Transaction addTransaction(Transaction Transaction, Ticket[] tickets);
 
-    Transaction updateTransaction(Long id, Transaction book);
+    Transaction confirmTransaction(Long id);
+
+    // Transaction updateTransaction(Long id, Transaction book);
 
     boolean isTransactionExpired(Transaction transaction);
 

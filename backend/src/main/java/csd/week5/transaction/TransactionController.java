@@ -40,19 +40,20 @@ public class TransactionController {
 
     }
 
+    // TODO: edit the parameters to also get the array of selectedSeats
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/Transactions")
     public Transaction addTransaction(@Valid @RequestBody Transaction Transaction) {
         return TransactionService.addTransaction(Transaction);
     }
 
-    @PutMapping("/Transactions/{id}")
-    public Transaction updateTransaction(@PathVariable Long id, @Valid @RequestBody Transaction newTransactionInfo){
-        Transaction Transaction = TransactionService.updateTransaction(id, newTransactionInfo);
-        if(Transaction == null) throw new TransactionNotFoundException(id);
+    // @PutMapping("/Transactions/{id}")
+    // public Transaction updateTransaction(@PathVariable Long id, @Valid @RequestBody Transaction newTransactionInfo){
+    //     Transaction Transaction = TransactionService.updateTransaction(id, newTransactionInfo);
+    //     if(Transaction == null) throw new TransactionNotFoundException(id);
         
-        return Transaction;
-    }
+    //     return Transaction;
+    // }
 
     
     @DeleteMapping("/Transactions/{id}")

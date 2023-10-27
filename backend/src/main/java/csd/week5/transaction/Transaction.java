@@ -45,7 +45,7 @@ public class Transaction {
     @Temporal(TemporalType.TIMESTAMP)
     private Date transaction_date;
 
-    public Transaction(double total_price,User user) {
+    public Transaction(double total_price, User user) {
         this.total_price = total_price;
         this.user = user;
         this.status = false;

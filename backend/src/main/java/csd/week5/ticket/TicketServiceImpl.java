@@ -3,6 +3,7 @@ package csd.week5.ticket;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
+import csd.week5.transaction.Transaction;
 import csd.week5.user.*;
 
 @Service
@@ -19,6 +20,11 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public List<Ticket> listTickets() {
         return tickets.findAll();
+    }
+
+    @Override
+    public List<Ticket> listTicketsByTransactionId(Transaction transaction) {
+        return tickets.findAllByTransaction(transaction);
     }
 
     @Override

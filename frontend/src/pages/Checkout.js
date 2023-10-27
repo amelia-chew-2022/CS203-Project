@@ -19,6 +19,9 @@ import Stack from '@mui/material/Stack';
 import { Link } from 'react-router-dom';
 import Verification from "./checkoutforms/Verification"
 
+import ButtonGrid from '../components/seatselect/ButtonGrid';
+import axios from "axios";
+
 const steps = ["Seat Selection", "Verification" ,"Payment Details", "Order Summary"]; 
 
 function getStepContent(step) {
