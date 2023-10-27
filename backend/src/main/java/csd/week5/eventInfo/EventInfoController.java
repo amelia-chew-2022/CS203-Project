@@ -8,11 +8,8 @@ import javax.validation.Valid;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,13 +29,14 @@ public class EventInfoController {
         return eventInfoService.listEventInfo();
     }
 
-    @GetMapping("/eventInfo")
-    public EventInfo getEventInfo(@PathVariable Long id){
+@GetMapping("/eventInfo/{id}") // Define the id as a path variable
+    public EventInfo getEventInfo(@PathVariable Long id) {
         EventInfo eventInfo = eventInfoService.getEventInfo(id);
-        if(eventInfo == null) throw new EventInfoNotFoundException(id);
-        return eventInfoService.getEventInfo(id);
-
+        if (eventInfo == null) throw new EventInfoNotFoundException(id);
+        return eventInfo;
     }
+    
+
 
     @ResponseStatus(HttpStatus.CREATED)
     public EventInfo addEventInfo(@Valid @RequestBody EventInfo eventInfo) {

@@ -93,50 +93,29 @@ public class Application {
 
                 EventInfoRepository eventInfoRepository = ctx.getBean(EventInfoRepository.class);
 
-                String name = "vibes";
+                String name = "VIBES";
 
-                String title = "<Typography variant=\"h4\" gutterBottom sx={{color: \"#fff\"}}>\r\n" + //
-                                "                    23 Sep 2023 (Sat.) / University Cultural Centre Ho Bee Auditorium\r\n"
-                                + //
-                                "                </Typography>\r\n" + //
-                                "\r\n" + //
-                                "                <Typography variant=\"h3\" sx={{fontWeight: \"bold\", color: \"#fff\"}}>\r\n"
-                                + //
-                                "                    VIBES\r\n" + //
-                                "                </Typography>";
-                String eventDetail = "<Typography variant=\"body1\" gutterBottom paragraph>\r\n" + //
-                                "            Art Republic proudly presents VIBES! An extraordinary festival, destined to ignite passions and capture hearts on September 23, \r\n"
-                                + //
-                                "            2023. Get ready for an epic celebration of music, dance, and fun at VIBES! Enchanting performances await you, featuring the \r\n"
-                                + //
-                                "            sensational Singaporean artist, Alfred Sun, and the mesmerizing dance choreographer from China, Orangie, whose captivating moves \r\n"
-                                + //
-                                "            and boundless talent will leave you in awe. And to crank up the excitement even more, we've got the esteemed radio DJ Hazelle \r\n"
-                                + //
-                                "            Teo from YES933FM, whose magnetic energy will light up the party as the ultimate MC!\r\n"
-                                + //
-                                "            </Typography>\r\n" + //
-                                "\r\n" + //
-                                "            <Typography variant=\"body1\" gutterBottom paragraph>\r\n" + //
-                                "            This grand spectacle involves over 200 tireless talents who have poured their hearts into crafting the show of a lifetime. \r\n"
-                                + //
-                                "            These extraordinary individuals worked hand in hand with creative and gifted dance and music instructors, taking you on a \r\n"
-                                + //
-                                "            captivating journey through their artistry. You'll be left breathless with every move, note, and beat as they showcase their \r\n"
-                                + //
-                                "            passion and skill on stage.\r\n" + //
-                                "            </Typography>\r\n" + //
-                                "\r\n" + //
-                                "            <Typography variant=\"body1\" gutterBottom paragraph>\r\n" + //
-                                "            At Art Republic, we dare to dream without bounds. Looking ahead, VIBES will evolve into a massive celebration, embracing legendary \r\n"
-                                + //
-                                "            dancers, acclaimed rappers, and celebrated entertainers from across the globe. The promise of an even more dynamic and mesmerizing \r\n"
-                                + //
-                                "            extravaganza will leave you craving for more. The stage is set, and the anticipation is mounting! Don't miss this opportunity to \r\n"
-                                + //
-                                "            experience the magic firsthand. Secure your tickets for VIBES now! We eagerly await your presence. See you there!\r\n"
-                                + //
-                                "            </Typography>";
+                String title = """
+                        <div class="MuiTypography-root MuiTypography-h4" style="color: #fff;">
+                                23 Sep 2023 (Sat.) / University Cultural Centre Ho Bee Auditorium
+                        </div>
+                    
+                        <div class="MuiTypography-root MuiTypography-h3" style="font-weight: bold; color: #fff;">
+                                VIBES
+                        </div>
+                    
+                                """; 
+                String eventDetail = """
+                        <p>
+                        Art Republic proudly presents VIBES! An extraordinary festival, destined to ignite passions and capture hearts on September 23, 2023. Get ready for an epic celebration of music, dance, and fun at VIBES! Enchanting performances await you, featuring the sensational Singaporean artist, Alfred Sun, and the mesmerizing dance choreographer from China, Orangie, whose captivating moves and boundless talent will leave you in awe. And to crank up the excitement even more, we've got the esteemed radio DJ Hazelle Teo from YES933FM, whose magnetic energy will light up the party as the ultimate MC!
+                    </p>
+                    <p>
+                        This grand spectacle involves over 200 tireless talents who have poured their hearts into crafting the show of a lifetime. These extraordinary individuals worked hand in hand with creative and gifted dance and music instructors, taking you on a captivating journey through their artistry. You'll be left breathless with every move, note, and beat as they showcase their passion and skill on stage.
+                    </p>
+                    <p>
+                        At Art Republic, we dare to dream without bounds. Looking ahead, VIBES will evolve into a massive celebration, embracing legendary dancers, acclaimed rappers, and celebrated entertainers from across the globe. The promise of an even more dynamic and mesmerizing extravaganza will leave you craving for more. The stage is set, and the anticipation is mounting! Don't miss this opportunity to experience the magic firsthand. Secure your tickets for VIBES now! We eagerly await your presence. See you there!
+                    </p>
+                                """;
 
                 String date = "23 Sep 2023 (Sat.)";
                 String ticketPricing = "<Typography variant=\"body1\" gutterBottom>\r\n" + //
@@ -235,7 +214,7 @@ public class Application {
 
                 byte[] image = null;                
                 try {
-                        String filePath = "../../../assets/vibes.png";
+                        String filePath = "src/main/assets/vibes.png";
                         image = PNGFileReader.readPNGFileAsBytes(filePath);
                         // Now you have the image data in the 'imageData' byte array
                 } catch (IOException e) {
@@ -244,6 +223,15 @@ public class Application {
 
                 eventInfoRepository.save(new EventInfo(name ,title, eventDetail, date, ticketPricing, EnRPolicy, aPolicy,
                                 ticketInfo, image));
+                
+                eventInfoRepository.save(new EventInfo("Coldplay: Music Of The Spheres World Tour - delivered by DHL", "2 Sep 2023 (Sat) ~ 3 Sep 2023 (Sun)", null));
+                eventInfoRepository.save(new EventInfo("TWICE 5TH WORLD TOUR 'READY TO BE' IN SINGAPORE", "2 Sep 2023 (Sat) ~ 3 Sep 2023 (Sun)", null));
+                eventInfoRepository.save(new EventInfo("ATEEZ WORLD TOUR [THE FELLOWSHIP: BREAK THE WALL]", "9 Sep 2023 (Sat)", null));eventInfoRepository.save(new EventInfo("TWICE 5TH WORLD TOUR 'READY TO BE' IN SINGAPORE", "2 Sep 2023 (Sat) ~ 3 Sep 2023 (Sun)", null));
+                eventInfoRepository.save(new EventInfo("Lauv: The Between Albums Tour in Singapore", "5 Sep 2023 (Tue)", null));
+                eventInfoRepository.save(new EventInfo("P1HARMONY LIVE TOUR [P1USTAGE H:P1ONEER] IN SINGAPORE", "17 Sep 2023 (Sun)", null));
+                eventInfoRepository.save(new EventInfo("HallyuPopFest Singapore 2023", "12 Nov 2023 (Sun)", null));
+                eventInfoRepository.save(new EventInfo("Rex Orange County Live in Asia 2023 Singapore", "17 Oct 2023 (Tue)", null));
+                eventInfoRepository.save(new EventInfo("Taylor Swift | The Eras Tour", "02 Mar 2024 (Sat) ~ 09 Mar 2024 (Sat)", null));
         }
 
 }

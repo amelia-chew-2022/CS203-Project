@@ -9,6 +9,7 @@ import Checkout from './pages/Checkout';
 import Error from './pages/Error';
 import Registration from './pages/Registration';
 import EventInfoError from './pages/EventInfoError';
+import EventInfo1 from './pages/EventInfo1';
 
 class App extends Component {
     render() {
@@ -18,7 +19,8 @@ class App extends Component {
                     <Route path="/home" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/registration" element={<Registration/>}/>
-                    <Route path="/eventinfo/:id" element={<EventInfo/>}/>
+                    <Route path="/eventinfo/:id" element={<EventInfo />}/>
+                    <Route path="/eventinfo1/:id" element={<EventInfo1/>}/>
                     <Route path="/eventinfo" element={<EventInfo/>}/>
                     <Route path="/categories" element={<Categories/>}/>
                     <Route path="/venues" element={<Venues/>}/>

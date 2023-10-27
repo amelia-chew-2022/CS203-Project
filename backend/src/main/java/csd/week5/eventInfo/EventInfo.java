@@ -28,42 +28,40 @@ import csd.week5.user.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class EventInfo {
+    
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
     @NotBlank
     private String name;
 
-    @NotBlank(message = "title date not be blank")
+
     @Lob
     @Column(columnDefinition = "TEXT")
     private String title;
 
-    @NotBlank(message = "eventDetail should not be blank")
+
     @Lob
     @Column(columnDefinition = "TEXT")
     private String eventDetail;
 
-    @NotBlank(message = "ticketPricing should not be blank")
     @Lob
     @Column(columnDefinition = "TEXT")
     private String ticketPricing;
 
-    @NotBlank(message = "EnRPolicy should not be blank")
+
     @Lob
     @Column(columnDefinition = "TEXT")
     private String EnRPolicy;
 
-    @NotBlank(message = "aPolicy should not be blank")
+
     @Lob
     @Column(columnDefinition = "TEXT")
     private String aPolicy;
 
-    @NotBlank(message = "ticketInfo should not be blank")
     @Lob
     @Column(columnDefinition = "TEXT")
     private String ticketInfo;
 
-    @NotBlank(message = "date should not be blank")
     @Lob
     @Column(columnDefinition = "TEXT")
     private String date;
@@ -81,6 +79,12 @@ public class EventInfo {
         this.EnRPolicy = EnRPolicy;
         this.aPolicy = aPolicy;
         this.ticketInfo = ticketInfo;
+        this.image = image;
+    }
+
+    public EventInfo(String name, String date, byte[] image){
+        this.name = name;
+        this.date = date;
         this.image = image;
     }
 
