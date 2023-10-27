@@ -1,6 +1,7 @@
 package csd.week5.transaction;
 
 import java.util.List;
+import csd.week5.user.User;
 
 import javax.validation.Valid;
 
@@ -47,8 +48,8 @@ public class TransactionController {
     }
 
     @PutMapping("/Transactions/{id}")
-    public Transaction updateTransaction(@PathVariable Long id, @Valid @RequestBody Transaction newTransactionInfo){
-        Transaction Transaction = TransactionService.updateTransaction(id, newTransactionInfo);
+    public Transaction updateTransaction(@PathVariable Long id, @Valid @RequestBody User newUser){
+        Transaction Transaction = TransactionService.updateTransaction(id, newUser);
         if(Transaction == null) throw new TransactionNotFoundException(id);
         
         return Transaction;

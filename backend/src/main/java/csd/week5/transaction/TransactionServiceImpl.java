@@ -32,23 +32,15 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction updateTransaction(Long id, Transaction newTransactionInfo) {
+    public Transaction updateTransaction(Long id, User newUser) {
         return Transactions.findById(id).map(existingTransaction -> {
-            // Update the user field only if newTransactionInfo.getUser() is not null
-            User newUser = newTransactionInfo.getUser();
-            if (newUser != null) {
-                existingTransaction.setUser(newUser);
-            }
+            if (users.findByUsername(newUser.getUsername()).isEmpty()) {
+                return null; //return null if cannot find user
+            } else {existingTransaction.setUser(newUser);}
             return Transactions.save(existingTransaction);
-        }).orElse(null);
+        }).orElse(null); //return null if cannot find transaction
     }
-    
 
-    /**
-     * Remove a book with the given id
-     * Spring Data JPA does not return a value for delete operation
-     * Cascading: removing a book will also remove all its associated reviews
-     */
     @Override
     public void deleteTransaction(Long id) {
         Transactions.deleteById(id);
