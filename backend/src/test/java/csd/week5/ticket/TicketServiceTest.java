@@ -6,6 +6,8 @@ import csd.week5.user.UserRepository;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -49,11 +51,10 @@ public class TicketServiceTest {
 
     @Test
     void updateTicket_NotFound_ReturnNull() {
-        Ticket ticket = new Ticket("Updated", "123", "1ac23V", "100");
         Long ticketId = 10L;
         when(tickets.findById(ticketId)).thenReturn(Optional.empty());
 
-        Ticket updatedTicket = ticketService.updateTicket(ticketId, ticket);
+        Ticket updatedTicket = ticketService.updateTicket(ticketId, "Updated");
 
         assertNull(updatedTicket);
         verify(tickets).findById(ticketId);
@@ -61,15 +62,16 @@ public class TicketServiceTest {
 
     @Test
     void updateTicket_Found_ReturnTicket() {
-        Ticket ticket = new Ticket("Updated", "123", "1ac23V", "100");
+        Ticket ticket = new Ticket("Original", "123", "1ac23V", "100");
         Long ticketId = 10L;
-        Optional<Ticket> original = Optional.of(new Ticket("Original", "123", "1ac23V", "100"));
+        Ticket expected = new Ticket("Updated", "123", "1ac23V", "100");
+        Optional<Ticket> original = Optional.of(ticket);
         when(tickets.findById(ticketId)).thenReturn(original);
         when(tickets.save(ticket)).thenReturn(ticket);
 
-        Ticket updatedTicket = ticketService.updateTicket(ticketId, ticket);
+        Ticket updatedTicket = ticketService.updateTicket(ticketId, "Updated");
 
-        assertNotNull(updatedTicket);
+        assertEquals(expected, updatedTicket);
         verify(tickets).findById(ticketId);
         verify(tickets).save(ticket);
     }
@@ -80,6 +82,8 @@ public class TicketServiceTest {
         Long ticketId = 10L;
         User user = new User("Dummy", null, "ROLE_ADMIN", "nic@gmail.com", "23698745", "SMU building", "87654321");
         Long userId = 11L;
+        Ticket expected = new Ticket("Ticket", "123", "1ac23V", "100", false);
+        expected.setUser(user);
 
         when(tickets.findById(ticketId)).thenReturn(Optional.of(ticket));
         when(users.findById(userId)).thenReturn(Optional.of(user));
@@ -87,7 +91,7 @@ public class TicketServiceTest {
 
         Ticket updatedTicket = ticketService.buyTicket(ticketId, userId);
 
-        assertNotNull(updatedTicket);
+        assertEquals(expected, updatedTicket);
         verify(tickets).findById(ticketId);
         verify(users).findById(userId);
         verify(tickets).save(ticket);

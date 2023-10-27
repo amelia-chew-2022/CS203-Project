@@ -7,9 +7,9 @@ public interface TicketService {
 
     Ticket getTicket(Long id);
 
-    Ticket addTicket(Ticket book);
+    Ticket addTicket(Ticket ticket);
 
-    Ticket updateTicket(Long id, Ticket book);
+    Ticket updateTicket(Long id, String title);
 
     Ticket updateAvailabilityById(Long id, Boolean available);
 

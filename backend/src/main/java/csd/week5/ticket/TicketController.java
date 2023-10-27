@@ -47,7 +47,7 @@ public class TicketController {
     }
 
     @PutMapping("/tickets/{id}")
-    public Ticket updateTicket(@PathVariable Long id, @Valid @RequestBody Ticket newTicketInfo){
+    public Ticket updateTicket(@PathVariable Long id, @Valid @RequestBody String newTicketInfo){
         Ticket ticket = ticketService.updateTicket(id, newTicketInfo);
         if(ticket == null) throw new TicketNotFoundException(id);
         
