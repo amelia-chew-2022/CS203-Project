@@ -32,6 +32,7 @@ public class EventInfoServiceImpl implements EventInfoService {
     @Override
     public EventInfo updateEventInfo(Long id, EventInfo updatedEventInfo) {
         return eventInfoRepo.findById(id).map(existingEventInfo -> {
+            existingEventInfo.setName(updatedEventInfo.getName());
             existingEventInfo.setTitle(updatedEventInfo.getTitle());
             existingEventInfo.setEventDetail(updatedEventInfo.getEventDetail());
             existingEventInfo.setDate(updatedEventInfo.getDate());
@@ -39,6 +40,7 @@ public class EventInfoServiceImpl implements EventInfoService {
             existingEventInfo.setTicketInfo(updatedEventInfo.getTitle());
             existingEventInfo.setEnRPolicy(updatedEventInfo.getEnRPolicy());
             existingEventInfo.setaPolicy(updatedEventInfo.getaPolicy());
+            existingEventInfo.setImage(updatedEventInfo.getImage());
             return eventInfoRepo.save(existingEventInfo);
         }).orElse(null);
     }

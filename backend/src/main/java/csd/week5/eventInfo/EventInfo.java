@@ -30,6 +30,9 @@ import csd.week5.user.*;
 public class EventInfo {
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
+    @NotBlank
+    private String name;
+
     @NotBlank(message = "title date not be blank")
     @Lob
     @Column(columnDefinition = "TEXT")
@@ -68,8 +71,9 @@ public class EventInfo {
     @Lob
     private byte[] image;
 
-    public EventInfo(String title, String eventDetail,String date, String ticketPricing, String EnRPolicy, String aPolicy,
+    public EventInfo(String name, String title, String eventDetail,String date, String ticketPricing, String EnRPolicy, String aPolicy,
         String ticketInfo, byte[] image) {
+        this.name = name;
         this.title = title;
         this.eventDetail = eventDetail;
         this.date = date;
@@ -78,6 +82,10 @@ public class EventInfo {
         this.aPolicy = aPolicy;
         this.ticketInfo = ticketInfo;
         this.image = image;
+    }
+
+    public void setName(String name){
+        this.name = name;
     }
 
     public void setTitle(String title) {
@@ -110,6 +118,10 @@ public class EventInfo {
 
     public void setImage(byte[] image){
         this.image = image;
+    }
+
+    public String getName(){
+        return name;
     }
 
     public String getTitle() {

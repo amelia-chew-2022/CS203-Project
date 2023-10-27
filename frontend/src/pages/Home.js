@@ -1,5 +1,4 @@
-import { useRef, Fragment, useState,useEffect} from "react";
-import { useNavigate } from 'react-router-dom';
+import { useRef, Fragment } from "react";
 import NavBar from "../components/navigation/NavBar";
 import FieldsRow from "../components/form/FieldsRow";
 import SearchBox from "../components/home/SearchBox";
@@ -13,25 +12,9 @@ import Heropage from "../assets/heropage.png";
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined';
 import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
-import axios from 'axios';
 
 const Home = () => {
     const eventslist = useRef(null);
-
-    const [eventInfoList, setEventInfoList] = useState(null);
-    const navigate = useNavigate();
-    useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const response = await axios.get('http://localhost:8080/home');
-            setEventInfoList(response.data);
-          } catch (error) {
-            // Handle any errors that occurred during the request
-            navigate('/eventinfo/notfound');
-          }
-        };
-        fetchData();
-      }, []);
 
     function scrollToSection(ref) {
         if (ref.current) {
