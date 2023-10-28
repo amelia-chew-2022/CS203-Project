@@ -3,7 +3,6 @@ import vibes from "../../assets/vibes.png";
 import Dropdown from "../../components/seatselect/DropDown";
 import ButtonGrid from "../../components/seatselect/ButtonGrid";
 import { Container } from "@mui/system";
-import FieldsColumn from "../../components/form/FieldsRow";
 import Typography from "@mui/material/Typography";
 function SeatSelect() {
   const [displayText, setGridTable] = useState(""); // State for the text to be displayed
@@ -25,9 +24,16 @@ function SeatSelect() {
       >
         {/* Image on the left */}
         <div style={{ marginRight: "20px" }}>
-          <FieldsColumn>
+          <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem",
+                margin: "1rem 0",
+            }}
+          >
             <img src={vibes} alt="img" width="flex" height="110" />
-          </FieldsColumn>
+          </div>
         </div>
 
         {/* Text box and dropdown to the right */}

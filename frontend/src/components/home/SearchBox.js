@@ -1,4 +1,3 @@
-import FieldsRow from "../form/FieldsRow";
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -22,7 +21,16 @@ export default function SearchBox() {
 
             }}
         >
-        <FieldsRow>
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "2rem",
+                justifyContent: "center",
+                marginTop: "2rem",
+                marginBottom: "2rem",
+            }}
+        >
             {/* search event */}
             <TextField label="Search Event" id="custom-css-outlined-input"                     
                 InputProps={{
@@ -42,13 +50,22 @@ export default function SearchBox() {
                 <DatePicker id="standard-basic" label="Select Date" variant="standard"/>
             </LocalizationProvider>
 
-        </FieldsRow>
+        </div>
 
-        <FieldsRow>
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "2rem",
+                justifyContent: "center",
+                marginTop: "2rem",
+                marginBottom: "2rem",
+            }}
+        >
             <Button variant="contained" size="large">
                 Search
             </Button>
-        </FieldsRow>
+        </div>
 
         </Box>
     );

@@ -5,7 +5,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import FieldsRow from '../form/FieldsRow';
 import ImageDisplay from './ImageDisplay';
 
 function EventCard() {
@@ -63,12 +62,23 @@ function EventCard() {
     return (
         <Fragment>
             {formattedData.map((row, rowIndex) => (
-                <FieldsRow key={rowIndex} className="row">
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        gap: "2rem",
+                        justifyContent: "center",
+                        marginTop: "2rem",
+                        marginBottom: "2rem",
+                    }} 
+                    key={rowIndex}
+                    className="row"
+                >
                     {row.map((eventInfo, itemIndex) => (
                         <Link to={`/eventinfo1/${eventInfo.id}`}>
                             <Button>
                                 <Card sx={{ width: 400, height: 300 }}>
-                                <ImageDisplay imagePath={"frontend/src/assests/coldplay.png"} />
+                                <ImageDisplay imagePath={require('../../assets/coldplay.png')} />
                                     <CardContent>
                                         <Typography sx={dateStyle}>
                                             {eventInfo.date}
@@ -81,7 +91,7 @@ function EventCard() {
                             </Button>
                         </Link>
                     ))}
-                </FieldsRow>
+                </div>
             ))}
         </Fragment>
     );
