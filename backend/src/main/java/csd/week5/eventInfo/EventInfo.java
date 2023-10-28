@@ -1,6 +1,7 @@
 package csd.week5.eventInfo;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,6 +15,9 @@ import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.persistence.ElementCollection;
+import javax.persistence.CollectionTable;
+import javax.persistence.OrderColumn;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -31,133 +35,36 @@ public class EventInfo {
     
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
-    @NotBlank
-    private String name;
+    @NotNull(message = "Event name should not be null")
+    private String eventName;
 
-
-    @Lob
-    @Column(columnDefinition = "TEXT")
-    private String title;
-
-
-    @Lob
-    @Column(columnDefinition = "TEXT")
-    private String eventDetail;
-
-    @Lob
-    @Column(columnDefinition = "TEXT")
-    private String ticketPricing;
-
-
-    @Lob
-    @Column(columnDefinition = "TEXT")
-    private String EnRPolicy;
-
-
-    @Lob
-    @Column(columnDefinition = "TEXT")
-    private String aPolicy;
-
-    @Lob
-    @Column(columnDefinition = "TEXT")
-    private String ticketInfo;
-
-    @Lob
-    @Column(columnDefinition = "TEXT")
+    @NotNull(message = "Event date should not be null")
     private String date;
 
+    // @NotNull(message = "Ticket's location should not be null")
+    private String location;
+
     @Lob
-    private byte[] image;
+    private ArrayList<String> eventDetail;
 
-    public EventInfo(String name, String title, String eventDetail,String date, String ticketPricing, String EnRPolicy, String aPolicy,
-        String ticketInfo, byte[] image) {
-        this.name = name;
-        this.title = title;
+    private String ticketPricing;
+
+    private String imageURL;
+
+
+    public EventInfo(String eventName, ArrayList<String> eventDetail, String date, String location, String imageURL){
+        this.eventName = eventName;
         this.eventDetail = eventDetail;
         this.date = date;
-        this.ticketPricing = ticketPricing;
-        this.EnRPolicy = EnRPolicy;
-        this.aPolicy = aPolicy;
-        this.ticketInfo = ticketInfo;
-        this.image = image;
+        this.location = location;
+        this.imageURL = imageURL;
     }
 
-    public EventInfo(String name, String date, byte[] image){
-        this.name = name;
+    public EventInfo(String eventName, String date, String imageURL){
+        this.eventName = eventName;
         this.date = date;
-        this.image = image;
+        this.imageURL = imageURL;
     }
 
-    public void setName(String name){
-        this.name = name;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setEventDetail(String eventDetail) {
-        this.eventDetail = eventDetail;
-    }
-
-    public void setDate(String date){
-        this.date = date;
-    }
-
-    public void setTicketPricing(String ticketPricing) {
-        this.ticketPricing = ticketPricing;
-    }
-
-    public void setaPolicy(String aPolicy) {
-        this.aPolicy = aPolicy;
-    }
-
-    public void setEnRPolicy(String EnRPolicy){
-        this.EnRPolicy = EnRPolicy;
-    }
-
-    public void setTicketInfo(String ticketInfo) {
-        this.ticketInfo = ticketInfo;
-    }
-
-    public void setImage(byte[] image){
-        this.image = image;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getEventDetail() {
-        return eventDetail;
-    }
-
-    public String getDate(){
-        return date;
-    }
-
-    public String getTicketPricing() {
-        return ticketPricing;
-    }
-
-    public String getEnRPolicy() {
-        return EnRPolicy;
-    }
-
-    public String getaPolicy() {
-        return aPolicy;
-    }
-
-    public String getTicketInfo() {
-        return ticketInfo;
-    }
-
-    public byte[] getImage(){
-        return image;
-    }
 
 }

@@ -54,3 +54,6 @@ Authorization: Basic Janaaaaa goodpassword
 
 ### show specific ticket
 GET http://localhost:8080/tickets/1
+
+###
+GET http://localhost:8080/eventInfo/1

@@ -102,9 +102,9 @@ const EventInfo1 = (props) => {
 
     const { id } = useParams();
     console.log('ID from URL:', id);
-    
+
     const navigate = useNavigate();
-    
+
     const [eventInfo, setEventInfo] = useState({});
 
     useEffect(() => {
@@ -187,13 +187,13 @@ const EventInfo1 = (props) => {
             {/* image */}
             <Box sx={{ backgroundColor: "#000" }}>
 
-            <Typography variant="h4" gutterBottom sx={{ color: "#fff" }}>
-                        {eventInfo.date} / University Cultural Centre Ho Bee Auditorium
-                    </Typography>
+                <Typography variant="h4" gutterBottom sx={{ color: "#fff" }}>
+                    {eventInfo.date} / University Cultural Centre Ho Bee Auditorium
+                </Typography>
 
-                    <Typography variant="h3" sx={{ fontWeight: "bold", color: "#fff" }}>
-                        {eventInfo.name}
-                    </Typography>
+                <Typography variant="h3" sx={{ fontWeight: "bold", color: "#fff" }}>
+                    {eventInfo.name}
+                </Typography>
             </Box>
 
             {/* tabs */}
@@ -245,19 +245,16 @@ const EventInfo1 = (props) => {
             </AppBar>
 
             {/* event details */}
-            <Box sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
-                <Box sx={{ width: "flex", height: "20px", backgroundColor: "#ececec" }}></Box>
-                <Container sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
+            <Box sx={{ width: 'flex', height: 'flex', backgroundColor: '#ececec', margin: '20px 140px' }}>
+                <Box sx={{ width: 'flex', height: '20px', backgroundColor: '#ececec' }}></Box>
+                <Container sx={{ width: 'flex', height: 'flex', backgroundColor: '#ececec', margin: '20px 0' }}>
                     <Typography variant="h3" gutterBottom a ref={section1Ref}>Event Details</Typography>
                 </Container>
                 <Typography variant="body1" gutterBottom paragraph>
-                     <div dangerouslySetInnerHTML={{ __html: eventInfo.eventDetail }}></div>
+                    <div dangerouslySetInnerHTML={{ __html: eventInfo.eventDetail }}></div>
                 </Typography>
-               
-
-                <Box sx={{ width: "flex", height: "20px", backgroundColor: "#ececec" }}></Box>
+                <Box sx={{ width: 'flex', height: '20px', backgroundColor: '#ececec' }}></Box>
             </Box>
-
             <Box sx={{ width: "flex", height: "20px", backgroundColor: "#fff" }}></Box>
             <Box sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
                 <Container sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
@@ -313,7 +310,21 @@ const EventInfo1 = (props) => {
                 <Container sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
                     <Typography variant="h3" gutterBottom a ref={section6Ref}>Ways To Buy Tickets</Typography>
                     <Typography variant="body1" gutterBottom>
-                        insert here
+                        <b>► ONLINE & MOBILE:</b><br />
+                        24 x 7 x 365 days of the year! Visit us on our website at ticketmaster.sg to purchase tickets.<br />
+
+                        <b>► HOTLINE:</b>
+                        +65 3158 8588
+
+                        Operating Hours:<br />
+                        Monday to Saturday (10am - 6pm)<br />
+                        Sunday and Public Holidays (Closed)<br />
+
+                        <b>► OUTLETS:</b><br />
+
+                        ♦ SINGPOST<br />
+                        The sale of tickets will be available at All SingPost outlets.<br />
+                        Click here to check for available branches and operating hours.<br />
                     </Typography>
                 </Container>
                 <Box sx={{ width: "flex", height: "20px", backgroundColor: "#fff" }}></Box>

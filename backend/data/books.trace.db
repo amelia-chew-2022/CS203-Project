@@ -10,3 +10,6 @@ insert into event_info (id, enrpolicy, a_policy, date, event_detail, ticket_info
 2023-10-27 00:14:11 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLDataException: Value too long for column "TITLE CHARACTER VARYING(255)": "U&'<Typography variant=""h4"" gutterBottom sx={{color: ""#fff""}}>\\000d\\000a        ... (321)"; SQL statement:
 insert into event_info (id, enrpolicy, a_policy, date, event_detail, ticket_info, ticket_pricing, title) values (default, ?, ?, ?, ?, ?, ?, ?) [22001-214]
+2023-10-28 00:23:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "EVENT_DETAIL BINARY VARYING(255)": "X'aced0005757200135b4c6a6176612e6c616e672e537472696e673badd256e7e91d7b4702000078... (1545)"; SQL statement:
+insert into event_info (id, date, event_detail, event_name, imageurl, location, ticket_pricing) values (default, ?, ?, ?, ?, ?, ?) [22001-214]

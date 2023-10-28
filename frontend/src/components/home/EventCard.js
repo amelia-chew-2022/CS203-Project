@@ -1,12 +1,13 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import CardContent from '@mui/material/CardContent';
 import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import FieldsRow from '../form/FieldsRow';
 import ImageDisplay from './ImageDisplay';
+
 function EventCard() {
     const dateStyle = {
         variant: "body1",
@@ -29,6 +30,7 @@ function EventCard() {
 
     const [eventInfoList, setEventInfoList] = useState([]);
     const navigate = useNavigate();
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -46,41 +48,40 @@ function EventCard() {
 
     const formatData = (eventInfoList, formattedData) => {
         for (let i = 0; i < Math.ceil(eventInfoList.length / 3); i++) {
-          const startIndex = i * 3;
-          let endIndex = startIndex + 3;  // Change 'const' to 'let' here
-      
-          if (endIndex > eventInfoList.length) {
-            endIndex = eventInfoList.length;
-          }
-          formattedData.push(eventInfoList.slice(startIndex, endIndex));
+            const startIndex = i * 3;
+            let endIndex = startIndex + 3;  // Change 'const' to 'let' here
+
+            if (endIndex > eventInfoList.length) {
+                endIndex = eventInfoList.length;
+            }
+            formattedData.push(eventInfoList.slice(startIndex, endIndex));
         }
-      }
-      
+    }
 
     formatData(eventInfoList, formattedData);
 
     return (
         <Fragment>
             {formattedData.map((row, rowIndex) => (
-                <div key={rowIndex} className="row">
+                <FieldsRow key={rowIndex} className="row">
                     {row.map((eventInfo, itemIndex) => (
-                            <Link to={`/eventinfo1/${eventInfo.id}`}>
-                                <Button>
-                                    <Card sx={{ width: 400, height: 300 }}>
-                                    <ImageDisplay imageBytes={eventInfo.image} />
-                                        <CardContent>
-                                            <Typography sx={dateStyle}>
-                                                {eventInfo.date}  
-                                            </Typography>
-                                            <Typography sx={eventStyle}>
-                                                {eventInfo.name} 
-                                            </Typography>
-                                        </CardContent>
-                                    </Card>
-                                </Button>
-                            </Link>
+                        <Link to={`/eventinfo1/${eventInfo.id}`}>
+                            <Button>
+                                <Card sx={{ width: 400, height: 300 }}>
+                                <ImageDisplay imagePath={"frontend/src/assests/coldplay.png"} />
+                                    <CardContent>
+                                        <Typography sx={dateStyle}>
+                                            {eventInfo.date}
+                                        </Typography>
+                                        <Typography sx={eventStyle}>
+                                            {eventInfo.eventName}
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
+                            </Button>
+                        </Link>
                     ))}
-                </div>
+                </FieldsRow>
             ))}
         </Fragment>
     );

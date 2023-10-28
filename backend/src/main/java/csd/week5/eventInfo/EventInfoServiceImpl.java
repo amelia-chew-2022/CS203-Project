@@ -32,15 +32,11 @@ public class EventInfoServiceImpl implements EventInfoService {
     @Override
     public EventInfo updateEventInfo(Long id, EventInfo updatedEventInfo) {
         return eventInfoRepo.findById(id).map(existingEventInfo -> {
-            existingEventInfo.setName(updatedEventInfo.getName());
-            existingEventInfo.setTitle(updatedEventInfo.getTitle());
+            existingEventInfo.setEventName(updatedEventInfo.getEventName());
             existingEventInfo.setEventDetail(updatedEventInfo.getEventDetail());
             existingEventInfo.setDate(updatedEventInfo.getDate());
-            existingEventInfo.setTicketPricing(updatedEventInfo.getTitle());
-            existingEventInfo.setTicketInfo(updatedEventInfo.getTitle());
-            existingEventInfo.setEnRPolicy(updatedEventInfo.getEnRPolicy());
-            existingEventInfo.setaPolicy(updatedEventInfo.getaPolicy());
-            existingEventInfo.setImage(updatedEventInfo.getImage());
+            existingEventInfo.setLocation(updatedEventInfo.getLocation());
+            existingEventInfo.setImageURL(updatedEventInfo.getImageURL());
             return eventInfoRepo.save(existingEventInfo);
         }).orElse(null);
     }

@@ -245,7 +245,7 @@ const EventInfo = (props) => {
                 <Container sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
                     <Typography variant="h3" gutterBottom a ref={section1Ref}>Event Details</Typography>
 
-                    {/* <Typography variant="body1" gutterBottom paragraph>
+                    <Typography variant="body1" gutterBottom paragraph>
                         Art Republic proudly presents VIBES! An extraordinary festival, destined to ignite passions and capture hearts on September 23,
                         2023. Get ready for an epic celebration of music, dance, and fun at VIBES! Enchanting performances await you, featuring the
                         sensational Singaporean artist, Alfred Sun, and the mesmerizing dance choreographer from China, Orangie, whose captivating moves
@@ -265,7 +265,7 @@ const EventInfo = (props) => {
                         dancers, acclaimed rappers, and celebrated entertainers from across the globe. The promise of an even more dynamic and mesmerizing
                         extravaganza will leave you craving for more. The stage is set, and the anticipation is mounting! Don't miss this opportunity to
                         experience the magic firsthand. Secure your tickets for VIBES now! We eagerly await your presence. See you there!
-                    </Typography> */}
+                    </Typography>
                 </Container>
                 <Box sx={{ width: "flex", height: "20px", backgroundColor: "#ececec" }}></Box>
             </Box>
