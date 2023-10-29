@@ -2,7 +2,6 @@ import Breadcrumbs from '@mui/material/Breadcrumbs';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import Typography from "@mui/material/Typography";
 import NavBar from "../components/navigation/NavBar";
-import Divider from "@mui/material/Divider"
 import Stack from '@mui/material/Stack';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -165,7 +164,6 @@ const EventInfo1 = (props) => {
 
             <CssBaseline />
             <NavBar />
-            {/* <CreateSeatMap/> */}
             {/* breadcrumbs */}
             <div
                 style={{
@@ -186,14 +184,17 @@ const EventInfo1 = (props) => {
 
             {/* image */}
             <Box sx={{ backgroundColor: "#000" }}>
+            <Container sx={{ backgroundColor: "000" }}>
+                <img src={eventInfo.imageURL} alt="Vibes" width="100%" />
 
                 <Typography variant="h4" gutterBottom sx={{ color: "#fff" }}>
-                    {eventInfo.date} / University Cultural Centre Ho Bee Auditorium
+                    {eventInfo.date} / {eventInfo.location}
                 </Typography>
 
                 <Typography variant="h3" sx={{ fontWeight: "bold", color: "#fff" }}>
                     {eventInfo.name}
                 </Typography>
+            </Container>
             </Box>
 
             {/* tabs */}
@@ -245,25 +246,29 @@ const EventInfo1 = (props) => {
             </AppBar>
 
             {/* event details */}
-            <Box sx={{ width: 'flex', height: 'flex', backgroundColor: '#ececec', margin: '20px 140px' }}>
+            <Box sx={{ width: 'flex', height: 'flex', backgroundColor: '#ececec' }}>
                 <Box sx={{ width: 'flex', height: '20px', backgroundColor: '#ececec' }}></Box>
-                <Container sx={{ width: 'flex', height: 'flex', backgroundColor: '#ececec', margin: '20px 0' }}>
+                <Container sx={{ width: 'flex', height: 'flex', backgroundColor: '#ececec' }}>
                     <Typography variant="h3" gutterBottom a ref={section1Ref}>Event Details</Typography>
+                    {eventInfo.eventDetail && (
+                        eventInfo.eventDetail.map((paragraph, index) => (
+                            <Typography key={index} variant="body1" gutterBottom paragraph>
+                                {paragraph}
+                            </Typography>
+                        ))
+                    )}
                 </Container>
-                <Typography variant="body1" gutterBottom paragraph>
-                    <div dangerouslySetInnerHTML={{ __html: eventInfo.eventDetail }}></div>
-                </Typography>
                 <Box sx={{ width: 'flex', height: '20px', backgroundColor: '#ececec' }}></Box>
             </Box>
+
+            {/* ticket pricing */}
             <Box sx={{ width: "flex", height: "20px", backgroundColor: "#fff" }}></Box>
             <Box sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
                 <Container sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
                     <Typography variant="h3" gutterBottom a ref={section2Ref}>Ticket Pricing</Typography>
-
-                    <Typography variant="body1" gutterBottom style={{ fontWeight: "bold", color: "#5522cc" }} paragraph>
-                        GENERAL SALE
+                    <Typography variant="body1" gutterBottom paragraph>
+                        {eventInfo.ticketPricing || "Ticket pricing information not available."}
                     </Typography>
-                    insert here
                 </Container>
                 <Box sx={{ width: "flex", height: "20px", backgroundColor: "#fff" }}></Box>
             </Box>
@@ -285,7 +290,17 @@ const EventInfo1 = (props) => {
                 <Container sx={{ width: "flex", height: "flex", backgroundColor: "#fff" }}>
                     <Typography variant="h3" gutterBottom a ref={section4Ref}>Exchange & Refund Policy</Typography>
                     <Typography variant="body1" gutterBottom>
-                        insert here
+                        <ol type="1">
+                            <li>The Organiser/Venue Owner reserves the right without refund or compensation to refuse admission/evict any person(s) whose
+                                conduct is disorderly or inappropriate or who poses a threat to security, or to the enjoyment of the Event by others.</li>
+                            <li>Ticket holders assume all risk of injury and all responsibility for property loss, destruction or theft and release the
+                                promoters, performers, sponsors, ticket outlets, venues, and their employees from any liability thereafter.</li>
+                            <li>The resale of ticket(s) at the same or any price in excess of the initial purchase price is prohibited.</li>
+                            <li>There is no refund, exchange, upgrade, or cancellation once ticket(s) are sold.</li>
+                            <li>We would like to caution members of the public against purchasing tickets from unauthorized sellers or 3rd party websites.
+                                By purchasing tickets through these non-authorized points of sale, buyers take on the risk that the validity of the tickets
+                                cannot be guaranteed, with no refunds possible.⁠</li>
+                        </ol>
                     </Typography>
                 </Container>
                 <Box sx={{ width: "flex", height: "20px", backgroundColor: "#fff" }}></Box>
@@ -297,8 +312,20 @@ const EventInfo1 = (props) => {
                 <Container sx={{ width: "flex", height: "flex", backgroundColor: "#ececec" }}>
                     <Typography variant="h3" gutterBottom a ref={section5Ref}>Admission Policy</Typography>
                     <Typography variant="body1" gutterBottom>
-                        <b>Admission Rules:</b><br />
-                        insert here
+                    <b>Admission Rules:</b><br />
+                        <ol type="1">
+                            <li>The seats on the third floor are relatively high. Please choose carefully if you are under 12 years old, over 60 years old,
+                                or those with high blood pressure, heart disease, fear of heights, or vertigo. Ticket holders assume all risk of injury and all
+                                responsibility for property loss, destruction or theft and release the promoters, performers, sponsors, ticket outlets, venues,
+                                and their employees from any liability thereafter.</li>
+                            <li>Admission to show/venue by full ticket only. Printed/electronic tickets must be produced for admission.</li>
+                            <li>Admission will not be allowed for infants in arms and children aged 3 years old and below.</li>
+                            <li>Children above 3 years old and under 6 years old may be admitted free of charge provided that they do not occupy a seat.
+                                They must be seated on the lap of a parent / guardian.</li>
+                            <li>Individuals aged 6 years old and above will be required to purchase a ticket for admission.</li>
+                            <li>No flash photography and videography allowed.</li>
+                            <li>No outside food and beverage are allowed into the venue.</li>
+                        </ol>
                     </Typography>
                 </Container>
                 <Box sx={{ width: "flex", height: "20px", backgroundColor: "#ececec" }}></Box>

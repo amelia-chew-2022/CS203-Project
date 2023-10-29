@@ -130,10 +130,9 @@ const Home = () => {
             </Typography>
             </div>
 
-            {/* cards */}
-            <Cards/>
-
             <EventCard/>
+
+            <Cards/>
 
             <Footer/>
         </Fragment>
