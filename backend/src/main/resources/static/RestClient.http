@@ -56,4 +56,5 @@ Authorization: Basic Janaaaaa goodpassword
 GET http://localhost:8080/tickets/1
 
 ###
-GET http://localhost:8080/eventInfo/1
+GET http://localhost:8080/checkout
+Authorization: Basic Janaaaaa goodpassword
