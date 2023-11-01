@@ -110,9 +110,9 @@ public class Application {
 
                 String ticketPricing = "Ticket Price: $50";
             
-                String imageURL = "src/assets/vibes.png";
+                String imageURL = "../../assets/coldplay.png";
 
-                eventInfoRepository.save(new EventInfo(eventName,eventDetail,date,location,imageURL));
+                eventInfoRepository.save(new EventInfo(eventName,eventDetail,date,location,ticketPricing,imageURL));
                 eventInfoRepository.save(new EventInfo("Coldplay: Music Of The Spheres World Tour - delivered by DHL", "2 Sep 2023 (Sat) ~ 3 Sep 2023 (Sun)", "../../assets/coldplay.png"));
                 eventInfoRepository.save(new EventInfo("TWICE 5TH WORLD TOUR 'READY TO BE' IN SINGAPORE", "2 Sep 2023 (Sat) ~ 3 Sep 2023 (Sun)", "../../assets/twice.png"));
                 eventInfoRepository.save(new EventInfo("ATEEZ WORLD TOUR [THE FELLOWSHIP: BREAK THE WALL]", "9 Sep 2023 (Sat)", "../../assets/ateez.png"));

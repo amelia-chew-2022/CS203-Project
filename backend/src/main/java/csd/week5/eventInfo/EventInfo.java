@@ -52,11 +52,12 @@ public class EventInfo {
     private String imageURL;
 
 
-    public EventInfo(String eventName, ArrayList<String> eventDetail, String date, String location, String imageURL){
+    public EventInfo(String eventName, ArrayList<String> eventDetail, String date, String location,String ticketPricing, String imageURL){
         this.eventName = eventName;
         this.eventDetail = eventDetail;
         this.date = date;
         this.location = location;
+        this.ticketPricing = ticketPricing;
         this.imageURL = imageURL;
     }
 

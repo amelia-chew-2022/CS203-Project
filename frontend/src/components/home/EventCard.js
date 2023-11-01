@@ -6,6 +6,15 @@ import Typography from '@mui/material/Typography';
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import ImageDisplay from './ImageDisplay';
+import '../../assets/coldplay.png';
+import '../../assets/twice.png';
+import '../../assets/ateez.png';
+import '../../assets/lauv.png';
+import '../../assets/p1harmony.png';
+import '../../assets/hallyupopfest.png';
+import '../../assets/roc.png';
+import '../../assets/taylorswift.png';
+import '../../assets/vibes.png';
 
 function EventCard() {
     const dateStyle = {
@@ -58,6 +67,8 @@ function EventCard() {
     }
 
     formatData(eventInfoList, formattedData);
+    // console.log(eventInfo.imageURL);
+    // console.log(eventInfo.ticketPricing);
 
     return (
         <Fragment>
@@ -78,7 +89,7 @@ function EventCard() {
                         <Link to={`/eventinfo1/${eventInfo.id}`}>
                             <Button>
                                 <Card sx={{ width: 400, height: 300 }}>
-                                <ImageDisplay imagePath={require('../../assets/coldplay.png')} />
+                                <ImageDisplay imagePath="/src/assets/taylorswift.png" />
                                     <CardContent>
                                         <Typography sx={dateStyle}>
                                             {eventInfo.date}

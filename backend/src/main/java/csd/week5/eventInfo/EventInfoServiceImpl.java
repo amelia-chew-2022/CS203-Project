@@ -36,6 +36,7 @@ public class EventInfoServiceImpl implements EventInfoService {
             existingEventInfo.setEventDetail(updatedEventInfo.getEventDetail());
             existingEventInfo.setDate(updatedEventInfo.getDate());
             existingEventInfo.setLocation(updatedEventInfo.getLocation());
+            existingEventInfo.setTicketPricing(updatedEventInfo.getTicketPricing());
             existingEventInfo.setImageURL(updatedEventInfo.getImageURL());
             return eventInfoRepo.save(existingEventInfo);
         }).orElse(null);
