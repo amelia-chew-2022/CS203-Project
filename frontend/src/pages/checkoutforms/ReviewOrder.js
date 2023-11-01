@@ -9,6 +9,7 @@ import Grid from '@mui/material/Grid';
 
 // console.log(selectedSeats);
 
+// TODO: change all hardcoded text into the tickets selected in the transaction
 const products = [
   {
     name: 'Product 1',

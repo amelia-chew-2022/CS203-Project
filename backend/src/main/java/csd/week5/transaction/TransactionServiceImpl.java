@@ -17,7 +17,7 @@ public class TransactionServiceImpl implements TransactionService {
     private UserRepository users;
     private TicketRepository tickets;
 
-    public TransactionServiceImpl(TransactionRepository Transactions, UserRepository users, TicketRepository tickets) {
+    public TransactionServiceImpl(@Autowired TransactionRepository Transactions, @Autowired UserRepository users, @Autowired TicketRepository tickets) {
         this.Transactions = Transactions;
         this.users = users;
         this.tickets = tickets;
@@ -40,15 +40,15 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Transaction addTransaction(Transaction Transaction, Ticket[] tickets) {
+    public Transaction addTransaction(Transaction Transaction, Ticket[] ticketList) {
         // create transaction
         Transaction transaction = Transactions.save(Transaction);
 
         // update selected tickets in the array: availability and transaction_id
-        for (Ticket ticket : tickets) {
-            ticket.setAvailable = false;
+        for (Ticket ticket : ticketList) {
+            ticket.setAvailable(false);
             // change transaction to transaction_id if we changed the foreign key in Ticket.java
-            ticket.setTransaction = transaction;
+            ticket.setTransaction(transaction);
         }
 
         return transaction;
@@ -74,7 +74,7 @@ public class TransactionServiceImpl implements TransactionService {
     // }
 
     public boolean isTransactionExpired(Transaction transaction) {
-        Date currentTime = new Date();
+        Date currentTime = new java.util.Date();
         long elapsedTime = currentTime.getTime() - transaction.getTransaction_date().getTime();
         return elapsedTime >= 10000;
     }
@@ -107,9 +107,9 @@ public class TransactionServiceImpl implements TransactionService {
 
         // revert availability and transaction_id attributes
         for (Ticket ticket : ticketList) {
-            ticket.setAvailable = true;
+            ticket.setAvailable(true);
             // change transaction to transaction_id if we changed the foreign key in Ticket.java
-            ticket.setTransaction = null;
+            ticket.setTransaction(null);;
         }
 
         Transactions.deleteById(id);

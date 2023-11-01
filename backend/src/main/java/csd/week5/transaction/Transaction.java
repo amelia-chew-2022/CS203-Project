@@ -52,6 +52,6 @@ public class Transaction {
         this.transaction_date = new Date();
     }
 
-    public void setTitle(Long id2) {
-    }
+    // public void setTitle(Long id2) {
+    // }
 }
