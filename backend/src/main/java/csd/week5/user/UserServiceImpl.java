@@ -23,10 +23,20 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
-    // @Override
-    // public User addUser(User user) {
-    //     return userRepository.save(user);
-    // }
+    @Override
+    public User addUser(@Valid @RequestBody User newUserInfo) {
+        // Create a new user using the values from newUserInfo
+        User newUser = new User();
+        newUser.setUsername(newUserInfo.getUsername());
+        newUser.setPassword(newUserInfo.getPassword());
+        newUser.setEmail(newUserInfo.getEmail());
+        newUser.setAddress(newUserInfo.getAddress());
+        newUser.setPhone_num(newUserInfo.getPhone_num());
+    
+        // Save the new user to the repository
+        return userRepository.save(newUser);
+    }
+    
 
     @Override
     public User updateUsers(Long id, @Valid @RequestBody User newUserInfo) {
