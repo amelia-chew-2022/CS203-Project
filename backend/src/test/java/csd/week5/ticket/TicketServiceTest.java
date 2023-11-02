@@ -74,22 +74,22 @@ public class TicketServiceTest {
         verify(tickets).save(ticket);
     }
 
-    @Test
-    void buyTicket_Successful_ReturnTicket() {
-        Ticket ticket = new Ticket("Ticket", "123", "1ac23V", "100");
-        Long ticketId = 10L;
-        User user = new User("Dummy", null, "ROLE_ADMIN", "nic@gmail.com", "23698745", "SMU building", "87654321");
-        Long userId = 11L;
+    // @Test
+    // void buyTicket_Successful_ReturnTicket() {
+    //     Ticket ticket = new Ticket("Ticket", "123", "1ac23V", "100");
+    //     Long ticketId = 10L;
+    //     User user = new User("Dummy", null, "ROLE_ADMIN", "nic@gmail.com", "23698745", "SMU building", "87654321");
+    //     Long userId = 11L;
 
-        when(tickets.findById(ticketId)).thenReturn(Optional.of(ticket));
-        when(users.findById(userId)).thenReturn(Optional.of(user));
-        when(tickets.save(ticket)).thenReturn(ticket);
+    //     when(tickets.findById(ticketId)).thenReturn(Optional.of(ticket));
+    //     when(users.findById(userId)).thenReturn(Optional.of(user));
+    //     when(tickets.save(ticket)).thenReturn(ticket);
 
-        Ticket updatedTicket = ticketService.buyTicket(ticketId, userId);
+    //     Ticket updatedTicket = ticketService.buyTicket(ticketId, userId);
 
-        assertNotNull(updatedTicket);
-        verify(tickets).findById(ticketId);
-        verify(users).findById(userId);
-        verify(tickets).save(ticket);
-    }
+    //     assertNotNull(updatedTicket);
+    //     verify(tickets).findById(ticketId);
+    //     verify(users).findById(userId);
+    //     verify(tickets).save(ticket);
+    // }
 }

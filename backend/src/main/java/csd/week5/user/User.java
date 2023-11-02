@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import csd.week5.ticket.*;
+import csd.week5.transaction.Transaction;
 
 @Entity
 @Getter
@@ -69,7 +70,9 @@ public class User implements UserDetails{
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Ticket> tickets;
+    private List<Transaction> transactions;
+
+
 
     public User(String username, String password, String authorities, String email, String credit_card_num, String address, String phone_num){
         this.username = username;

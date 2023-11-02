@@ -43,12 +43,14 @@ public class TransactionServiceImpl implements TransactionService {
     public Transaction addTransaction(Transaction Transaction, Ticket[] ticketList) {
         // create transaction
         Transaction transaction = Transactions.save(Transaction);
-
+        long userID = transaction.getUser().getId();
+        
         // update selected tickets in the array: availability and transaction_id
         for (Ticket ticket : ticketList) {
             ticket.setAvailable(false);
             // change transaction to transaction_id if we changed the foreign key in Ticket.java
             ticket.setTransaction(transaction);
+
         }
 
         return transaction;
@@ -59,7 +61,7 @@ public class TransactionServiceImpl implements TransactionService {
     public Transaction confirmTransaction(Long id) {
         // not sure if i have to still check if transaction time has expired in this method or not, since the transaction validity is periodically checked
         return Transactions.findById(id).map(Transaction -> {
-            Transaction.setStatus(true);
+            Transaction.setCompleted(true);
             return Transactions.save(Transaction);
         }).orElse(null);
     }
@@ -103,7 +105,7 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void deleteTransaction(Long id) {
         Transaction transaction = Transactions.findById(id).orElse(null);
-        List<Ticket> ticketList = tickets.listTicketsByTransactionId(transaction);
+        List<Ticket> ticketList = tickets.listTicketsByTransaction_Id(transaction);
 
         // revert availability and transaction_id attributes
         for (Ticket ticket : ticketList) {

@@ -10,11 +10,11 @@ import csd.week5.user.*;
 public class TicketServiceImpl implements TicketService {
 
     private TicketRepository tickets;
-    private UserRepository users;
+    // private UserRepository users;
 
-    public TicketServiceImpl(TicketRepository tickets, UserRepository users) {
+    public TicketServiceImpl(TicketRepository tickets) {
         this.tickets = tickets;
-        this.users = users;
+        // this.users = users;
     }
 
     @Override
@@ -23,7 +23,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public List<Ticket> listTicketsByTransactionId(Transaction transaction) {
+    public List<Ticket> listTicketsByTransaction_Id(Transaction transaction) {
         return tickets.findAllByTransaction(transaction);
     }
 
@@ -64,16 +64,15 @@ public class TicketServiceImpl implements TicketService {
         }).orElse(null);
     }
 
-    // commented our buyTicket since availability will be updated in TransactionServiceImpl with the method addTransaction
+    // commented our buyTicket since availability will be updated in
+    // TransactionServiceImpl with the method addTransaction
 
-    // @Override
     // public Ticket buyTicket(Long id, Long userID) {
-    //     Ticket ticket = getTicket(id);
-    //     users.findById(userID).map(user -> {
-    //         ticket.setUser(user);
-    //         ticket.setAvailability(false);
-    //         return tickets.save(ticket);
-    //     });
-    //     return ticket;
-    // }
+    // Ticket ticket = getTicket(id);
+    // users.findById(userID).map(user -> {
+    // ticket.setUser(user);
+    // ticket.setAvailability(false);
+    // return tickets.save(ticket);
+    // });
+    // return ticket;
 }

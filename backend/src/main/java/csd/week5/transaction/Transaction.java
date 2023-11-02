@@ -42,22 +42,18 @@ public class Transaction {
     private User user;
 
     // @Enumerated(EnumType.STRING)
-    private boolean status;
+    private boolean completed;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date transaction_date;
 
-    @OneToMany
-    @JoinColumn(mappedBy = "transaction", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
     private List<Ticket> ticketList;
 
     public Transaction(double total_price, User user) {
         this.total_price = total_price;
         this.user = user;
-        this.status = false;
+        this.completed = false;
         this.transaction_date = new Date();
     }
-
-    // public void setTitle(Long id2) {
-    // }
 }
