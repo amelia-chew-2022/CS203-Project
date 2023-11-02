@@ -1,7 +1,11 @@
 package csd.week5.user;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import csd.week5.user.*;
 
@@ -19,35 +23,20 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
-    @Override
-    public User getUser(Long id) {
-        return userRepository.findById(id).orElse(null);
-    }
+    // @Override
+    // public User addUser(User user) {
+    //     return userRepository.save(user);
+    // }
 
     @Override
-    public User addUser(User user) {
-        return userRepository.save(user);
-    }
-
-    @Override
-    public User updateUsers(Long id, User newUserInfo) {
+    public User updateUsers(Long id, @Valid @RequestBody User newUserInfo) {
         return userRepository.findById(id).map(existingUser -> {
-            // Update the user fields only if newUserInfo fields are not null
-            if (newUserInfo.getUsername() != null) {
-                existingUser.setUsername(newUserInfo.getUsername());
-            }
-            if (newUserInfo.getPassword() != null) {
-                existingUser.setPassword(newUserInfo.getPassword());
-            }
-            if (newUserInfo.getEmail() != null) {
-                existingUser.setEmail(newUserInfo.getEmail());
-            }
-            if (newUserInfo.getAddress() != null) {
-                existingUser.setAddress(newUserInfo.getAddress());
-            }
-            if (newUserInfo.getPhone_num() != null) {
-                existingUser.setPhone_num(newUserInfo.getPhone_num());
-            }
+            // Update the user fields directly with the values from newUserInfo
+            existingUser.setUsername(newUserInfo.getUsername());
+            existingUser.setPassword(newUserInfo.getPassword());
+            existingUser.setEmail(newUserInfo.getEmail());
+            existingUser.setAddress(newUserInfo.getAddress());
+            existingUser.setPhone_num(newUserInfo.getPhone_num());
             return userRepository.save(existingUser);
         }).orElse(null);
     }
@@ -59,5 +48,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public User getUsers(Long id) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getUsers'");
+    }
+
+    @Override
+    public User addUsers(User user) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'addUsers'");
     }
 }
