@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TransactionRepository extends JpaRepository <Transaction, Long> {
-    List<Transaction> findAllByStatus(boolean bool);
+   List<Transaction> findAllByCompleted(boolean bool);
 }

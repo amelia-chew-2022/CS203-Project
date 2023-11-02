@@ -31,7 +31,7 @@ public class TransactionServiceImpl implements TransactionService {
     // i assumed JPA automatically created this findAllByStatus method
     @Override
     public List<Transaction> listActiveTransactions() {
-        return Transactions.findAllByStatus(false);
+        return Transactions.findAllByCompleted(false);
     }
 
     @Override
