@@ -51,7 +51,9 @@ public class SecurityConfig {
             .antMatchers(HttpMethod.PUT, "/tickets/*").hasRole("ADMIN")
             .antMatchers(HttpMethod.DELETE, "/tickets/*").hasRole("ADMIN")
             .antMatchers(HttpMethod.GET, "/tickets/*/*/buy").hasAnyRole("USER", "ADMIN")
-            
+            .antMatchers(HttpMethod.GET, "/home").permitAll()
+            .antMatchers(HttpMethod.GET, "/eventinfo1/*").permitAll()
+            .antMatchers(HttpMethod.GET, "/checkout").hasRole("USER")
             .and()
         .authenticationProvider(authenticationProvider())
         .csrf().disable()

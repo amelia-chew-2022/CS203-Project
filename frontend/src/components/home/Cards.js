@@ -4,7 +4,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import FieldsRow from '../form/FieldsRow';
 import { Fragment } from 'react';
 import Coldplay from '../../assets/coldplay.png';
 import Twice from '../../assets/twice.png';
@@ -36,11 +35,22 @@ const eventStyle = {
     textTransform: "none",
 };
 
+
+
 export default function Cards() {
 
     return (
         <Fragment>
-        <FieldsRow>
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "2rem",
+                justifyContent: "center",
+                marginTop: "2rem",
+                marginBottom: "2rem",
+            }}
+        >
         <Link to="/eventinfo">
         <Button>
             <Card sx={{ width: 400, height: 300 }}>
@@ -99,9 +109,18 @@ export default function Cards() {
                 </CardContent>
             </Card>
         </Button>
-        </FieldsRow>
+        </div>
 
-        <FieldsRow>
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "2rem",
+                justifyContent: "center",
+                marginTop: "2rem",
+                marginBottom: "2rem",
+            }}
+        >
         <Button>
             <Card sx={{ width: 400, height: 300 }}>
                 <CardMedia
@@ -158,9 +177,18 @@ export default function Cards() {
                 </CardContent>
             </Card>
         </Button>
-        </FieldsRow>
+        </div>
 
-        <FieldsRow>
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "2rem",
+                justifyContent: "center",
+                marginTop: "2rem",
+                marginBottom: "2rem",
+            }}
+        >
         <Button>
             <Card sx={{ width: 400, height: 300 }}>
                 <CardMedia
@@ -217,7 +245,7 @@ export default function Cards() {
                 </CardContent>
             </Card>
         </Button>
-        </FieldsRow>
+        </div>
         </Fragment>
   );
 }
