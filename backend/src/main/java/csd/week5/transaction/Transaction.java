@@ -3,6 +3,7 @@ package csd.week5.transaction;
 import java.util.List;
 import java.util.Date;
 
+import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +21,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import csd.week5.user.*;
+import csd.week5.ticket.*;
 
 @Entity
 @Getter
@@ -44,6 +46,10 @@ public class Transaction {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date transaction_date;
+
+    @OneToMany
+    @JoinColumn(mappedBy = "transaction", cascade = CascadeType.ALL)
+    private List<Ticket> ticketList;
 
     public Transaction(double total_price, User user) {
         this.total_price = total_price;

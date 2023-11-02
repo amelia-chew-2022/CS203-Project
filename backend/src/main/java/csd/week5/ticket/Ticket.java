@@ -48,7 +48,9 @@ public class Ticket {
     @JoinColumn(name = "transaction_id", nullable = true)
     private Transaction transaction;
 
-
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = true)
+    private User user;
 
     public Ticket(String title, String ticket_number, String seat_number, String unit_price, boolean available) {
         this.title = title;
@@ -70,5 +72,9 @@ public class Ticket {
     public void setAvailability(boolean b) {
         available = b;
     }
+
+    // public void setUser(User user) {
+    //     this.user = user;
+    // }
 
 }

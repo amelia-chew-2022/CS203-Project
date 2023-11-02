@@ -10,4 +10,5 @@ import csd.week5.transaction.Transaction;
 @Repository
 public interface TicketRepository extends JpaRepository <Ticket, Long> {
     List<Ticket> findAllByTransaction(Transaction transaction);
+    List<Ticket> listTicketsByTransactionId(Transaction transaction);
 }

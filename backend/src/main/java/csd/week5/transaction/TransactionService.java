@@ -11,7 +11,7 @@ public interface TransactionService {
 
     Transaction getTransaction(Long id);
 
-    Transaction addTransaction(Transaction Transaction, Ticket[] tickets);
+    Transaction addTransaction(Transaction Transaction, Ticket[] ticketList);
 
     Transaction confirmTransaction(Long id);
 

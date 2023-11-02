@@ -17,7 +17,7 @@ public class TransactionServiceImpl implements TransactionService {
     private UserRepository users;
     private TicketRepository tickets;
 
-    public TransactionServiceImpl(@Autowired TransactionRepository Transactions, @Autowired UserRepository users, @Autowired TicketRepository tickets) {
+    public TransactionServiceImpl(TransactionRepository Transactions, UserRepository users, TicketRepository tickets) {
         this.Transactions = Transactions;
         this.users = users;
         this.tickets = tickets;
@@ -74,7 +74,7 @@ public class TransactionServiceImpl implements TransactionService {
     // }
 
     public boolean isTransactionExpired(Transaction transaction) {
-        Date currentTime = new java.util.Date();
+        Date currentTime = new java.sql.Date(new java.util.Date().getTime());
         long elapsedTime = currentTime.getTime() - transaction.getTransaction_date().getTime();
         return elapsedTime >= 10000;
     }

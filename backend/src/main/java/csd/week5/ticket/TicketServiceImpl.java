@@ -64,14 +64,16 @@ public class TicketServiceImpl implements TicketService {
         }).orElse(null);
     }
 
-    @Override
-    public Ticket buyTicket(Long id, Long userID) {
-        Ticket ticket = getTicket(id);
-        users.findById(userID).map(user -> {
-            ticket.setUser(user);
-            ticket.setAvailability(false);
-            return tickets.save(ticket);
-        });
-        return ticket;
-    }
+    // commented our buyTicket since availability will be updated in TransactionServiceImpl with the method addTransaction
+
+    // @Override
+    // public Ticket buyTicket(Long id, Long userID) {
+    //     Ticket ticket = getTicket(id);
+    //     users.findById(userID).map(user -> {
+    //         ticket.setUser(user);
+    //         ticket.setAvailability(false);
+    //         return tickets.save(ticket);
+    //     });
+    //     return ticket;
+    // }
 }

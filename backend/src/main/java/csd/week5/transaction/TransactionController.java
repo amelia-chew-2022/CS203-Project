@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import csd.week5.ticket.Ticket;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -43,8 +44,8 @@ public class TransactionController {
     // TODO: edit the parameters to also get the array of selectedSeats
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/Transactions")
-    public Transaction addTransaction(@Valid @RequestBody Transaction Transaction) {
-        return TransactionService.addTransaction(Transaction);
+    public Transaction addTransaction(@Valid @RequestBody Transaction Transaction, Ticket[] ticketList) {
+        return TransactionService.addTransaction(Transaction, ticketList);
     }
 
     // @PutMapping("/Transactions/{id}")
