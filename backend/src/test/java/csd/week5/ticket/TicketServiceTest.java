@@ -62,14 +62,13 @@ public class TicketServiceTest {
         Ticket ticket = new Ticket("Original", "123", "1ac23V", "100");
         Ticket newTicketInfo = new Ticket("Updated", "123", "1ac23V", "100");
         Long ticketId = 10L;
-        Ticket expected = new Ticket("Updated", "123", "1ac23V", "100");
         Optional<Ticket> original = Optional.of(ticket);
         when(tickets.findById(ticketId)).thenReturn(original);
         when(tickets.save(ticket)).thenReturn(ticket);
 
         Ticket updatedTicket = ticketService.updateTicket(ticketId, newTicketInfo);
 
-        assertEquals(expected, updatedTicket);
+        assertEquals(newTicketInfo, updatedTicket);
         verify(tickets).findById(ticketId);
         verify(tickets).save(ticket);
     }

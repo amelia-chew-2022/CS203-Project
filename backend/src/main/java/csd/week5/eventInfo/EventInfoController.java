@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,42 +19,42 @@ import org.springframework.web.bind.annotation.RestController;
 public class EventInfoController {
     private EventInfoService eventInfoService;
 
-    public EventInfoController(EventInfoService bs){
+    public EventInfoController(EventInfoService bs) {
         this.eventInfoService = bs;
     }
 
     @GetMapping("/home")
-    public List<EventInfo> getEventInfo(){
+    public List<EventInfo> getEventInfo() {
         return eventInfoService.listEventInfo();
     }
 
-@GetMapping("/eventInfo/{id}") // Define the id as a path variable
+    @GetMapping("/eventInfo/{id}") // Define the id as a path variable
     public EventInfo getEventInfo(@PathVariable Long id) {
         EventInfo eventInfo = eventInfoService.getEventInfo(id);
-        if (eventInfo == null) throw new EventInfoNotFoundException(id);
+        if (eventInfo == null)
+            throw new EventInfoNotFoundException(id);
         return eventInfo;
     }
-    
-
 
     @ResponseStatus(HttpStatus.CREATED)
     public EventInfo addEventInfo(@Valid @RequestBody EventInfo eventInfo) {
         return eventInfoService.addEventInfo(eventInfo);
     }
 
-    public EventInfo updateEventInfo(@PathVariable Long id, @Valid @RequestBody EventInfo neweventInfoInfo){
+    public EventInfo updateEventInfo(@PathVariable Long id, @Valid @RequestBody EventInfo neweventInfoInfo) {
         EventInfo eventInfo = eventInfoService.updateEventInfo(id, neweventInfoInfo);
-        if(eventInfo == null) throw new EventInfoNotFoundException(id);
-        
+        if (eventInfo == null)
+            throw new EventInfoNotFoundException(id);
+
         return eventInfo;
     }
 
-    public void deleteEventInfo(@PathVariable Long id){
-        try{
+    public void deleteEventInfo(@PathVariable Long id) {
+        try {
             eventInfoService.deleteEventInfo(id);
-         }catch(EmptyResultDataAccessException e) {
+        } catch (EmptyResultDataAccessException e) {
             throw new EventInfoNotFoundException(id);
-         }
+        }
     }
 
 }
