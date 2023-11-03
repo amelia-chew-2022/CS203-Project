@@ -49,7 +49,7 @@ Content-Type: application/json
 }
 
 ### user buys ticket
-GET http://localhost:8080/tickets/1/3/buy
+PUT http://localhost:8080/tickets/1/3/buy
 Authorization: Basic Janaaaaa goodpassword
 
 ### show specific ticket

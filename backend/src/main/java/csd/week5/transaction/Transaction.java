@@ -30,8 +30,6 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-
     private double total_price;
 
     @ManyToOne // Use @ManyToOne to create a many-to-one relationship with the User entity

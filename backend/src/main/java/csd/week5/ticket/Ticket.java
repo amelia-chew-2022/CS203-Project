@@ -45,6 +45,7 @@ public class Ticket {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = true)
+    @JsonIgnore
     private User user;
 
     public Ticket(String title, String ticket_number, String seat_number, String unit_price, boolean available) {
@@ -67,18 +68,4 @@ public class Ticket {
     public void setAvailability(boolean b) {
         available = b;
     }
-
-    // @Override
-    // public boolean equals(Object o) {
-    //     if (o instanceof Ticket) {
-    //         Ticket t = (Ticket)o;
-    //         if (this.title.equals(t.title) && this.ticket_number.equals(t.ticket_number) && 
-    //     this.seat_number.equals(t.seat_number) && this.unit_price.equals(t.unit_price) && 
-    //     this.available.equals(t.available)) {
-    //         return true;
-    //     }
-    //     }
-    //     return false;
-    // }
-
 }

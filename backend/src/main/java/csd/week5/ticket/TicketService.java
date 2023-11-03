@@ -9,7 +9,7 @@ public interface TicketService {
 
     Ticket addTicket(Ticket ticket);
 
-    Ticket updateTicket(Long id, String title);
+    Ticket updateTicket(Long id, Ticket newTicketInfo);
 
     Ticket updateAvailabilityById(Long id, Boolean available);
 

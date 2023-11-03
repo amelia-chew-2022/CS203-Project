@@ -47,7 +47,7 @@ public class TicketController {
     }
 
     @PutMapping("/tickets/{id}")
-    public Ticket updateTicket(@PathVariable Long id, @Valid @RequestBody String newTicketInfo){
+    public Ticket updateTicket(@PathVariable Long id, @Valid @RequestBody Ticket newTicketInfo){
         Ticket ticket = ticketService.updateTicket(id, newTicketInfo);
         if(ticket == null) throw new TicketNotFoundException(id);
         
@@ -71,8 +71,11 @@ public class TicketController {
          }
     }
 
-    @GetMapping("/tickets/{id}/{userID}/buy")
-    public void buyTicket(@PathVariable Long id, @PathVariable Long userID){
-        ticketService.buyTicket(id, userID);
+    @PutMapping("/tickets/{id}/{userID}/buy")
+    public Ticket buyTicket(@PathVariable Long id, @PathVariable Long userID){
+        Ticket ticket = ticketService.buyTicket(id, userID);
+        if(ticket == null) throw new TicketNotFoundException(id);
+
+        return ticket;
     }
 }

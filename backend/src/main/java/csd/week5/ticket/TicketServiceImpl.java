@@ -1,6 +1,7 @@
 package csd.week5.ticket;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import csd.week5.user.*;
@@ -32,9 +33,9 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Ticket updateTicket(Long id, String newTicketInfo) {
+    public Ticket updateTicket(Long id, Ticket newTicketInfo) {
         return tickets.findById(id).map(ticket -> {
-            ticket.setTitle(newTicketInfo);
+            ticket.setTitle(newTicketInfo.getTitle());
             return tickets.save(ticket);
         }).orElse(null);
 
@@ -60,12 +61,13 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public Ticket buyTicket(Long id, Long userID) {
-        Ticket ticket = getTicket(id);
-        users.findById(userID).map(user -> {
-            ticket.setUser(user);
-            ticket.setAvailability(false);
-            return tickets.save(ticket);
-        });
-        return ticket;
+        Optional<Ticket> t = tickets.findById(id);
+        Optional<User> u = users.findById(userID);
+        if (!t.equals(Optional.empty()) && !u.equals(Optional.empty())) {
+            t.get().setAvailable(false);
+            t.get().setUser(u.get());
+            return tickets.save(t.get());
+        }
+        return null;
     }
 }
