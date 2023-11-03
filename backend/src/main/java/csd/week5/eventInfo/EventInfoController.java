@@ -29,27 +29,28 @@ public class EventInfoController {
         return eventInfoService.listEventInfo();
     }
 
-@GetMapping("/eventInfo/{id}") // Define the id as a path variable
+    @GetMapping("/eventInfo/{id}") // Define the id as a path variable
     public EventInfo getEventInfo(@PathVariable Long id) {
         EventInfo eventInfo = eventInfoService.getEventInfo(id);
         if (eventInfo == null) throw new EventInfoNotFoundException(id);
         return eventInfo;
     }
     
-
-
-    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/eventInfo/{id}")
+    
     public EventInfo addEventInfo(@Valid @RequestBody EventInfo eventInfo) {
         return eventInfoService.addEventInfo(eventInfo);
     }
 
-    public EventInfo updateEventInfo(@PathVariable Long id, @Valid @RequestBody EventInfo neweventInfoInfo){
-        EventInfo eventInfo = eventInfoService.updateEventInfo(id, neweventInfoInfo);
+    @ResponseStatus(HttpStatus.CREATED)
+    public EventInfo updateEventInfo(@PathVariable Long id, @Valid @RequestBody EventInfo neweventInfo){
+        EventInfo eventInfo = eventInfoService.updateEventInfo(id, neweventInfo);
         if(eventInfo == null) throw new EventInfoNotFoundException(id);
         
         return eventInfo;
     }
 
+    @DeleteMapping("/eventInfo/{id}")
     public void deleteEventInfo(@PathVariable Long id){
         try{
             eventInfoService.deleteEventInfo(id);
@@ -57,5 +58,4 @@ public class EventInfoController {
             throw new EventInfoNotFoundException(id);
          }
     }
-
 }

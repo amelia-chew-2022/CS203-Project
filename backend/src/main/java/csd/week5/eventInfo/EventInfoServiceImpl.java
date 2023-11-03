@@ -30,7 +30,7 @@ public class EventInfoServiceImpl implements EventInfoService {
     }
 
     @Override
-    public EventInfo updateEventInfo(Long id, EventInfo updatedEventInfo) {
+    public EventInfo updateEventInfo(Long id,EventInfo updatedEventInfo) {
         return eventInfoRepo.findById(id).map(existingEventInfo -> {
             existingEventInfo.setEventName(updatedEventInfo.getEventName());
             existingEventInfo.setEventDetail(updatedEventInfo.getEventDetail());
