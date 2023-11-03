@@ -1,8 +1,8 @@
 import { useRef, Fragment } from "react";
 import NavBar from "../components/navigation/NavBar";
-import FieldsRow from "../components/form/FieldsRow";
 import SearchBox from "../components/home/SearchBox";
 import Cards from "../components/home/Cards";
+import EventCard from "../components/home/EventCard";
 import * as React from 'react';
 import Typography from "@mui/material/Typography";
 import CssBaseline from '@mui/material/CssBaseline';
@@ -54,38 +54,84 @@ const Home = () => {
             >
             <Box height="50px"></Box>
 
-            <FieldsRow>
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "2rem",
+                    justifyContent: "center",
+                    marginTop: "2rem",
+                    marginBottom: "2rem",
+                }}
+            >
             <Container>
                 <Typography variant="h2" fontWeight="bold" color="white" textAlign="center">Dance with the rhythm, <br/>immerse in the melody.</Typography>
             </Container>
-            </FieldsRow>
+            </div>
 
-            <FieldsRow>
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "2rem",
+                    justifyContent: "center",
+                    marginTop: "2rem",
+                    marginBottom: "2rem",
+                }}
+            >
                 <SearchBox/>
-            </FieldsRow>
+            </div>
 
-            <FieldsRow>
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "2rem",
+                    justifyContent: "center",
+                    marginTop: "2rem",
+                    marginBottom: "2rem",
+                }}
+            >
                 <Typography color="white">Scroll down to discover upcoming events</Typography>
-            </FieldsRow>
+            </div>
 
-            <FieldsRow>
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "2rem",
+                    justifyContent: "center",
+                    marginTop: "2rem",
+                    marginBottom: "2rem",
+                }}
+            >
             <IconButton>
                 <KeyboardArrowDownOutlinedIcon fontSize="large" style={{color: "white"}}
                 onClick={() => scrollToSection(eventslist)}
                 />
             </IconButton>
-            </FieldsRow>
+            </div>
             </div>
             </Container>
 
 
-            <FieldsRow>
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    gap: "2rem",
+                    justifyContent: "center",
+                    marginTop: "2rem",
+                    marginBottom: "2rem",
+                }}
+            >
             <Typography a ref={eventslist} variant="h3" gutterBottom sx={{fontWeight: "bold"}}>
                 Upcoming Events
             </Typography>
-            </FieldsRow>
+            </div>
 
-            {/* cards */}
+            <EventCard/>
+
             <Cards/>
 
             <Footer/>
