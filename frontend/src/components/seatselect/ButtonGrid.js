@@ -1,22 +1,3 @@
-
-/* const containerStyle = {
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  minHeight: "10vh",
-  padding: "0 20px",
-  width: "800px", // Set a fixed width for the grid container
-};
-
-const buttonStyle = {
-  width: "60px",
-  height: "60px",
-  margin: "5px",
-  borderRadius: "20px 20px 0 0",
-  borderBottom: "none",
-  backgroundColor: "#626262",
-  border: "1px solid #ccc",
-}; */
 import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
@@ -51,7 +32,6 @@ function ButtonGrid({ onButtonClick }) {
     // Toggle the 'available' property for the selected seat
     updatedSeat.available = !updatedSeat.available;
 
-
     // Send a PUT request to update the seat's 'available' property in the database
     axios
       .put(
@@ -64,26 +44,10 @@ function ButtonGrid({ onButtonClick }) {
       .then((res) => {
         // If the update is successful, update the state with the new button data
         setButtons(updatedButtons);
-
-        // Set a timer to revert the update after 5 seconds
-        revertTimeout = setTimeout(() => {
-          updatedSeat.available = !updatedSeat.available;
-          axios
-            .put(
-              `http://localhost:8080/tickets/updateAvailability/${updatedSeat.id}`,
-              updatedSeat.available,
-              {
-                headers: { "Content-Type": "application/json" },
-              }
-            )
-            .then((res) => {
-              setButtons(updatedButtons);
-            })
-            .catch((err) => console.log(err));
-        }, 10000); // 5000 milliseconds = 5 seconds
       })
       .catch((err) => console.log(err));
   };
+
   const updateSelectedSeats = () => {
     // Loop through selected seats and trigger handleUpdateClick for each
     selectedSeats.forEach((seat) => {
@@ -161,8 +125,6 @@ function ButtonGrid({ onButtonClick }) {
       >
         Update Selected Seats
       </Button>
-
-      
     </div>
   );
 }
