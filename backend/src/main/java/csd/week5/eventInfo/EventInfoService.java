@@ -19,4 +19,6 @@ public interface EventInfoService {
      */
     void deleteEventInfo(Long id);
 
+    // EventInfo getEventInfo(String title);
+
 }

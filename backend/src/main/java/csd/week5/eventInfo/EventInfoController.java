@@ -36,11 +36,13 @@ public class EventInfoController {
         return eventInfo;
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+    // @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/eventInfo/{id}")
     public EventInfo addEventInfo(@Valid @RequestBody EventInfo eventInfo) {
         return eventInfoService.addEventInfo(eventInfo);
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     public EventInfo updateEventInfo(@PathVariable Long id, @Valid @RequestBody EventInfo neweventInfoInfo) {
         EventInfo eventInfo = eventInfoService.updateEventInfo(id, neweventInfoInfo);
         if (eventInfo == null)
