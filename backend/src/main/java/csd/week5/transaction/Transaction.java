@@ -1,7 +1,9 @@
 package csd.week5.transaction;
 
 import java.util.List;
+import java.util.Date;
 
+import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,11 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne; // Import the ManyToOne annotation
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import csd.week5.ticket.Ticket;
 import csd.week5.user.*;
 import lombok.*;
 
@@ -32,16 +38,23 @@ public class Transaction {
 
     private double total_price;
 
-    @ManyToOne // Use @ManyToOne to create a many-to-one relationship with the User entity
-    @JoinColumn(name = "user_id") // Specify the foreign key column name
-    private User user; // Change the user field to be of type User
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = true)
+    private User user;
 
-    @NotBlank(message = "Transaction date should not be blank")
-    private String transaction_date;
+    // @Enumerated(EnumType.STRING)
+    private boolean completed;
 
-    public Transaction( double total_price, User user, String transaction_date) {
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date transaction_date;
+
+    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
+    private List<Ticket> ticketList;
+
+    public Transaction(double total_price, User user) {
         this.total_price = total_price;
         this.user = user;
-        this.transaction_date = transaction_date;
+        this.completed = false;
+        this.transaction_date = new Date();
     }
 }

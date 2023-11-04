@@ -4,22 +4,28 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
 
+import csd.week5.transaction.Transaction;
 import csd.week5.user.*;
 
 @Service
 public class TicketServiceImpl implements TicketService {
 
     private TicketRepository tickets;
-    private UserRepository users;
+    // private UserRepository users;
 
-    public TicketServiceImpl(TicketRepository tickets, UserRepository users) {
+    public TicketServiceImpl(TicketRepository tickets) {
         this.tickets = tickets;
-        this.users = users;
+        // this.users = users;
     }
 
     @Override
     public List<Ticket> listTickets() {
         return tickets.findAll();
+    }
+
+    @Override
+    public List<Ticket> listTicketsByTransaction_Id(Transaction transaction) {
+        return tickets.findAllByTransaction(transaction);
     }
 
     @Override
@@ -59,15 +65,15 @@ public class TicketServiceImpl implements TicketService {
         }).orElse(null);
     }
 
-    @Override
-    public Ticket buyTicket(Long id, Long userID) {
-        Optional<Ticket> t = tickets.findById(id);
-        Optional<User> u = users.findById(userID);
-        if (!t.equals(Optional.empty()) && !u.equals(Optional.empty())) {
-            t.get().setAvailable(false);
-            t.get().setUser(u.get());
-            return tickets.save(t.get());
-        }
-        return null;
-    }
+    // commented our buyTicket since availability will be updated in
+    // TransactionServiceImpl with the method addTransaction
+
+    // public Ticket buyTicket(Long id, Long userID) {
+    // Ticket ticket = getTicket(id);
+    // users.findById(userID).map(user -> {
+    // ticket.setUser(user);
+    // ticket.setAvailability(false);
+    // return tickets.save(ticket);
+    // });
+    // return ticket;
 }

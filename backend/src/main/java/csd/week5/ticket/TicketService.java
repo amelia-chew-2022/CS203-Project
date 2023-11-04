@@ -2,8 +2,12 @@ package csd.week5.ticket;
 
 import java.util.List;
 
+import csd.week5.transaction.Transaction;
+
 public interface TicketService {
     List<Ticket> listTickets();
+
+    // List<Ticket> listTicketsByTransaction_Id(Transaction transaction);
 
     Ticket getTicket(Long id);
 
@@ -20,5 +24,5 @@ public interface TicketService {
      */
     void deleteTicket(Long id);
 
-    Ticket buyTicket(Long id, Long userID);
+    // Ticket buyTicket(Long id, Long userID);
 }
