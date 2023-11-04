@@ -3,17 +3,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
 
-// Styles for the buttons
-
-const buttonStyle = {
-  width: "60px",
-  height: "60px",
-  margin: "5px",
-  borderRadius: "20px 20px 0 0",
-  borderBottom: "none",
-  backgroundColor: "#626262",
-  border: "1px solid #ccc",
-};
+// export selectedSeats;
 
 function ButtonGrid({ onButtonClick }) {
   const [buttons, setButtons] = useState([]);
@@ -64,7 +54,9 @@ function ButtonGrid({ onButtonClick }) {
     selectedSeats.forEach((seat) => {
       handleUpdateClick(seat.row, seat.col);
     });
-    setSelectedSeats([]); // Clear the selected seats
+
+
+    
   };
 
   const handleButtonClick = (rowIndex, colIndex) => {
@@ -144,4 +136,5 @@ function ButtonGrid({ onButtonClick }) {
   );
 }
 
+// export {selectedSeats};
 export default ButtonGrid;

@@ -5,6 +5,11 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Grid from '@mui/material/Grid';
 
+// import {selectedSeats} from '../../components/seatselect/ButtonGrid';
+
+// console.log(selectedSeats);
+
+// TODO: change all hardcoded text into the tickets selected in the transaction
 const products = [
   {
     name: 'Product 1',
