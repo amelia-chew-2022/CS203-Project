@@ -49,7 +49,6 @@ public class EventInfoController {
         return eventInfo;
     }
 
-    @DeleteMapping("/eventInfo/{id}")
     public void deleteEventInfo(@PathVariable Long id) {
         try {
             eventInfoService.deleteEventInfo(id);
