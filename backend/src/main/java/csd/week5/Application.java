@@ -77,12 +77,12 @@ public class Application {
                 UserRepository users = ctx.getBean(UserRepository.class);
                 BCryptPasswordEncoder encoder = ctx.getBean(BCryptPasswordEncoder.class);
                 System.out.println("[Add user]: " + users.save(
-                                new User("Shawn", encoder.encode("hello123"), "ROLE_ADMIN", "shawn@gmail.com",
-                                                "15465658", "SMU building", "12345678"))
+                                new User("Shawn", encoder.encode("hello123"), "shawn@gmail.com",
+                                                 "SMU building", "12345678"))
                                 .getUsername());
                 System.out.println("[Add user]: " + users.save(
-                                new User("Nicholas", encoder.encode("bye123"), "ROLE_ADMIN", "nic@gmail.com",
-                                                "23698745", "SMU building", "87654321"))
+                                new User("Nicholas", encoder.encode("bye123"), "nic@gmail.com",
+                                                 "SMU building", "87654321"))
                                 .getUsername());
 
                 // JPA transaction repository init

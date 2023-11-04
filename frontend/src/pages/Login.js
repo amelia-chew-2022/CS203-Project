@@ -13,7 +13,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 function onChange(value) {
     console.log("Captcha value:", value);
@@ -57,8 +56,21 @@ const Login = () => {
             setPasswordError(password === '');
         } else {
             event.preventDefault();
+
+            const captchaValue = '<ReCAPTCHA Value>'; // Replace with the actual ReCAPTCHA value
+
+            const data = {
+                username: username,
+                password: password,
+                captchaValue: captchaValue, // Include the ReCAPTCHA value
+            };
+
+            // Now you can send the data to your server, including the ReCAPTCHA value
+            // Make sure you send this data to your server for verification
+            console.log("Data to send to the server:", data);
+
             let authHeader = window.btoa(username + ':' + password);
-            let user = {'username': username, 'authHeader': authHeader};
+            let user = { 'username': username, 'authHeader': authHeader };
             localStorage.setItem('user', JSON.stringify(user));
             navigate('/');
         }
@@ -110,7 +122,10 @@ const Login = () => {
                         error={passwordError}
                         helperText={passwordError ? 'Password is required' : ''}
                     />
-                    <ReCAPTCHA sitekey="6LdH1UwoAAAAAO8hLo9y8SkrWpKT3W7VR0xHVD3S" onChange={handleCaptchaChange}></ReCAPTCHA>
+                    <ReCAPTCHA
+                        sitekey="6LdH1UwoAAAAAO8hLo9y8SkrWpKT3W7VR0xHVD3S"
+                        onChange={handleCaptchaChange}
+                    />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
                         label="Remember me"
@@ -120,7 +135,6 @@ const Login = () => {
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
-                        // onClick={handleSubmit}
                     >
                         Sign In
                     </Button>

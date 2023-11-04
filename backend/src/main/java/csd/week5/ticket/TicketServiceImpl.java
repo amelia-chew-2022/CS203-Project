@@ -23,9 +23,9 @@ public class TicketServiceImpl implements TicketService {
         return tickets.findAll();
     }
 
-    @Override
+    // @Override
     public List<Ticket> listTicketsByTransaction_Id(Transaction transaction) {
-        return tickets.findAllByTransaction(transaction);
+        return tickets.findAllTicketsByTransaction(transaction);
     }
 
     @Override

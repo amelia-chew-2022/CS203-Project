@@ -18,9 +18,9 @@ class App extends Component {
                     <Route path="/home" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/registration" element={<Registration/>}/>
-                    <Route path="/eventinfo/:id" element={<EventInfo />}/>
+                    <Route path="/eventinfo" element={<EventInfo />}/>
                     <Route path="/eventinfo1/:id" element={<EventInfo1/>}/>
-                    <Route path="/eventinfo" element={<EventInfo/>}/>
+                    {/* <Route path="/eventinfo" element={<EventInfo/>}/> */}
                     <Route path = "/error" element = {<Error/>}/>
                     <Route path = "/eventinfo/notfound" element = {<EventInfoError/>}/>
                     <Route path="/checkout" element={<Checkout/>}/>

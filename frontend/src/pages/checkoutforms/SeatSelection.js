@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
 
+
 export default function SeatSelection() {
   const [buttons, setButtons] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -134,9 +135,9 @@ export default function SeatSelection() {
       >
         {/* Image on the left */}
         <div style={{ marginRight: "20px" }}>
-          <FieldsColumn>
+          {/* <FieldsColumn> */}
             <img src={vibes} alt="img" width="flex" height="110" />
-          </FieldsColumn>
+          {/* </FieldsColumn> */}
         </div>
 
         <div>

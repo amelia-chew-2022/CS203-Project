@@ -184,3 +184,15 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: /Users/oliverloh
 	at org.h2.mvstore.FileStore.open(FileStore.java:128)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:452)
 	... 58 more
+2023-11-04 18:26:33 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USER" not found (this database is empty); SQL statement:
+insert into user (id, address, authorities, credit_card_num, email, password, phone_num, username) values (default, ?, ?, ?, ?, ?, ?, ?) [42104-214]
+2023-11-04 18:38:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TICKET" not found (this database is empty); SQL statement:
+insert into ticket (id, available, seat_number, ticket_number, title, transaction_id, unit_price, user_id) values (default, ?, ?, ?, ?, ?, ?, ?) [42104-214]
+2023-11-04 18:40:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USER" not found (this database is empty); SQL statement:
+insert into user (id, address, authorities, email, password, phone_num, username) values (default, ?, ?, ?, ?, ?, ?) [42104-214]
+2023-11-04 18:40:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USER" not found (this database is empty); SQL statement:
+insert into user (id, address, authorities, email, password, phone_num, username) values (default, ?, ?, ?, ?, ?, ?) [42104-214]

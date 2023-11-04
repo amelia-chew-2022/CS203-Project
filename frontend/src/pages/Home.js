@@ -126,7 +126,7 @@ const Home = () => {
                 }}
             >
             <Typography a ref={eventslist} variant="h3" gutterBottom sx={{fontWeight: "bold"}}>
-                Upcoming Events
+                Upcoming Events 
             </Typography>
             </div>
 

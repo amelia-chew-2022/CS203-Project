@@ -1,6 +1,7 @@
 package csd.week5.transaction;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.scheduling.annotation.Scheduled;
@@ -114,7 +115,9 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void deleteTransaction(Long id) {
         Transaction transaction = Transactions.findById(id).orElse(null);
-        List<Ticket> ticketList = tickets.listTicketsByTransaction_Id(transaction);
+        List<Ticket> ticketList = tickets.findAllTicketsByTransaction(transaction);
+
+        
 
         // revert availability and transaction_id attributes
         for (Ticket ticket : ticketList) {
