@@ -7,7 +7,6 @@ import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
 
-
 export default function SeatSelection() {
   const [buttons, setButtons] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
@@ -28,18 +27,23 @@ export default function SeatSelection() {
       .catch((err) => console.log(err));
   }, []);
 
-  const handleUpdateClick = (rowIndex, colIndex) => {
+  const handleUpdateClick = (rowIndex, colIndex, transactionId) => {
     const updatedButtons = [...buttons]; // Create a copy of the buttons array
     const updatedSeat = updatedButtons[rowIndex][colIndex];
 
     // Toggle the 'available' property for the selected seat
     updatedSeat.available = !updatedSeat.available;
 
+    const updatedTicketData = {
+      Available: false,
+      transaction_Id: transactionId,
+    };
+    console.log(updatedTicketData.transaction_Id);
     // Send a PUT request to update the seat's 'available' property in the database
     axios
       .put(
         `http://localhost:8080/tickets/updateAvailability/${updatedSeat.id}`,
-        updatedSeat.available,
+        updatedTicketData,
         {
           headers: { "Content-Type": "application/json" },
         }
@@ -51,26 +55,30 @@ export default function SeatSelection() {
       .catch((err) => console.log(err));
   };
 
-  const updateSelectedSeats = async () => {
-    // Loop through selected seats and trigger handleUpdateClick for each
-    let totalPrice = 0;
-    //Update tickets by making seat available = false
-    selectedSeats.forEach((seat) => {
-      handleUpdateClick(seat.row, seat.col);
-      // Add the price of each seat to the total price
-      totalPrice += seat.price;
-      totalPrice += seat.price;
-    });
+  const [totalPrice, setTotalPrice] = useState(0);
 
+  const updateSelectedSeats = async () => {
+    let totalPrice = 0; // Temporary variable to hold the calculation
+    let transactionId=0;
+    // Loop through selected seats to calculate the total price
+    selectedSeats.forEach((seat) => {
+      const ticket = buttons[seat.row][seat.col]; // Get the full seat object
+   
+      totalPrice += ticket.unit_price; // Add the price of each seat to the local total
+
+      console.log(totalPrice);
+    });
+  
     /// Assuming `selectedSeats` is an array that contains the selected seat details
     // and `currentUser` is an object that contains the ID of the currently logged in user.
 
     // Create a transaction object
     const transactionData = {
       total_price: totalPrice,
-      userId: 2,
+      User_Id: 2,
     };
 
+    console.log(transactionData);
     try {
       // Send a POST request to the backend to add the transaction
       const response = await axios.post(
@@ -84,6 +92,7 @@ export default function SeatSelection() {
       // Check if the transaction was created successfully
       if (response.status === 201) {
         console.log("Transaction created:", response.data);
+        transactionId = response.data.id; // Here's where you get the transaction ID
         navigate("/checkout"); // Navigate to the checkout page or any other page
       } else {
         console.error("Transaction creation failed:", response);
@@ -94,6 +103,10 @@ export default function SeatSelection() {
         error.response || error.message
       );
     }
+
+    selectedSeats.forEach((seat) => {
+      handleUpdateClick(seat.row, seat.col, transactionId);
+    });
   };
 
   const handleButtonClick = (rowIndex, colIndex) => {
@@ -136,7 +149,7 @@ export default function SeatSelection() {
         {/* Image on the left */}
         <div style={{ marginRight: "20px" }}>
           {/* <FieldsColumn> */}
-            <img src={vibes} alt="img" width="flex" height="110" />
+          <img src={vibes} alt="img" width="flex" height="110" />
           {/* </FieldsColumn> */}
         </div>
 

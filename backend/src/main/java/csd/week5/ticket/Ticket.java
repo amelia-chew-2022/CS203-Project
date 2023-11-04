@@ -42,7 +42,7 @@ public class Ticket {
     @Size(min = 5, max = 200, message = "Seat number should be at least 5 characters long")
     private String seat_number;
 
-    private String unit_price;
+    private int unit_price;
 
     private Boolean available = true;
 
@@ -61,7 +61,7 @@ public class Ticket {
 
     
 
-    public Ticket(String title, String ticket_number, String seat_number, String unit_price, boolean available) {
+    public Ticket(String title, String ticket_number, String seat_number, int unit_price, boolean available) {
         this.title = title;
         this.ticket_number = ticket_number;
         this.seat_number = seat_number;
@@ -69,7 +69,7 @@ public class Ticket {
         this.available = available;
     }
 
-    public Ticket(String title, String ticket_number, String seat_number, String unit_price) {
+    public Ticket(String title, String ticket_number, String seat_number, int unit_price) {
         this.title = title;
         this.ticket_number = ticket_number;
         this.seat_number = seat_number;
