@@ -7,7 +7,7 @@ import csd.week5.transaction.Transaction;
 public interface TicketService {
     List<Ticket> listTickets();
 
-    List<Ticket> listTicketsByTransaction_Id(Transaction transaction);
+    // List<Ticket> listTicketsByTransaction_Id(Transaction transaction);
 
     Ticket getTicket(Long id);
 
