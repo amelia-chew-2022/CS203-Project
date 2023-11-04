@@ -8,7 +8,7 @@ import axios from "axios";
 function ButtonGrid({ onButtonClick }) {
   const [buttons, setButtons] = useState([]);
   const [selectedSeats, setSelectedSeats] = useState([]);
-  let revertTimeout; // Declare a variable to store the timeout ID
+
 
   useEffect(() => {
     axios
@@ -53,6 +53,9 @@ function ButtonGrid({ onButtonClick }) {
     selectedSeats.forEach((seat) => {
       handleUpdateClick(seat.row, seat.col);
     });
+
+
+    
   };
 
   const handleButtonClick = (rowIndex, colIndex) => {

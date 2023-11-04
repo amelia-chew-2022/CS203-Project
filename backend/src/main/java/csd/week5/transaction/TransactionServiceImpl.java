@@ -39,27 +39,40 @@ public class TransactionServiceImpl implements TransactionService {
         return Transactions.findById(id).orElse(null);
     }
 
-    @Override
+
+
+   /*  @Override
     public Transaction addTransaction(Transaction Transaction, Ticket[] ticketList) {
         // create transaction
         Transaction transaction = Transactions.save(Transaction);
         long userID = transaction.getUser().getId();
-        
+
         // update selected tickets in the array: availability and transaction_id
         for (Ticket ticket : ticketList) {
             ticket.setAvailable(false);
-            // change transaction to transaction_id if we changed the foreign key in Ticket.java
+            // change transaction to transaction_id if we changed the foreign key in
+            // Ticket.java
             ticket.setTransaction(transaction);
 
         }
 
         return transaction;
+    } */
+
+     public Transaction addTransaction(Transaction Transaction) {
+        // create transaction
+        Transaction transaction = Transactions.save(Transaction);
+        //long userID = transaction.getUser().getId();
+
+        return transaction;
     }
 
-    // confirms that the transaction is completed and the seats selected are final and paid for
+    // confirms that the transaction is completed and the seats selected are final
+    // and paid for
     @Override
     public Transaction confirmTransaction(Long id) {
-        // not sure if i have to still check if transaction time has expired in this method or not, since the transaction validity is periodically checked
+        // not sure if i have to still check if transaction time has expired in this
+        // method or not, since the transaction validity is periodically checked
         return Transactions.findById(id).map(Transaction -> {
             Transaction.setCompleted(true);
             return Transactions.save(Transaction);
@@ -67,11 +80,12 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     // @Override
-    // public Transaction updateTransaction(Long id, Transaction newTransactionInfo) {
-    //     return Transactions.findById(id).map(Transaction -> {
-    //         Transaction.setTitle(newTransactionInfo.getId());
-    //         return Transactions.save(Transaction);
-    //     }).orElse(null);
+    // public Transaction updateTransaction(Long id, Transaction newTransactionInfo)
+    // {
+    // return Transactions.findById(id).map(Transaction -> {
+    // Transaction.setTitle(newTransactionInfo.getId());
+    // return Transactions.save(Transaction);
+    // }).orElse(null);
 
     // }
 
@@ -110,13 +124,13 @@ public class TransactionServiceImpl implements TransactionService {
         // revert availability and transaction_id attributes
         for (Ticket ticket : ticketList) {
             ticket.setAvailable(true);
-            // change transaction to transaction_id if we changed the foreign key in Ticket.java
-            ticket.setTransaction(null);;
+            // change transaction to transaction_id if we changed the foreign key in
+            // Ticket.java
+            ticket.setTransaction(null);
+            ;
         }
 
         Transactions.deleteById(id);
     }
-
-
 
 }

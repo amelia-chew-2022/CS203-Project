@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Checkout from './pages/Checkout';
 import Error from './pages/Error';
 import Registration from './pages/Registration';
+import SeatSelection from './pages/checkoutforms/SeatSelection'
 
 class App extends Component {
     render() {
@@ -22,6 +23,7 @@ class App extends Component {
                     <Route path="/venues" element={<Venues/>}/>
                     <Route path = "/error" element = {<Error/>}/>
                     <Route path="/checkout" element={<Checkout/>}/>
+                    <Route path="/seatSelection" element={<SeatSelection/>}/>
                 </Routes>
             </Router>
         );

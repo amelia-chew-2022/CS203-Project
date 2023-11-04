@@ -10,7 +10,6 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import AddressForm from './checkoutforms/AddressForm';
 import Review from './checkoutforms/ReviewOrder';
-import SeatSelection from './checkoutforms/SeatSelection';
 import NavBar from "../components/navigation/NavBar";
 import Footer from "../components/footer/Footer";
 import Breadcrumbs from '@mui/material/Breadcrumbs';
@@ -19,20 +18,15 @@ import Stack from '@mui/material/Stack';
 import { Link } from 'react-router-dom';
 import Verification from "./checkoutforms/Verification"
 
-import ButtonGrid from '../components/seatselect/ButtonGrid';
-import axios from "axios";
-
-const steps = ["Seat Selection", "Verification" ,"Payment Details", "Order Summary"]; 
+const steps = ["Verification" ,"Payment Details", "Order Summary"]; 
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-        return <SeatSelection />;
-    case 1:
         return <Verification />; 
-    case 2:
+    case 1:
         return <AddressForm />; 
-    case 3:
+    case 2:
         return <Review />;
     default:
         throw new Error('Unknown step');
