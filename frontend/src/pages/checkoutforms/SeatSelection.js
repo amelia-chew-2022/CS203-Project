@@ -6,8 +6,6 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
-import NavBar from "../../components/navigation/NavBar";
-import Footer from "../../components/footer/Footer";
 
 export default function SeatSelection() {
   const [buttons, setButtons] = useState([]);
@@ -148,7 +146,6 @@ export default function SeatSelection() {
 
   return (
     <>
-      <NavBar></NavBar>
       <div
         style={{
           display: "flex",
@@ -351,7 +348,6 @@ export default function SeatSelection() {
             Update Selected Seats
           </Button>
         </div>
-        <Footer/>
       </div>
     </>
   );

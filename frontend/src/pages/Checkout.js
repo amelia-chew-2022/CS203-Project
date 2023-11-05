@@ -18,16 +18,19 @@ import Stack from '@mui/material/Stack';
 import { Link } from 'react-router-dom';
 import Verification from "./checkoutforms/Verification"
 import { useParams } from 'react-router-dom';
+import SeatSelection from './checkoutforms/SeatSelection';
 
 const steps = ["Verification" ,"Payment Details", "Order Summary"]; 
 
 function getStepContent(step,transactionId) {
   switch (step) {
     case 0:
-        return <Verification />; 
+        return <SeatSelection/>
     case 1:
-        return <AddressForm />; 
+        return <Verification/>; 
     case 2:
+        return <AddressForm />; 
+    case 3:
         return <Review transactionId={transactionId} />;
     default:
         throw new Error('Unknown step');
