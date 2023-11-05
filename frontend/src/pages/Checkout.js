@@ -69,8 +69,8 @@ const breadcrumbs = [
     href="/material-ui/getting-started/installation/"
     onClick={handleClick}
   >
-  <Link to="/eventinfo">
-    VIBES
+  <Link to="/eventinfo1/1">
+    Event Info
   </Link>
   </Link>,
   <Typography key="4" color="text.primary">

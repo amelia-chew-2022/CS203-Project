@@ -55,7 +55,7 @@ const breadcrumbs = [
         </Link>
     </Link>,
     <Typography key="3" color="text.primary">
-        VIBES
+        Event Info
     </Typography>,
 ];
 
@@ -192,7 +192,7 @@ const EventInfo1 = (props) => {
                 </Typography>
 
                 <Typography variant="h3" sx={{ fontWeight: "bold", color: "#fff" }}>
-                    {eventInfo.name}
+                    {eventInfo.eventName}
                 </Typography>
             </Container>
             </Box>
@@ -238,7 +238,7 @@ const EventInfo1 = (props) => {
                                 onClick={() => scrollToSection(section6Ref)}
                             />
                         </Tabs>
-                        <Link to="/checkout">
+                        <Link to="/checkout/:id">
                             <Button variant="contained" size="large">Buy Tickets</Button>
                         </Link>
                     </Toolbar>

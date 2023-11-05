@@ -8,11 +8,8 @@ import Typography from '@mui/material/Typography';
 import { Zalgo } from '@h.yoshida/react-zalgo';
 
 function Verification() {
-
-    const [isChecked, setIsChecked] = useState(false);
     const [verificationText, setVerificationText] = useState('');
     const [userInput, setUserInput] = useState('');
-    const [isVerified, setIsVerified] = useState(false);
 
     useEffect(() => {
         generateVerificationText(); // Call the function when the component loads
@@ -34,18 +31,6 @@ function Verification() {
         topGlitchAmount: () => Math.ceil(2 * Math.random()),
         midGlitchAmount: () => Math.ceil(2 * Math.random()),
         btmGlitchAmount: () => Math.ceil(2 * Math.random()),
-    };
-
-    const handleInputChange = (e) => {
-        setUserInput(e.target.value);
-    };
-
-    const verifyBot = () => {
-        if (userInput === verificationText && isChecked) {
-            setIsVerified(true);
-        } else {
-            setIsVerified(false);
-        }
     };
 
     function YourComponent() {
@@ -76,53 +61,44 @@ function Verification() {
 
     return (
         <div>
-            {!isVerified ? (
-                <div>
-                    <div className='centered-container'>
-                        <p align="center">
-                        <span style={{ fontSize: '50px', userSelect: 'none' }}>
-                        <Zalgo className='verification' textData={verificationText} glitchParams={param}/>
-                        </span>
-                        </p>
-                        <p align="center">Please enter the verification code 
-                                <YourComponent/>
-                        </p>
-
-                        <p align="center">
-                            The verification code consists of only alphabetic letters and can be refreshed by clicking the on its image
-                            <br/>
-                            Please do not operate on more than one window and submit this page as soon as possible to avoid verification failure
-                        </p>
-
-                    </div>
-
-                    <Divider></Divider>
-
-                    <p classname='terms-and-conditions'>
-                        If you are already opted-in you will receive updates by electronic means (email, SMS, etc.) about events, activities, news, products and special offers from the organisers, sponsors, and/or venue of this event.
-                        <br />
-                        If you want to receive updates or manage your preference, go to My Profile. You can unsubscribe at any time by contacting the event partner.
+            <div>
+                <div className='centered-container'>
+                    <p align="center">
+                    <span style={{ fontSize: '50px', userSelect: 'none' }}>
+                    <Zalgo className='verification' textData={verificationText} glitchParams={param}/>
+                    </span>
                     </p>
+                    <p align="center">Please enter the verification code 
+                        <YourComponent/>
+                    </p>
+                    <p align="center">
+                        The verification code consists of only alphabetic letters and can be refreshed by clicking the on its image
+                        <br/>
+                        Please do not operate on more than one window and submit this page as soon as possible to avoid verification failure
+                    </p>
+                </div>
+
+                <Divider/>
+
+                <p classname='terms-and-conditions'>
+                    If you are already opted-in you will receive updates by electronic means (email, SMS, etc.) about events, activities, news, products and special offers from the organisers, sponsors, and/or venue of this event.
+                    <br />
+                    If you want to receive updates or manage your preference, go to My Profile. You can unsubscribe at any time by contacting the event partner.
+                </p>
 
 
-                    <FormControlLabel 
-                        control={<Checkbox />}
-                        label={
+                <FormControlLabel 
+                    control={<Checkbox />}
+                    label={
                         <Typography sx={{ fontWeight: "bold" }}>
                         I hereby acknowledge that I have read and agreed to Purchase Policy and the terms and conditions of this event 
                         (including the Exchange and Refund Policy, Admission Policy and Conditions of Entry for the event), 
                         and authorize Ticketmaster to collect, process, utilize and internationally transmit my personal data in accordance 
                         with the Privacy Policy and within the scope of specific purposes set forth therein.
                         </Typography>
-                        }
-                    />
-                </div>
-
-            ) : (
-                <div>
-                    <p>Verification successful! You are not a bot.</p>
-                </div>
-            )}
+                    }
+                />
+            </div>
         </div>
     );
 };
