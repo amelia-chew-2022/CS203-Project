@@ -60,6 +60,12 @@ export default function SeatSelection() {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const updateSelectedSeats = async () => {
+    // Check if no seats are selected
+  if (selectedSeats.length === 0) {
+    alert("Please select at least one seat before continuing.");
+    return; // Exit the function early if no seats are selected
+  }
+
     let totalPrice = 0; // Temporary variable to hold the calculation
     let transactionId = 0;
     // Loop through selected seats to calculate the total price
