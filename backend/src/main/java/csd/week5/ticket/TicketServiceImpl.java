@@ -3,18 +3,19 @@ package csd.week5.ticket;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
-
-import csd.week5.transaction.Transaction;
+import csd.week5.transaction.*;
 import csd.week5.user.*;
 
 @Service
 public class TicketServiceImpl implements TicketService {
 
     private TicketRepository tickets;
+    private TransactionRepository transactionRepository;
     // private UserRepository users;
 
-    public TicketServiceImpl(TicketRepository tickets) {
+    public TicketServiceImpl(TicketRepository tickets,TransactionRepository transactionRepository) {
         this.tickets = tickets;
+        this.transactionRepository=transactionRepository;
         // this.users = users;
     }
 
@@ -58,12 +59,22 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public Ticket updateAvailabilityById(Long id, Boolean available) {
+    public Ticket updateAvailabilityById(Long id, Boolean available, Long transactionId) {
         return tickets.findById(id).map(ticket -> {
             ticket.setAvailable(available);
+            
+            if (transactionId != null) {
+                // Fetch the transaction from the database
+                Transaction transaction = transactionRepository.findById(transactionId).orElse(null);
+                ticket.setTransaction(transaction); // Now we directly set the Transaction object
+            } else {
+                ticket.setTransaction(null);
+            }
+            
             return tickets.save(ticket);
         }).orElse(null);
     }
+
 
     // commented our buyTicket since availability will be updated in
     // TransactionServiceImpl with the method addTransaction

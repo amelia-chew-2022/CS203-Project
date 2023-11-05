@@ -6,6 +6,8 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../../components/navigation/NavBar";
+import Footer from "../../components/footer/Footer";
 
 export default function SeatSelection() {
   const [buttons, setButtons] = useState([]);
@@ -35,16 +37,17 @@ export default function SeatSelection() {
     updatedSeat.available = !updatedSeat.available;
 
     const updatedTicketData = {
-      Available: false,
+      IsAvailable: false,
+      transaction_id: transactionId,
     };
 
-    console.log(updatedTicketData.transaction_Id);
+    //console.log(updatedTicketData.transaction_Id);
     // Send a PUT request to update the seat's 'available' property in the database
     axios
       .put(
         `http://localhost:8080/tickets/updateAvailability/${buttons[rowIndex][colIndex].id}`,
         updatedTicketData,
-        
+
         {
           headers: { "Content-Type": "application/json" },
         }
@@ -99,12 +102,16 @@ export default function SeatSelection() {
         selectedSeats.forEach((seat) => {
           handleUpdateClick(seat.row, seat.col, createdTransactionId);
         });
+        navigate("/checkout");
       } else {
         console.error("Transaction creation failed:", response);
       }
     } catch (error) {
-      console.error("Error creating transaction:", error.response || error.message);
-    };
+      console.error(
+        "Error creating transaction:",
+        error.response || error.message
+      );
+    }
 
     selectedSeats.forEach((seat) => {
       handleUpdateClick(seat.row, seat.col, transactionId);
@@ -136,11 +143,12 @@ export default function SeatSelection() {
     }
 
     //Calculate total price of seat selected
-    function calculateTotalPrice(selectedSeats) { }
+    function calculateTotalPrice(selectedSeats) {}
   };
 
   return (
     <>
+      <NavBar></NavBar>
       <div
         style={{
           display: "flex",
@@ -343,6 +351,7 @@ export default function SeatSelection() {
             Update Selected Seats
           </Button>
         </div>
+        <Footer/>
       </div>
     </>
   );

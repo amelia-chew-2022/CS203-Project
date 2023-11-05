@@ -17,7 +17,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import csd.week5.ticket.Ticket;
@@ -49,6 +50,7 @@ public class Transaction {
     private Date transaction_date;
 
     @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Ticket> ticketList;
 
     public Transaction(double total_price, User user) {
