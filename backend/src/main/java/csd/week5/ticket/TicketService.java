@@ -24,4 +24,7 @@ public interface TicketService {
      */
     void deleteTicket(Long id);
     // Ticket buyTicket(Long id, Long userID);
+
+    List<Ticket> listTicketsByTransaction_Id(Long transactionId);
+    List<Ticket> listTicketsByTransaction_Id(Transaction transaction);
 }

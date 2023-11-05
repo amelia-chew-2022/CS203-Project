@@ -95,3 +95,40 @@ Authorization: Basic Nicholas bye123
 {
     "available" : true,
 }
+
+###
+Post http://localhost:8080/transactions
+Content-Type: application/json
+
+{
+    "total_price": 200,
+    "user_id": 2
+
+}
+
+###
+Put http://localhost:8080/tickets/updateAvailability/12
+Content-Type: application/json
+
+{
+    "IsAvailable": false,
+    "transaction_id": 1
+}
+
+###
+Get http://localhost:8080/getTickets/2
+
+###
+Post http://localhost:8080/registeriation
+Content-Type: application/json
+
+{
+    "username": "Janaaaaa",
+    "password": "goodpassword",
+    "email": "jana@gmail.com",
+    "address": "SMU building",
+    "phone_num": "32165498"
+}
+
+
+

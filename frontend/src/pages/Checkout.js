@@ -17,17 +17,18 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import Stack from '@mui/material/Stack';
 import { Link } from 'react-router-dom';
 import Verification from "./checkoutforms/Verification"
+import { useParams } from 'react-router-dom';
 
 const steps = ["Verification" ,"Payment Details", "Order Summary"]; 
 
-function getStepContent(step) {
+function getStepContent(step,transactionId) {
   switch (step) {
     case 0:
         return <Verification />; 
     case 1:
         return <AddressForm />; 
     case 2:
-        return <Review />;
+        return <Review transactionId={transactionId} />;
     default:
         throw new Error('Unknown step');
   }
@@ -78,6 +79,9 @@ const breadcrumbs = [
 ];
 
 export default function Checkout() {
+
+  let { transactionId } = useParams();
+
     const [activeStep, setActiveStep] = React.useState(0);
 
     const handleNext = () => {
@@ -150,7 +154,7 @@ export default function Checkout() {
                 </React.Fragment>
               ) : (
                 <React.Fragment>
-                  {getStepContent(activeStep)}
+                  {getStepContent(activeStep,transactionId)}
                   <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                     {activeStep !== 0 && (
                       <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>

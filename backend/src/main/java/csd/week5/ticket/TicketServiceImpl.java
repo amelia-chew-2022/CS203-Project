@@ -24,10 +24,14 @@ public class TicketServiceImpl implements TicketService {
         return tickets.findAll();
     }
 
-    // @Override
-    public List<Ticket> listTicketsByTransaction_Id(Transaction transaction) {
-        return tickets.findAllTicketsByTransaction(transaction);
+
+    @Override
+    public List<Ticket> listTicketsByTransaction_Id(Long transactionId) {
+        return tickets.findAllTicketsByTransactionId(transactionId);
     }
+
+
+    
 
     @Override
     public Ticket getTicket(Long id) {
@@ -75,6 +79,12 @@ public class TicketServiceImpl implements TicketService {
         }).orElse(null);
     }
 
+    @Override
+    public List<Ticket> listTicketsByTransaction_Id(Transaction transaction) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'listTicketsByTransaction_Id'");
+    }
+
 
     // commented our buyTicket since availability will be updated in
     // TransactionServiceImpl with the method addTransaction
@@ -88,3 +98,4 @@ public class TicketServiceImpl implements TicketService {
     // });
     // return ticket;
 }
+

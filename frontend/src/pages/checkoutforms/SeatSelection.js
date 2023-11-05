@@ -96,13 +96,13 @@ export default function SeatSelection() {
       // Check if the transaction was created successfully
       if (response.status === 201) {
         // Set the transactionId with the one from the response
-        const createdTransactionId = response.data.id;
+         transactionId = response.data.id;
 
         // Now update each selected seat with the created transaction ID
         selectedSeats.forEach((seat) => {
-          handleUpdateClick(seat.row, seat.col, createdTransactionId);
+          handleUpdateClick(seat.row, seat.col, transactionId);
         });
-        navigate("/checkout");
+        navigate(`/checkout/${transactionId}`);
       } else {
         console.error("Transaction creation failed:", response);
       }
