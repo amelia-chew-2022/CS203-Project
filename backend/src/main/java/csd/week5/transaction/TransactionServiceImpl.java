@@ -129,7 +129,8 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public void deleteTransaction(Long id) {
         Transaction transaction = Transactions.findById(id).orElse(null);
-        List<Ticket> ticketList = tickets.findAllTicketsByTransaction(transaction);
+        // List<Ticket> ticketList = tickets.findAllTicketsByTransaction(transaction);
+        List<Ticket> ticketList = tickets.findAllTicketsByTransactionId(transaction.getId());
 
         
 
