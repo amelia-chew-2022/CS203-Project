@@ -51,9 +51,9 @@ public class TransactionController {
     } */
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/transactions")
-    public Transaction addTransaction(@Valid @RequestBody Transaction Transaction) {
-        return TransactionService.addTransaction(Transaction);
+    @PostMapping("/Transactions")
+    public Transaction createTransaction(@Valid @RequestBody TransactionRequest TransactionRequest) {
+        return TransactionService.createTransaction(TransactionRequest);
     }
 
     // @PutMapping("/Transactions/{id}")

@@ -9,6 +9,7 @@ import Registration from './pages/Registration';
 import EventInfoError from './pages/EventInfoError';
 import EventInfo1 from './pages/EventInfo1';
 import SeatSelection from './pages/checkoutforms/SeatSelection'
+import Logout from './pages/Logout';
 
 class App extends Component {
     render() {
@@ -26,6 +27,7 @@ class App extends Component {
                     <Route path="/checkout" element={<Checkout/>}/>
                     <Route path="/" element={<Navigate to="/home" />} />
                     <Route path="/seatSelection" element={<SeatSelection/>}/>
+                    <Route path = "/logout" element = {<Logout/>}></Route>
                 </Routes>
             </Router>
         );

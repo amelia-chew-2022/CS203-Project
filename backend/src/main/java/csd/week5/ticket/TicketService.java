@@ -23,6 +23,5 @@ public interface TicketService {
      * @param id
      */
     void deleteTicket(Long id);
-
     // Ticket buyTicket(Long id, Long userID);
 }

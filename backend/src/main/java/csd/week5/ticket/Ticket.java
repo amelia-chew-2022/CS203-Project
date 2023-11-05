@@ -55,8 +55,6 @@ public class Ticket {
     @JoinColumn(name = "transaction_id", nullable = true)
     private Transaction transaction;
 
-    
-
     public Ticket(String title, String ticket_number, String seat_number, int unit_price, boolean available) {
         this.title = title;
         this.ticket_number = ticket_number;

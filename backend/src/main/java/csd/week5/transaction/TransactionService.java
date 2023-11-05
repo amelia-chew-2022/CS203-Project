@@ -17,6 +17,7 @@ public interface TransactionService {
 
     Transaction confirmTransaction(Long id);
 
+    Transaction createTransaction(TransactionRequest transactionRequest);
     // Transaction updateTransaction(Long id, Transaction book);
 
     boolean isTransactionExpired(Transaction transaction);
