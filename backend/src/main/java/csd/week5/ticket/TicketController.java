@@ -76,4 +76,10 @@ public class TicketController {
     // public void buyTicket(@PathVariable Long id, @PathVariable Long userID){
     // ticketService.buyTicket(id, userID);
     // }
+
+    @GetMapping("/getTickets/{transactionId}") 
+    public List<Ticket> getTickets(@PathVariable long transactionId) {
+        return ticketService.listTicketsByTransaction_Id(transactionId);
+    }
+    
 }

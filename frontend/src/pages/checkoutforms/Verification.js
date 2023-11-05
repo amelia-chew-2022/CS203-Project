@@ -29,45 +29,24 @@ function Verification() {
         }
         setVerificationText(generatedText);
     };
+
     const param = {
         topGlitchAmount: () => Math.ceil(2 * Math.random()),
         midGlitchAmount: () => Math.ceil(2 * Math.random()),
         btmGlitchAmount: () => Math.ceil(2 * Math.random()),
     };
 
-    function Checkboxes() {
-        const handleCheckboxChange = () => {
-            // Toggle the state between checked and unchecked
-            setIsChecked(!isChecked);
-        };
-
-        const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
-        return (
-            <div>
-                <Checkbox
-                    {...label}
-                    checked={isChecked}
-                    onChange={handleCheckboxChange}
-                />
-            </div>
-        );
-    }
-
     const handleInputChange = (e) => {
         setUserInput(e.target.value);
     };
 
     const verifyBot = () => {
-        // In a real implementation, you would send the userInput to the server for verification.
-        // For simplicity, we'll check it locally here.
         if (userInput === verificationText && isChecked) {
             setIsVerified(true);
         } else {
             setIsVerified(false);
         }
     };
-
 
     function YourComponent() {
         const [userInput, setUserInput] = useState('');
@@ -95,15 +74,11 @@ function Verification() {
         );
       };
 
-      
-
     return (
         <div>
             {!isVerified ? (
                 <div>
                     <div className='centered-container'>
-
-                        {/* <button onClick={generateVerificationText}>Generate Image</button> */}
                         <p align="center">
                         <span style={{ fontSize: '50px', userSelect: 'none' }}>
                         <Zalgo className='verification' textData={verificationText} glitchParams={param}/>
@@ -131,7 +106,7 @@ function Verification() {
 
 
                     <FormControlLabel 
-                        control={<Checkboxes />}
+                        control={<Checkbox />}
                         label={
                         <Typography sx={{ fontWeight: "bold" }}>
                         I hereby acknowledge that I have read and agreed to Purchase Policy and the terms and conditions of this event 
@@ -146,7 +121,6 @@ function Verification() {
             ) : (
                 <div>
                     <p>Verification successful! You are not a bot.</p>
-                    {/* You can show additional content or allow the user to proceed here */}
                 </div>
             )}
         </div>
@@ -154,4 +128,3 @@ function Verification() {
 };
 
 export default Verification
-

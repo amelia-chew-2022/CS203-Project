@@ -29,18 +29,6 @@ const NavBar = ({ authenticated = false }) => {
             <img src={Logo} alt="Logo"/>
             </Link>
 
-            {/* {authenticated ? ( */}
-            <Link to="/logout">
-            <Button 
-                size="large"
-                color="secondary"
-                startIcon={<LogoutIcon/>}
-            >
-                Logout
-            </Button>
-            </Link>
-            {/* ) : ( */}
-            <>
             <Link to="/login">
             <Button 
                 size="large"
@@ -60,8 +48,16 @@ const NavBar = ({ authenticated = false }) => {
                 Registration
             </Button>
             </Link>
-            </>
-            {/* )} */}
+
+            <Link to="/logout">
+            <Button 
+                size="large"
+                color="secondary"
+                startIcon={<LogoutIcon/>}
+            >
+                Logout
+            </Button>
+            </Link>
             </Toolbar>
             </Container>
         </AppBar>

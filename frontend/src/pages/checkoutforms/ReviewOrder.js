@@ -1,9 +1,10 @@
-import * as React from 'react';
-import Typography from '@mui/material/Typography';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import Grid from '@mui/material/Grid';
+import Typography from "@mui/material/Typography";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import Grid from "@mui/material/Grid";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 // import {selectedSeats} from '../../components/seatselect/ButtonGrid';
 
@@ -12,49 +13,60 @@ import Grid from '@mui/material/Grid';
 // TODO: change all hardcoded text into the tickets selected in the transaction
 const products = [
   {
-    name: 'Product 1',
-    desc: 'A nice thing',
-    price: '$9.99',
+    name: "Product 1",
+    desc: "A nice thing",
+    price: "$9.99",
   },
   {
-    name: 'Product 2',
-    desc: 'Another thing',
-    price: '$3.45',
+    name: "Product 2",
+    desc: "Another thing",
+    price: "$3.45",
   },
   {
-    name: 'Product 3',
-    desc: 'Something else',
-    price: '$6.51',
+    name: "Product 3",
+    desc: "Something else",
+    price: "$6.51",
   },
   {
-    name: 'Product 4',
-    desc: 'Best thing of all',
-    price: '$14.11',
+    name: "Product 4",
+    desc: "Best thing of all",
+    price: "$14.11",
   },
-  { name: 'Shipping', desc: '', price: 'Free' },
+  { name: "Shipping", desc: "", price: "Free" },
 ];
 
-const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
+const addresses = ["1 MUI Drive", "Reactville", "Anytown", "99999", "USA"];
 const payments = [
-  { name: 'Card type', detail: 'Visa' },
-  { name: 'Card holder', detail: 'Mr John Smith' },
-  { name: 'Card number', detail: 'xxxx-xxxx-xxxx-1234' },
-  { name: 'Expiry date', detail: '04/2024' },
+  { name: "Card type", detail: "Visa" },
+  { name: "Card holder", detail: "Mr John Smith" },
+  { name: "Card number", detail: "xxxx-xxxx-xxxx-1234" },
+  { name: "Expiry date", detail: "04/2024" },
 ];
 
-export default function Review() {
+export default function Review({ transactionId }) {
+  const [tickets, setTickets] = useState([]);
+
+  useEffect(() => {
+    axios.get(`/tickets/${transactionId}`)
+         .then((response) => {
+             // assuming your state is named `tickets`
+             setTickets(response.data);
+             console.log(response.data)
+         })
+         .catch((error) => {
+             console.error("Error fetching tickets:", error);
+         });
+}, [transactionId]);
+  
+
+
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Order summary
       </Typography>
       <List disablePadding>
-        {products.map((product) => (
-          <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={product.name} secondary={product.desc} />
-            <Typography variant="body2">{product.price}</Typography>
-          </ListItem>
-        ))}
+       
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
@@ -68,7 +80,7 @@ export default function Review() {
             Shipping
           </Typography>
           <Typography gutterBottom>John Smith</Typography>
-          <Typography gutterBottom>{addresses.join(', ')}</Typography>
+          <Typography gutterBottom>{addresses.join(", ")}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
