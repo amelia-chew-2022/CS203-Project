@@ -20,7 +20,7 @@ public class EmailController {
     private TicketService ticketService;
     private TransactionService transactionService;
 
-    @PostMapping("/registeriation")
+    @PostMapping("/registration")
     public ResponseEntity<String> registerUser(@RequestBody User user) {
         // Assume User is a POJO with a username, email, etc.
 

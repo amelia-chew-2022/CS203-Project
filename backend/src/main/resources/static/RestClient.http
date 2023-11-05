@@ -119,7 +119,7 @@ Content-Type: application/json
 Get http://localhost:8080/getTickets/2
 
 ###
-Post http://localhost:8080/registeriation
+Post http://localhost:8080/registration
 Content-Type: application/json
 
 {
