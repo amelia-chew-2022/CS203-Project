@@ -40,7 +40,15 @@ function handleClick(event) {
   event.preventDefault();
   console.info("You clicked a breadcrumb.");
 }
-
+function MySubComponent() {
+  // You can use hooks and other logic here
+  return (
+    <div>
+      {/* Your JSX goes here */}
+      This is a subcomponent!
+    </div>
+  );
+}
 const breadcrumbs = [
   <Link underline="hover" key="1" color="inherit" onClick={handleClick}>
     <Link to="/">Home</Link>
@@ -69,7 +77,6 @@ const breadcrumbs = [
 ];
 
 export default function Checkout() {
-
   let { transactionId } = useParams();
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -91,7 +98,7 @@ export default function Checkout() {
     <React.Fragment>
       <CssBaseline />
       <NavBar></NavBar>
-
+      
       {/* breadcrumbs  */}
       <div
         style={{
@@ -145,7 +152,11 @@ export default function Checkout() {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {getStepContent(activeStep, transactionId,handleVerificationSuccess)}
+              {getStepContent(
+                activeStep,
+                transactionId,
+                handleVerificationSuccess
+              )}
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>

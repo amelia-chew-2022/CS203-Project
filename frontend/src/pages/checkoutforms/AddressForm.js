@@ -46,6 +46,8 @@ export default function AddressForm() {
             autoComplete="cc-name"
             variant="standard"
             error={!fieldValidations.cardName}
+            value="John Doe" // The hardcoded value
+            InputLabelProps={{ shrink: true }} // Ensures the label moves up
             onBlur={(e) => validateField('cardName', e.target.value)}
           />
         </Grid>
@@ -57,6 +59,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="cc-number"
             variant="standard"
+            value="4212 1215 1215 1256" // The hardcoded value
+            InputLabelProps={{ shrink: true }} // Ensures the label moves up
             error={!fieldValidations.cardNumber}
             onBlur={(e) => validateField('cardNumber', e.target.value)}
           />
@@ -69,6 +73,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="cc-exp"
             variant="standard"
+            value="12/23" // The hardcoded value
+            InputLabelProps={{ shrink: true }} // Ensures the label moves up
             error={!fieldValidations.expDate}
             onBlur={(e) => validateField('expDate', e.target.value)}
           />
@@ -82,6 +88,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="cc-csc"
             variant="standard"
+            value="123" // The hardcoded value
+            InputLabelProps={{ shrink: true }} // Ensures the label moves up
             error={!fieldValidations.cvv}
             onBlur={(e) => validateField('cvv', e.target.value)}
           />
@@ -109,6 +117,8 @@ export default function AddressForm() {
             autoComplete="given-name"
             variant="standard"
             error={!fieldValidations.firstName}
+            value="John" // The hardcoded value
+            InputLabelProps={{ shrink: true }} // Ensures the label moves up
             onBlur={(e) => validateField('firstName', e.target.value)}
           />
         </Grid>
@@ -121,6 +131,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="family-name"
             variant="standard"
+            value="Doe" // The hardcoded value
+            InputLabelProps={{ shrink: true }} // Ensures the label moves up
             error={!fieldValidations.lastName}
             onBlur={(e) => validateField('lastName', e.target.value)}
           />
@@ -134,6 +146,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
+            value="Random St 1 #01-123" // The hardcoded value
+            InputLabelProps={{ shrink: true }} // Ensures the label moves up
             error={!fieldValidations.address1}
             onBlur={(e) => validateField('address1', e.target.value)}
           />
@@ -157,6 +171,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping address-level2"
             variant="standard"
+            value="Singapore" // The hardcoded value
+            InputLabelProps={{ shrink: true }} // Ensures the label moves up
             error={!fieldValidations.city}
             onBlur={(e) => validateField('city', e.target.value)}
           />
@@ -178,6 +194,8 @@ export default function AddressForm() {
             label="Zip / Postal code"
             fullWidth
             autoComplete="shipping postal-code"
+            value="521123" // The hardcoded value
+            InputLabelProps={{ shrink: true }} // Ensures the label moves up
             variant="standard"
             error={!fieldValidations.zip}
             onBlur={(e) => validateField('zip', e.target.value)}
@@ -192,6 +210,8 @@ export default function AddressForm() {
             fullWidth
             autoComplete="shipping country"
             variant="standard"
+            value="Singapore" // The hardcoded value
+            InputLabelProps={{ shrink: true }} // Ensures the label moves up
             error={!fieldValidations.country}
             onBlur={(e) => validateField('country', e.target.value)}
           />

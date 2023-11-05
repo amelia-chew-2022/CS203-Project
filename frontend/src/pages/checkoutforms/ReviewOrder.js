@@ -36,12 +36,12 @@ const products = [
   { name: "Shipping", desc: "", price: "Free" },
 ];
 
-const addresses = ["1 MUI Drive", "Reactville", "Anytown", "99999", "USA"];
+const addresses = ["Random St 1", " #01-123", "", "521123", "Singapore"];
 const payments = [
   { name: "Card type", detail: "Visa" },
-  { name: "Card holder", detail: "Mr John Smith" },
-  { name: "Card number", detail: "xxxx-xxxx-xxxx-1234" },
-  { name: "Expiry date", detail: "04/2024" },
+  { name: "Card holder", detail: "Mr John Doe" },
+  { name: "Card number", detail: "xxxx-xxxx-xxxx-1256" },
+  { name: "Expiry date", detail: "12/2023" },
 ];
 
 export default function Review({ transactionId }) {
@@ -96,7 +96,7 @@ const totalPrice = tickets.reduce((total, ticket) => {
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Shipping
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
+          <Typography gutterBottom>John Doe</Typography>
           <Typography gutterBottom>{addresses.join(", ")}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>

@@ -6,6 +6,9 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../../components/navigation/NavBar";
+import Footer from "../../components/footer/Footer";
+import CssBaseline from "@mui/material/CssBaseline";
 
 export default function SeatSelection() {
   const [buttons, setButtons] = useState([]);
@@ -152,7 +155,11 @@ export default function SeatSelection() {
   };
 
   return (
-    <>
+    <React.Fragment>
+    <div id="back-to-top-anchor" />
+
+    <CssBaseline />
+    <NavBar></NavBar>
       <div
         style={{
           display: "flex",
@@ -161,7 +168,7 @@ export default function SeatSelection() {
         }}
       >
         {/* Image on the left */}
-        <div style={{ marginRight: "20px" }}>
+        <div style={{ marginRight: "20px",marginTop: "20px" }}>
           {/* <FieldsColumn> */}
           <img src={vibes} alt="img" width="flex" height="110" />
           {/* </FieldsColumn> */}
@@ -213,6 +220,7 @@ export default function SeatSelection() {
         style={{
           backgroundColor: "#222222",
           display: "flex",
+        
           justifyContent: "center",
           alignItems: "center",
           minHeight: "10vh", // Use minHeight to cover the entire viewport height
@@ -251,8 +259,9 @@ export default function SeatSelection() {
                       width: "60px",
                       height: "60px",
                       backgroundColor: isSeatSelected(rowIndex, colIndex)
-                        ? "red" // Change the background color when selected
-                        : "green", // Default background color
+                        ? "green" // Change the background color when selected
+                        : "#5522CC", // Default background color
+                      borderRadius: "20px 20px 0 0", // Half-circle on top
                     }}
                     onClick={() => handleButtonClick(rowIndex, colIndex)}
                     disabled={!seat.available} // Adjust based on your logic
@@ -292,7 +301,7 @@ export default function SeatSelection() {
             style={{
               width: "20px",
               height: "20px",
-              backgroundColor: "#626262",
+              backgroundColor: "#5522CC",
               marginRight: "5px",
             }}
           ></div>
@@ -305,7 +314,7 @@ export default function SeatSelection() {
             style={{
               width: "20px",
               height: "20px",
-              backgroundColor: "#222222",
+              backgroundColor: "#5522CC",
               marginRight: "5px",
             }}
           ></div>
@@ -355,7 +364,9 @@ export default function SeatSelection() {
             Update Selected Seats
           </Button>
         </div>
-      </div>
-    </>
+        <Footer/>
+      </div> 
+   
+      </React.Fragment>
   );
 }
