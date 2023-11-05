@@ -4,32 +4,28 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:3030")
+@CrossOrigin(origins = "http://localhost:3000")
 
 @RestController
 public class UserController {
-    private UserRepository users;
-    private BCryptPasswordEncoder encoder;
+    private UserService userService;
 
-    public UserController(UserRepository users, BCryptPasswordEncoder encoder){
-        this.users = users;
-        this.encoder = encoder;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @GetMapping("/users")
     public List<User> getUsers() {
-        return users.findAll();
+        return userService.listUsers();
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/users")
-    public User addUser(@Valid @RequestBody User user){
-        user.setPassword(encoder.encode(user.getPassword()));
-        return users.save(user);
+    public User createUser(@Valid @RequestBody User user) {
+        return userService.addUser(user);
     }
 
-    
-   
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,19 +22,20 @@ import org.springframework.web.bind.annotation.*;
 public class TicketController {
     private TicketService ticketService;
 
-    public TicketController(TicketService bs){
+    public TicketController(TicketService bs) {
         this.ticketService = bs;
     }
 
     @GetMapping("/tickets")
-    public List<Ticket> getTickets(){
+    public List<Ticket> getTickets() {
         return ticketService.listTickets();
     }
 
     @GetMapping("/tickets/{id}")
-    public Ticket getTicket(@PathVariable Long id){
+    public Ticket getTicket(@PathVariable Long id) {
         Ticket ticket = ticketService.getTicket(id);
-        if(ticket == null) throw new TicketNotFoundException(id);
+        if (ticket == null)
+            throw new TicketNotFoundException(id);
         return ticketService.getTicket(id);
 
     }
@@ -47,35 +47,35 @@ public class TicketController {
     }
 
     @PutMapping("/tickets/{id}")
-    public Ticket updateTicket(@PathVariable Long id, @Valid @RequestBody Ticket newTicketInfo){
+    public Ticket updateTicket(@PathVariable Long id, @Valid @RequestBody Ticket newTicketInfo) {
         Ticket ticket = ticketService.updateTicket(id, newTicketInfo);
-        if(ticket == null) throw new TicketNotFoundException(id);
-        
+        if (ticket == null)
+            throw new TicketNotFoundException(id);
+
         return ticket;
     }
 
     @PutMapping("/tickets/updateAvailability/{id}")
-    public Ticket updateAvailabilityById(@PathVariable Long id, @Valid @RequestBody Boolean available){
+    public Ticket updateAvailabilityById(@PathVariable Long id, @Valid @RequestBody Boolean available) {
         Ticket ticket = ticketService.updateAvailabilityById(id, available);
-        if(ticket == null) throw new TicketNotFoundException(id);
-        
-        return ticket;
-    }
-    
-    @DeleteMapping("/tickets/{id}")
-    public void deleteTicket(@PathVariable Long id){
-        try{
-            ticketService.deleteTicket(id);
-         }catch(EmptyResultDataAccessException e) {
+        if (ticket == null)
             throw new TicketNotFoundException(id);
-         }
-    }
-
-    @PutMapping("/tickets/{id}/{userID}/buy")
-    public Ticket buyTicket(@PathVariable Long id, @PathVariable Long userID){
-        Ticket ticket = ticketService.buyTicket(id, userID);
-        if(ticket == null) throw new TicketNotFoundException(id);
 
         return ticket;
     }
+
+    @DeleteMapping("/tickets/{id}")
+    public void deleteTicket(@PathVariable Long id) {
+        try {
+            ticketService.deleteTicket(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new TicketNotFoundException(id);
+        }
+    }
+
+
+    // @GetMapping("/tickets/{id}/{userID}/buy")
+    // public void buyTicket(@PathVariable Long id, @PathVariable Long userID){
+    // ticketService.buyTicket(id, userID);
+    // }
 }

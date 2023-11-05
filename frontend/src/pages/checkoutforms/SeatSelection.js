@@ -1,16 +1,140 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import vibes from "../../assets/vibes.png";
-import Dropdown from "../../components/seatselect/DropDown";
-import ButtonGrid from "../../components/seatselect/ButtonGrid";
 import { Container } from "@mui/system";
 import Typography from "@mui/material/Typography";
-function SeatSelect() {
-  const [displayText, setGridTable] = useState(""); // State for the text to be displayed
+import axios from "axios";
+import Button from "@mui/material/Button";
+import Grid from "@mui/material/Grid";
+import { useNavigate } from "react-router-dom";
 
-  const [clickCount, setClickCount] = useState(""); // State for the text to be displayed
-  const handleButtonClick = (data) => {
-    setClickCount(data.clickCount);
-    setGridTable(data.gridTable);
+export default function SeatSelection() {
+  const [buttons, setButtons] = useState([]);
+  const [selectedSeats, setSelectedSeats] = useState([]);
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/tickets")
+      .then((res) => {
+        const data = res.data;
+        // Ensure that data is correctly structured as a 2D array with 6 rows
+        const formattedData = [];
+        for (let i = 0; i < 6; i++) {
+          formattedData.push(data.slice(i * 6, (i + 1) * 6));
+        }
+        setButtons(formattedData);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const handleUpdateClick = (rowIndex, colIndex, transactionId) => {
+    const updatedButtons = [...buttons]; // Create a copy of the buttons array
+    const updatedSeat = updatedButtons[rowIndex][colIndex];
+
+    // Toggle the 'available' property for the selected seat
+    updatedSeat.available = !updatedSeat.available;
+
+    const updatedTicketData = {
+      Available: false,
+      transaction_Id: transactionId,
+    };
+    console.log(updatedTicketData.transaction_Id);
+    // Send a PUT request to update the seat's 'available' property in the database
+    axios
+      .put(
+        `http://localhost:8080/tickets/updateAvailability/${updatedSeat.id}`,
+        updatedTicketData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+      .then((res) => {
+        // If the update is successful, update the state with the new button data
+        setButtons(updatedButtons);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const updateSelectedSeats = async () => {
+    let totalPrice = 0; // Temporary variable to hold the calculation
+    let transactionId=0;
+    // Loop through selected seats to calculate the total price
+    selectedSeats.forEach((seat) => {
+      const ticket = buttons[seat.row][seat.col]; // Get the full seat object
+   
+      totalPrice += ticket.unit_price; // Add the price of each seat to the local total
+
+      console.log(totalPrice);
+    });
+  
+    /// Assuming `selectedSeats` is an array that contains the selected seat details
+    // and `currentUser` is an object that contains the ID of the currently logged in user.
+
+    // Create a transaction object
+    const transactionData = {
+      total_price: totalPrice,
+      User_Id: 2,
+    };
+
+    console.log(transactionData);
+    try {
+      // Send a POST request to the backend to add the transaction
+      const response = await axios.post(
+        "http://localhost:8080/transactions/",
+        transactionData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+
+      // Check if the transaction was created successfully
+      if (response.status === 201) {
+        console.log("Transaction created:", response.data);
+        transactionId = response.data.id; // Here's where you get the transaction ID
+        navigate("/checkout"); // Navigate to the checkout page or any other page
+      } else {
+        console.error("Transaction creation failed:", response);
+      }
+    } catch (error) {
+      console.error(
+        "Error creating transaction:",
+        error.response || error.message
+      );
+    }
+
+    selectedSeats.forEach((seat) => {
+      handleUpdateClick(seat.row, seat.col, transactionId);
+    });
+  };
+
+  const handleButtonClick = (rowIndex, colIndex) => {
+    toggleSeatSelection(rowIndex, colIndex);
+  };
+
+  const isSeatSelected = (rowIndex, colIndex) => {
+    return selectedSeats.some(
+      (seat) => seat.row === rowIndex && seat.col === colIndex
+    );
+  };
+
+  const toggleSeatSelection = (rowIndex, colIndex) => {
+    if (isSeatSelected(rowIndex, colIndex)) {
+      setSelectedSeats((prevSelectedSeats) =>
+        prevSelectedSeats.filter(
+          (seat) => seat.row !== rowIndex || seat.col !== colIndex
+        )
+      );
+    } else {
+      setSelectedSeats((prevSelectedSeats) => [
+        ...prevSelectedSeats,
+        { row: rowIndex, col: colIndex },
+      ]);
+    }
+
+    //Calculate total price of seat selected
+    function calculateTotalPrice(selectedSeats) {}
   };
 
   return (
@@ -24,19 +148,11 @@ function SeatSelect() {
       >
         {/* Image on the left */}
         <div style={{ marginRight: "20px" }}>
-          <div
-            style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "1rem",
-                margin: "1rem 0",
-            }}
-          >
-            <img src={vibes} alt="img" width="flex" height="110" />
-          </div>
+          {/* <FieldsColumn> */}
+          <img src={vibes} alt="img" width="flex" height="110" />
+          {/* </FieldsColumn> */}
         </div>
 
-        {/* Text box and dropdown to the right */}
         <div>
           {/* Text box */}
           <p>
@@ -44,12 +160,8 @@ function SeatSelect() {
               <b>Vibes</b>
             </Typography>
           </p>
-
-          {/* Dropdown box */}
           <p>
-            <div>
-              <Dropdown />
-            </div>
+            <div>Date: 4/10/20</div>
           </p>
         </div>
       </div>
@@ -110,27 +222,43 @@ function SeatSelect() {
         >
           <Typography variant="h4">STAGE</Typography>
         </div>
+      </div>
 
-        <ButtonGrid
-          onButtonClick={handleButtonClick}
-          style={{ marginBottom: "20px" }}
-        />
-        {clickCount > 0 && (
-          <div
-            style={{
-              backgroundColor: "lightgray",
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "50px",
-              fontSize: "18px", // Set the font size
-              fontWeight: "bold", // Set the font weight to bold
-            }}
-          >
-            You selected &nbsp; <b>{clickCount} </b>&nbsp;<p>tickets</p>
-          </div>
-        )}
+      {/*Button Grid*/}
+      <div style={{ backgroundColor: "#222222" }}>
+        <Grid container>
+          {buttons.map((row, rowIndex) => (
+            <Grid container item key={rowIndex} justifyContent="center">
+              {row.map((seat, colIndex) => (
+                <Grid item key={colIndex} style={{ margin: "5px" }}>
+                  <Button
+                    variant="contained"
+                    style={{
+                      width: "60px",
+                      height: "60px",
+                      backgroundColor: isSeatSelected(rowIndex, colIndex)
+                        ? "red" // Change the background color when selected
+                        : "green", // Default background color
+                    }}
+                    onClick={() => handleButtonClick(rowIndex, colIndex)}
+                    disabled={!seat.available} // Adjust based on your logic
+                  >
+                    {seat.seat_number}
+                  </Button>
+                </Grid>
+              ))}
+            </Grid>
+          ))}
+        </Grid>
+        {/*  <div>
+          <ul>
+            {selectedSeats.map((seat, index) => (
+              <li key={index}>
+                Row: {seat.row + 1}, Col: {seat.col + 1}
+              </li>
+            ))}
+          </ul>
+        </div> */}
       </div>
 
       {/* Legend */}
@@ -182,9 +310,7 @@ function SeatSelect() {
         </div>
       </div>
 
-      {/*Cat Prices not sure if we including this */}
-      <div className="Cat-Price">
-
+      <div className="Add-Info">
         <Container>
           <div>
             <p>
@@ -198,21 +324,24 @@ function SeatSelect() {
             </p>
           </div>
         </Container>
-        <Container>
-          <div className="Price-table">
-            {displayText && (
-              <div>
-                <Typography variant="h5" fontWeight="bold">
-                  Ticket Price
-                </Typography>
-                <p>{displayText}</p>
-              </div>
-            )}
-          </div>
-        </Container>
+
+        {/* Create a button to update the seat availability for selected seats */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            marginTop: "20px",
+          }}
+        >
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={updateSelectedSeats} // Call the updateSelectedSeats function
+          >
+            Update Selected Seats
+          </Button>
+        </div>
       </div>
     </>
   );
 }
-
-export default SeatSelect;

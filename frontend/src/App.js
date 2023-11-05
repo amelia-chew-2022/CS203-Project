@@ -8,6 +8,7 @@ import Error from './pages/Error';
 import Registration from './pages/Registration';
 import EventInfoError from './pages/EventInfoError';
 import EventInfo1 from './pages/EventInfo1';
+import SeatSelection from './pages/checkoutforms/SeatSelection'
 
 class App extends Component {
     render() {
@@ -17,13 +18,14 @@ class App extends Component {
                     <Route path="/home" element={<Home/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/registration" element={<Registration/>}/>
-                    <Route path="/eventinfo/:id" element={<EventInfo />}/>
+                    <Route path="/eventinfo" element={<EventInfo />}/>
                     <Route path="/eventinfo1/:id" element={<EventInfo1/>}/>
-                    <Route path="/eventinfo" element={<EventInfo/>}/>
+                    {/* <Route path="/eventinfo" element={<EventInfo/>}/> */}
                     <Route path = "/error" element = {<Error/>}/>
                     <Route path = "/eventinfo/notfound" element = {<EventInfoError/>}/>
                     <Route path="/checkout" element={<Checkout/>}/>
                     <Route path="/" element={<Navigate to="/home" />} />
+                    <Route path="/seatSelection" element={<SeatSelection/>}/>
                 </Routes>
             </Router>
         );

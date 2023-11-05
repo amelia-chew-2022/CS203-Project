@@ -10,18 +10,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.*;
-
 import csd.week5.ticket.*;
-import csd.week5.transaction.*;
+import csd.week5.transaction.Transaction;
 
 @Entity
 @Getter
@@ -42,50 +41,38 @@ public class User implements UserDetails {
 
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
-    @NotNull(message = "Username should not be null")
-    @Size(min = 5, max = 20, message = "Username should be between 5 and 20 characters")
+    // @NotNull(message = "Username should not be null")
+    // @Size(min = 5, max = 20, message = "Username should be between 5 and 20 characters")
     private String username;
 
     @NotNull(message = "Password should not be null")
     @Size(min = 8, message = "Password should be at least 8 characters")
     private String password;
 
-    @NotNull(message = "Authorities should not be null")
-    // We define two roles/authorities: ROLE_USER or ROLE_ADMIN
     private String authorities;
 
     @NotNull(message = "Email should not be null")
-    @Size(min = 8, message = "Email should be at least 8 characters")
+    @Email
     private String email;
-
-    // To delete
-    @NotNull(message = "Credit card number should not be null")
-    @Size(min = 8, message = "Credit card number should be 8 digits")
-    private String credit_card_num;
 
     @NotNull(message = "Address should not be null")
     @Size(min = 8, message = "Address should be at least 8 characters")
     private String address;
 
-    @NotNull(message = "Phone number should not be null")
-    @Size(min = 8, message = "Phone number should be at least 8 characters")
+    // @NotNull(message = "Phone number should not be null")
+    // @Size(min = 8, message = "Phone number should be at least 8 characters")
     private String phone_num;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Ticket> tickets;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Transaction> transactions;
 
-    public User(String username, String password, String authorities, String email, String credit_card_num,
-            String address, String phone_num) {
+
+    public User(String username, String password, String email, String address, String phone_num) {
         this.username = username;
         this.password = password;
-        this.authorities = authorities;
+        this.authorities = "ROLE_USER";
         this.email = email;
-        this.credit_card_num = credit_card_num;
         this.address = address;
         this.phone_num = phone_num;
     }
@@ -96,6 +83,10 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.asList(new SimpleGrantedAuthority(authorities));
+    }
+
+    public void setAdmin(User user){
+        user.authorities = "ROLE_ADMIN";
     }
 
     @Override
