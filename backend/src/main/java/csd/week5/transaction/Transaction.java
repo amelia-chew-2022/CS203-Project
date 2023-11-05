@@ -34,6 +34,7 @@ public class Transaction {
 
     @ManyToOne // Use @ManyToOne to create a many-to-one relationship with the User entity
     @JoinColumn(name = "user_id") // Specify the foreign key column name
+    @JsonIgnore
     private User user; // Change the user field to be of type User
 
     @NotBlank(message = "Transaction date should not be blank")

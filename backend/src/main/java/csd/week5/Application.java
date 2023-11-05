@@ -85,11 +85,15 @@ public class Application {
                                                 "23698745", "SMU building", "87654321"))
                                 .getUsername());
 
+                User newUser = new User("Random User", encoder.encode("password"), "ROLE_USER", "ruser@gmail.com",
+                                                "23698745", "SMU building", "87654321");
+                System.out.println("[Add user]: " + users.save(
+                                newUser)
+                                .getUsername());
+
                 // JPA transaction repository init
                 TransactionRepository transaction = ctx.getBean(TransactionRepository.class);
-                transaction.save(new Transaction(100.0, null, "here"));
-                // System.out.println("[Add transaction]: " + transaction.save(new
-                // Transaction("100","helllo","here")));
+                System.out.println("[Add transaction]: " + transaction.save(new Transaction(100, newUser,"01-01-2023")).getTransaction_date());
 
                 EventInfoRepository eventInfoRepository = ctx.getBean(EventInfoRepository.class);
 

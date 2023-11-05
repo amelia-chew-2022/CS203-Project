@@ -74,4 +74,29 @@ public class EventInfoServiceTest {
         verify(eventInfoRepo).findById(eventInfoId);
         verify(eventInfoRepo).save(eventInfo);
     }
+
+    @Test
+    void getEventInfo_Found_ReturnEventInfo() {
+        EventInfo eventInfo = new EventInfo("Twice", null, null, null, null, null);
+        Long id = 1L;
+
+        when(eventInfoRepo.findById(id)).thenReturn(Optional.of(eventInfo));
+
+        EventInfo getEventInfo = eventInfoService.getEventInfo(id);
+
+        assertEquals(eventInfo, getEventInfo);
+        verify(eventInfoRepo).findById(id);
+    }
+
+    @Test
+    void getEventInfo_NotFound_ReturnNull() {
+        Long id = 1L;
+
+        when(eventInfoRepo.findById(id)).thenReturn(Optional.empty());
+
+        EventInfo getEventInfo = eventInfoService.getEventInfo(id);
+
+        assertNull(getEventInfo);
+        verify(eventInfoRepo).findById(id);
+    }
 }
