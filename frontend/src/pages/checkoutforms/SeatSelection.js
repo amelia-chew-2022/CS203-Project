@@ -84,7 +84,7 @@ export default function SeatSelection() {
     try {
       // Send a POST request to the backend to add the transaction
       const response = await axios.post(
-        "http://localhost:8080/transactions",
+        "http://localhost:8080/Transactions",
         transactionData,
         {
           headers: { "Content-Type": "application/json" },
@@ -99,6 +99,7 @@ export default function SeatSelection() {
         // Now update each selected seat with the created transaction ID
         selectedSeats.forEach((seat) => {
           handleUpdateClick(seat.row, seat.col, transactionId);
+
         });
         navigate(`/checkout/${transactionId}`);
       } else {

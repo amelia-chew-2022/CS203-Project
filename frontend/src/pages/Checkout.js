@@ -25,12 +25,10 @@ const steps = ["Verification" ,"Payment Details", "Order Summary"];
 function getStepContent(step,transactionId) {
   switch (step) {
     case 0:
-        return <SeatSelection/>
-    case 1:
         return <Verification/>; 
-    case 2:
+    case 1:
         return <AddressForm />; 
-    case 3:
+    case 2:
         return <Review transactionId={transactionId} />;
     default:
         throw new Error('Unknown step');
@@ -84,7 +82,6 @@ const breadcrumbs = [
 export default function Checkout() {
 
   let { transactionId } = useParams();
-
     const [activeStep, setActiveStep] = React.useState(0);
 
     const handleNext = () => {
