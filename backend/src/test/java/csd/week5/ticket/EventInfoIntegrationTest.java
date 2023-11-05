@@ -20,14 +20,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import csd.week5.ticket.Ticket;
-import csd.week5.ticket.TicketRepository;
+import csd.week5.eventInfo.EventInfoRepository;
+import csd.week5.eventInfo.EventInfo;
+import csd.week5.eventInfo.EventInfoRepository;
 import csd.week5.user.User;
-import csd.week5.user.UserRepository;
+import csd.week5.user.*;
 
 /** Start an actual HTTP server listening at a random port*/
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-class TicketIntegrationTest {
+class EventInfoIntegrationTest {
 
 	@LocalServerPort
 	private int port;
@@ -43,7 +44,7 @@ class TicketIntegrationTest {
 	private TestRestTemplate restTemplate;
 
 	@Autowired
-	private TicketRepository tickets;
+	private EventInfoRepository eventInfoRepo;
 
 	@Autowired
 	private UserRepository users;
@@ -54,68 +55,68 @@ class TicketIntegrationTest {
 
 	@AfterEach
 	void tearDown(){
-		tickets.deleteAll();
+		eventInfoRepo.deleteAll();
 		users.deleteAll();
 	}
 
 	@Test
-	public void getTickets_Success() throws Exception {
-		URI uri = new URI(baseUrl + port + "/tickets");
-		tickets.save(new Ticket("BTS Concert", "123456789", "1k65cv", 100));
+	public void getEventInfoRepo_Success() throws Exception {
+		URI uri = new URI(baseUrl + port + "/home");
+		eventInfoRepo.save(new EventInfo("BTS Concert", null, "Testing", "Testing", "Testing", "Testing"));
 		
 		// Need to use array with a ReponseEntity here
-		ResponseEntity<Ticket[]> result = restTemplate.getForEntity(uri, Ticket[].class);
-		Ticket[] tickets = result.getBody();
+		ResponseEntity<EventInfo[]> result = restTemplate.getForEntity(uri, EventInfo[].class);
+		EventInfo[] eventInfoRepo = result.getBody();
 		
 		assertEquals(200, result.getStatusCode().value());
-		assertEquals(1, tickets.length);
+		assertEquals(1, eventInfoRepo.length);
 	}
 
 	@Test
-	public void getTicket_ValidTicketId_Success() throws Exception {
-		Ticket Ticket = new Ticket("BTS Concert", "123456789", "1k65cv", 100);
-		Long id = tickets.save(Ticket).getId();
-		URI uri = new URI(baseUrl + port + "/tickets/" + id);
+	public void getEventInfo_ValidEventInfoId_Success() throws Exception {
+		EventInfo EventInfo = new EventInfo("BTS Concert", null, "Testing", "Testing", "Testing", "Testing");
+		Long id = eventInfoRepo.save(EventInfo).getId();
+		URI uri = new URI(baseUrl + port + "/eventInfo/" + id);
 		
-		ResponseEntity<Ticket> result = restTemplate.getForEntity(uri, Ticket.class);
+		ResponseEntity<EventInfo> result = restTemplate.getForEntity(uri, EventInfo.class);
 			
 		assertEquals(200, result.getStatusCode().value());
-		assertEquals(Ticket.getTitle(), result.getBody().getTitle());
+		assertEquals(EventInfo.getEventName(), result.getBody().getEventName());
 	}
 
 	@Test
-	public void getTicket_InvalidTicketId_Failure() throws Exception {
-		URI uri = new URI(baseUrl + port + "/tickets/1");
+	public void getEventInfo_InvalidEventInfoId_Failure() throws Exception {
+		URI uri = new URI(baseUrl + port + "/eventInfo/1");
 		
-		ResponseEntity<Ticket> result = restTemplate.getForEntity(uri, Ticket.class);
+		ResponseEntity<EventInfo> result = restTemplate.getForEntity(uri, EventInfo.class);
 			
 		assertEquals(404, result.getStatusCode().value());
 	}
 
 	@Test
-	public void addTicket_Success() throws Exception {
-		URI uri = new URI(baseUrl + port + "/tickets");
-		Ticket Ticket = new Ticket("BTS Concert", "123456789", "1k65cv", 100);
+	public void addEventInfo_Success() throws Exception {
+		URI uri = new URI(baseUrl + port + "/eventInfo");
+		EventInfo EventInfo = new EventInfo("BTS Concert", null, "Testing", "Testing", "Testing", "Testing");
 		User admin = new User("admin", encoder.encode("goodpassword"), "admin@gmail.com", "SMU building", "12345678");
 		admin.setAdmin();
 		users.save(admin);
 
-		ResponseEntity<Ticket> result = restTemplate.withBasicAuth("admin", "goodpassword")
-										.postForEntity(uri, Ticket, Ticket.class);
+		ResponseEntity<EventInfo> result = restTemplate.withBasicAuth("admin", "goodpassword")
+										.postForEntity(uri, EventInfo, EventInfo.class);
 			
 		assertEquals(201, result.getStatusCode().value());
-		assertEquals(Ticket.getTitle(), result.getBody().getTitle());
+		assertEquals(EventInfo.getEventName(), result.getBody().getEventName());
 	}
 
 	/**
-	 * Integration tests for delete/update a Ticket.
+	 * Integration tests for delete/update a EventInfo.
 	 * For delete operation: there should be two tests for success and failure scenarios.
 	 * Similarly, there should be two tests for update operation.
 	 */
 	@Test
-	public void deleteTicket_ValidTicketId_Success() throws Exception {
-		Ticket Ticket = tickets.save(new Ticket("BTS Concert", "123456789", "1k65cv", 100));
-		URI uri = new URI(baseUrl + port + "/tickets/" + Ticket.getId().longValue());
+	public void deleteEventInfo_ValidEventInfoId_Success() throws Exception {
+		EventInfo EventInfo = eventInfoRepo.save(new EventInfo("BTS Concert", null, "Testing", "Testing", "Testing", "Testing"));
+		URI uri = new URI(baseUrl + port + "/eventInfo/" + EventInfo.getId().longValue());
 		User admin = new User("admin", encoder.encode("goodpassword"), "admin@gmail.com", "SMU building", "12345678");
 		admin.setAdmin();
 		users.save(admin);
@@ -126,13 +127,13 @@ class TicketIntegrationTest {
 		
 		assertEquals(200, result.getStatusCode().value());
 		// An empty Optional should be returned by "findById" after deletion
-		Optional<Ticket> emptyValue = Optional.empty();
-		assertEquals(emptyValue, tickets.findById(Ticket.getId()));
+		Optional<EventInfo> emptyValue = Optional.empty();
+		assertEquals(emptyValue, eventInfoRepo.findById(EventInfo.getId()));
 	}
 
 	@Test
-	public void deleteTicket_InvalidTicketId_Failure() throws Exception {
-		URI uri = new URI(baseUrl + port + "/tickets/1");
+	public void deleteEventInfo_InvalidEventInfoId_Failure() throws Exception {
+		URI uri = new URI(baseUrl + port + "/eventInfo/1");
 		User admin = new User("admin", encoder.encode("goodpassword"), "admin@gmail.com", "SMU building", "12345678");
 		admin.setAdmin();
 		users.save(admin);
@@ -144,31 +145,31 @@ class TicketIntegrationTest {
 	}
 
 	@Test
-	public void updateTicket_ValidTicketId_Success() throws Exception {
-		Ticket Ticket = tickets.save(new Ticket("BTS Concert", "123456789", "1k65cv", 100));
-		URI uri = new URI(baseUrl + port + "/tickets/" + Ticket.getId().longValue());
-		Ticket newTicketInfo = new Ticket("BTS Concert", "123456789", "1k65cv", 100);
+	public void updateEventInfo_ValidEventInfoId_Success() throws Exception {
+		EventInfo EventInfo = eventInfoRepo.save(new EventInfo("BTS Concert", null, "Testing", "Testing", "Testing", "Testing"));
+		URI uri = new URI(baseUrl + port + "/eventInfo/" + EventInfo.getId().longValue());
+		EventInfo newEventInfo = new EventInfo("New Concert", null, "Testing", "Testing", "Testing", "Testing");
 		User admin = new User("admin", encoder.encode("goodpassword"), "admin@gmail.com", "SMU building", "12345678");
 		admin.setAdmin();
 		users.save(admin);
 		
-		ResponseEntity<Ticket> result = restTemplate.withBasicAuth("admin", "goodpassword")
-										.exchange(uri, HttpMethod.PUT, new HttpEntity<>(newTicketInfo), Ticket.class);
+		ResponseEntity<EventInfo> result = restTemplate.withBasicAuth("admin", "goodpassword")
+										.exchange(uri, HttpMethod.PUT, new HttpEntity<>(newEventInfo), EventInfo.class);
 			
 		assertEquals(200, result.getStatusCode().value());
-		assertEquals(newTicketInfo.getTitle(), result.getBody().getTitle());
+		assertEquals(newEventInfo.getEventName(), result.getBody().getEventName());
 	}
 
 	@Test
-	public void updateTicket_InvalidTicketId_Failure() throws Exception {
-		URI uri = new URI(baseUrl + port + "/tickets/1");
-		Ticket newTicketInfo = new Ticket("BTS Concert", "123456789", "1k65cv", 100);
+	public void updateEventInfo_InvalidEventInfoId_Failure() throws Exception {
+		URI uri = new URI(baseUrl + port + "/eventInfo/1");
+		EventInfo newEventInfoInfo = new EventInfo("BTS Concert", null, "Testing", "Testing", "Testing", "Testing");
 		User admin = new User("admin", encoder.encode("goodpassword"), "admin@gmail.com", "SMU building", "12345678");
 		admin.setAdmin();
 		users.save(admin);
 		
-		ResponseEntity<Ticket> result = restTemplate.withBasicAuth("admin", "goodpassword")
-										.exchange(uri, HttpMethod.PUT, new HttpEntity<>(newTicketInfo), Ticket.class);
+		ResponseEntity<EventInfo> result = restTemplate.withBasicAuth("admin", "goodpassword")
+										.exchange(uri, HttpMethod.PUT, new HttpEntity<>(newEventInfoInfo), EventInfo.class);
 			
 		assertEquals(404, result.getStatusCode().value());
 	}

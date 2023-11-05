@@ -76,20 +76,18 @@ public class Application {
                 // JPA user repository init
                 UserRepository users = ctx.getBean(UserRepository.class);
                 BCryptPasswordEncoder encoder = ctx.getBean(BCryptPasswordEncoder.class);
-                System.out.println("[Add user]: " + users.save(
-                                new User("Shawn", encoder.encode("hello123"), "shawn@gmail.com",
-                                                 "SMU building", "12345678"))
-                                .getUsername());
-                System.out.println("[Add user]: " + users.save(
-                                new User("Nicholas", encoder.encode("bye123"), "nic@gmail.com",
-                                                 "SMU building", "87654321"))
-                                .getUsername());
+                User admin1 = new User("Shawn", encoder.encode("hello123"), "shawn@gmail.com",
+                                                 "SMU building", "12345678");
+                admin1.setAdmin();
+                System.out.println("[Add admin]: " + users.save(admin1).getUsername());
+                User admin2 = new User("Nicholas", encoder.encode("bye123"), "nic@gmail.com",
+                                                 "SMU building", "87654321");
+                admin2.setAdmin();
+                System.out.println("[Add admin]: " + users.save(admin2).getUsername());
 
                 // JPA transaction repository init
                 TransactionRepository transaction = ctx.getBean(TransactionRepository.class);
                 transaction.save(new Transaction(100.0, null));
-                // System.out.println("[Add transaction]: " + transaction.save(new
-                // Transaction("100","helllo","here")));
 
                 EventInfoRepository eventInfoRepository = ctx.getBean(EventInfoRepository.class);
 

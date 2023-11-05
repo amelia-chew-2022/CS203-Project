@@ -63,7 +63,7 @@ Content-Type: application/json
 
 
 ### user buys ticket
-PUT http://localhost:8080/tickets/1/3/buy
+PUT http://localhost:8080/tickets/1/4/buy
 Authorization: Basic Janaaaaa goodpassword
 
 ### show specific ticket
@@ -119,7 +119,7 @@ Content-Type: application/json
 Get http://localhost:8080/getTickets/2
 
 ###
-Post http://localhost:8080/registeriation
+Post http://localhost:8080/registration
 Content-Type: application/json
 
 {

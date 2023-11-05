@@ -13,7 +13,7 @@ public interface TransactionService {
     Transaction getTransaction(Long id);
 
     /* Transaction addTransaction(Transaction Transaction, Ticket[] ticketList); */
-    csd.week5.transaction.Transaction addTransaction(Transaction Transaction);
+    Transaction addTransaction(Transaction Transaction);
 
     Transaction confirmTransaction(Long id);
 

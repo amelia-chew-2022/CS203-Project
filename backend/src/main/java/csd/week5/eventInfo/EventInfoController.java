@@ -7,11 +7,11 @@ import javax.validation.Valid;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+// import org.springframework.web.bind.annotation.GetMapping;
+// import org.springframework.web.bind.annotation.PathVariable;
+// import org.springframework.web.bind.annotation.RequestBody;
+// import org.springframework.web.bind.annotation.ResponseStatus;
+// import org.springframework.web.bind.annotation.RestController;
 
 @CrossOrigin(origins = "http://localhost:3000")
 
@@ -36,13 +36,13 @@ public class EventInfoController {
         return eventInfo;
     }
 
-    // @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/eventInfo/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/eventInfo")
     public EventInfo addEventInfo(@Valid @RequestBody EventInfo eventInfo) {
         return eventInfoService.addEventInfo(eventInfo);
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+    @PutMapping("/eventInfo/{id}")
     public EventInfo updateEventInfo(@PathVariable Long id, @Valid @RequestBody EventInfo neweventInfoInfo) {
         EventInfo eventInfo = eventInfoService.updateEventInfo(id, neweventInfoInfo);
         if (eventInfo == null)

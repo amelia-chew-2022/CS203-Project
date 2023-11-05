@@ -52,7 +52,7 @@ public class TransactionController {
     } */
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/transactions")
+    @PostMapping("/Transactions")
     public Transaction createTransaction(@Valid @RequestBody TransactionRequest TransactionRequest) {
         return TransactionService.createTransaction(TransactionRequest);
     }

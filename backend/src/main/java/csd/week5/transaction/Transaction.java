@@ -1,6 +1,7 @@
 package csd.week5.transaction;
 
 import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -43,20 +44,17 @@ public class Transaction {
     @JoinColumn(name = "user_id", nullable = true)
     private User user;
 
-    // @Enumerated(EnumType.STRING)
-    private boolean completed;
+    private boolean completed = false;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date transaction_date;
+    private LocalDateTime localDateTime = LocalDateTime.now();
 
     @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
-    @JsonBackReference
+    //@JsonBackReference
+    @JsonIgnore
     private List<Ticket> ticketList;
 
     public Transaction(double total_price, User user) {
         this.total_price = total_price;
         this.user = user;
-        this.completed = false;
-        this.transaction_date = new Date();
     }
 }
