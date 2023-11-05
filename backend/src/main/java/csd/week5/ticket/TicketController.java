@@ -56,12 +56,11 @@ public class TicketController {
     }
 
     @PutMapping("/tickets/updateAvailability/{id}")
-    public Ticket updateAvailabilityById(@PathVariable Long id,@RequestBody Boolean available) {
-        Ticket ticket = ticketService.updateAvailabilityById(id, available);
-        if (ticket == null)
-            throw new TicketNotFoundException(id);
-
-        return ticket;
+    public Ticket updateAvailabilityById(@PathVariable Long id, @RequestBody TicketRequest TicketRequest) {
+        // Call the updated service method with id, available, and transactionId from
+        // the request
+        return ticketService.updateAvailabilityById(id, TicketRequest.getAvailable(),
+                TicketRequest.getTransactionId());
     }
 
     @DeleteMapping("/tickets/{id}")
@@ -72,7 +71,6 @@ public class TicketController {
             throw new TicketNotFoundException(id);
         }
     }
-
 
     // @GetMapping("/tickets/{id}/{userID}/buy")
     // public void buyTicket(@PathVariable Long id, @PathVariable Long userID){

@@ -2,7 +2,7 @@ package csd.week5.ticket;
 
 import java.util.List;
 
-import csd.week5.transaction.Transaction;
+import csd.week5.transaction.*;
 
 public interface TicketService {
     List<Ticket> listTickets();
@@ -15,7 +15,7 @@ public interface TicketService {
 
     Ticket updateTicket(Long id, Ticket newTicketInfo);
 
-    Ticket updateAvailabilityById(Long id, Boolean available);
+    Ticket updateAvailabilityById(Long id, Boolean available, Long transactionId);
 
     /**
      * Change method's signature: do not return a value for delete operation

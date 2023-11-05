@@ -13,7 +13,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import csd.week5.transaction.*;
@@ -27,6 +28,7 @@ import csd.week5.user.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class Ticket {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -46,15 +48,20 @@ public class Ticket {
 
     private Boolean available = true;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = true)
-    @JsonIgnore
-    private User user;
+    /*
+     * @ManyToOne
+     * 
+     * @JoinColumn(name = "user_id", nullable = true)
+     * 
+     * @JsonIgnore
+     * private User user;
+     */
 
     @ManyToOne
     @JoinColumn(name = "transaction_id", nullable = true)
+    @JsonManagedReference
     private Transaction transaction;
-    
+
     // @ManyToOne
     // @JoinColumn(name = "user_id", nullable = true)
     // private User user;
@@ -76,5 +83,9 @@ public class Ticket {
 
     public void setAvailability(boolean b) {
         available = b;
+    }
+
+    public void setTransaction(Transaction transaction) {
+        this.transaction = transaction;
     }
 }
