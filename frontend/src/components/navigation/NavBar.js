@@ -5,6 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import React from "react";
 import LoginIcon from '@mui/icons-material/Login';
 import AppRegistrationIcon from '@mui/icons-material/AppRegistration';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { Link } from "react-router-dom";
 import Logo from "../../assets/applogo.svg";
 
@@ -28,6 +29,18 @@ const NavBar = ({ authenticated = false }) => {
             <img src={Logo} alt="Logo"/>
             </Link>
 
+            {/* {authenticated ? ( */}
+            <Link to="/logout">
+            <Button 
+                size="large"
+                color="secondary"
+                startIcon={<LogoutIcon/>}
+            >
+                Logout
+            </Button>
+            </Link>
+            {/* ) : ( */}
+            <>
             <Link to="/login">
             <Button 
                 size="large"
@@ -47,6 +60,8 @@ const NavBar = ({ authenticated = false }) => {
                 Registration
             </Button>
             </Link>
+            </>
+            {/* )} */}
             </Toolbar>
             </Container>
         </AppBar>
