@@ -1,11 +1,12 @@
 package csd.week5.user;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     List<User> listUsers();
 
-    User getUser(Long id);
+    Optional<User> getUser(Long id);
 
     User addUser(User user);
 

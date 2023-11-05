@@ -1,6 +1,7 @@
 package csd.week5.user;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
@@ -67,10 +68,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUsers'");
+    public Optional<User> getUser(Long id) {
+        return userRepository.findById(id);
     }
+    
+    
 
     // @Override
     // public User addUsers(User user) {

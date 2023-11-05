@@ -36,14 +36,15 @@ export default function SeatSelection() {
 
     const updatedTicketData = {
       Available: false,
-      transaction_Id: transactionId,
     };
+
     console.log(updatedTicketData.transaction_Id);
     // Send a PUT request to update the seat's 'available' property in the database
     axios
       .put(
-        `http://localhost:8080/tickets/updateAvailability/${updatedSeat.id}`,
+        `http://localhost:8080/tickets/updateAvailability/${buttons[rowIndex][colIndex].id}`,
         updatedTicketData,
+        
         {
           headers: { "Content-Type": "application/json" },
         }
@@ -59,30 +60,30 @@ export default function SeatSelection() {
 
   const updateSelectedSeats = async () => {
     let totalPrice = 0; // Temporary variable to hold the calculation
-    let transactionId=0;
+    let transactionId = 0;
     // Loop through selected seats to calculate the total price
     selectedSeats.forEach((seat) => {
       const ticket = buttons[seat.row][seat.col]; // Get the full seat object
-   
+
       totalPrice += ticket.unit_price; // Add the price of each seat to the local total
 
-      console.log(totalPrice);
+      // console.log(totalPrice);
     });
-  
+
     /// Assuming `selectedSeats` is an array that contains the selected seat details
     // and `currentUser` is an object that contains the ID of the currently logged in user.
 
     // Create a transaction object
     const transactionData = {
       total_price: totalPrice,
-      User_Id: 2,
+      user_id: 2,
     };
 
-    console.log(transactionData);
+    // console.log(transactionData);
     try {
       // Send a POST request to the backend to add the transaction
       const response = await axios.post(
-        "http://localhost:8080/transactions/",
+        "http://localhost:8080/transactions",
         transactionData,
         {
           headers: { "Content-Type": "application/json" },
@@ -91,18 +92,19 @@ export default function SeatSelection() {
 
       // Check if the transaction was created successfully
       if (response.status === 201) {
-        console.log("Transaction created:", response.data);
-        transactionId = response.data.id; // Here's where you get the transaction ID
-        navigate("/checkout"); // Navigate to the checkout page or any other page
+        // Set the transactionId with the one from the response
+        const createdTransactionId = response.data.id;
+
+        // Now update each selected seat with the created transaction ID
+        selectedSeats.forEach((seat) => {
+          handleUpdateClick(seat.row, seat.col, createdTransactionId);
+        });
       } else {
         console.error("Transaction creation failed:", response);
       }
     } catch (error) {
-      console.error(
-        "Error creating transaction:",
-        error.response || error.message
-      );
-    }
+      console.error("Error creating transaction:", error.response || error.message);
+    };
 
     selectedSeats.forEach((seat) => {
       handleUpdateClick(seat.row, seat.col, transactionId);
@@ -134,7 +136,7 @@ export default function SeatSelection() {
     }
 
     //Calculate total price of seat selected
-    function calculateTotalPrice(selectedSeats) {}
+    function calculateTotalPrice(selectedSeats) { }
   };
 
   return (

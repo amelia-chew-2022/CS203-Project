@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @CrossOrigin(origins = "http://localhost:3000")
 
@@ -27,5 +28,13 @@ public class UserController {
     public User createUser(@Valid @RequestBody User user) {
         return userService.addUser(user);
     }
+
+    @GetMapping("/users/{id}")
+    public User findUserById(@PathVariable Long id) {
+        return userService.getUser(id)
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    }
+    
+
 
 }

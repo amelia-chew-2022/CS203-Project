@@ -4,8 +4,10 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import csd.week5.ticket.*;
 // import csd.week5.ticket.TicketRepository;
@@ -15,12 +17,12 @@ import csd.week5.user.*;
 public class TransactionServiceImpl implements TransactionService {
 
     private TransactionRepository Transactions;
-    private UserRepository users;
+    private UserRepository userRepository;
     private TicketRepository tickets;
 
-    public TransactionServiceImpl(TransactionRepository Transactions, UserRepository users, TicketRepository tickets) {
+    public TransactionServiceImpl(TransactionRepository Transactions, UserRepository userRepository, TicketRepository tickets) {
         this.Transactions = Transactions;
-        this.users = users;
+        this.userRepository = userRepository;
         this.tickets = tickets;
     }
 
@@ -67,6 +69,18 @@ public class TransactionServiceImpl implements TransactionService {
 
         return transaction;
     }
+
+    @Override
+    public Transaction createTransaction(TransactionRequest transactionRequest) {
+        double total_price = transactionRequest.getTotal_price(); // ensure this is a double
+        Long user_id = transactionRequest.getUser_id(); // use Long instead of int
+        User user = userRepository.findById(user_id) // findById expects a Long
+                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+    
+        Transaction transaction = new Transaction(total_price, user); // Assuming such a constructor exists
+        return Transactions.save(transaction);
+    }
+    
 
     // confirms that the transaction is completed and the seats selected are final
     // and paid for
