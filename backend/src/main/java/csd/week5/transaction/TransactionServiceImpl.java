@@ -1,6 +1,7 @@
 package csd.week5.transaction;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,9 +106,9 @@ public class TransactionServiceImpl implements TransactionService {
     // }
 
     public boolean isTransactionExpired(Transaction transaction) {
-        Date currentTime = new java.sql.Date(new java.util.Date().getTime());
-        long elapsedTime = currentTime.getTime() - transaction.getTransaction_date().getTime();
-        return elapsedTime >= 10000;
+        LocalDateTime localDateTime = LocalDateTime.now();
+        LocalDateTime _5minsAfterTransaction = transaction.getLocalDateTime().plusMinutes(5);
+        return localDateTime.isAfter(_5minsAfterTransaction);
     }
 
     public void handleTimeoutTransactions() {
