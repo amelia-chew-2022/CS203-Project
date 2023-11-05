@@ -141,7 +141,7 @@ public class TransactionServiceTest {
         Transaction.setTicketList(ticketList);
 
         when(transactions.findById(id)).thenReturn(Optional.of(Transaction));
-        when(tickets.findAllTicketsByTransaction(Transaction)).thenReturn(ticketList);
+        when(tickets.findAllTicketsByTransactionId(Transaction.getId())).thenReturn(ticketList);
 
         transactionService.deleteTransaction(id);
 
@@ -149,7 +149,7 @@ public class TransactionServiceTest {
         assertNull(t1.getTransaction());
         assertNull(t2.getTransaction());
         verify(transactions).findById(id);
-        verify(tickets).findAllTicketsByTransaction(Transaction);
+        verify(tickets).findAllTicketsByTransactionId(Transaction.getId());
 
     }
 }
