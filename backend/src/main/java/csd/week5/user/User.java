@@ -85,8 +85,8 @@ public class User implements UserDetails {
         return Arrays.asList(new SimpleGrantedAuthority(authorities));
     }
 
-    public void setAdmin(User user){
-        user.authorities = "ROLE_ADMIN";
+    public void setAdmin(){
+        authorities = "ROLE_ADMIN";
     }
 
     @Override

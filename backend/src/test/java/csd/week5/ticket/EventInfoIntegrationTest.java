@@ -24,7 +24,7 @@ import csd.week5.eventInfo.EventInfoRepository;
 import csd.week5.eventInfo.EventInfo;
 import csd.week5.eventInfo.EventInfoRepository;
 import csd.week5.user.User;
-import csd.week5.user.UserRepository;
+import csd.week5.user.*;
 
 /** Start an actual HTTP server listening at a random port*/
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -97,7 +97,9 @@ class EventInfoIntegrationTest {
 	public void addEventInfo_Success() throws Exception {
 		URI uri = new URI(baseUrl + port + "/eventInfo");
 		EventInfo EventInfo = new EventInfo("BTS Concert", null, "Testing", "Testing", "Testing", "Testing");
-		users.save(new User("admin", encoder.encode("goodpassword"), "ROLE_ADMIN", "admin@gmail.com", "123456789", "SMU building", "12345678"));
+		User admin = new User("admin", encoder.encode("goodpassword"), "admin@gmail.com", "SMU building", "12345678");
+		admin.setAdmin();
+		users.save(admin);
 
 		ResponseEntity<EventInfo> result = restTemplate.withBasicAuth("admin", "goodpassword")
 										.postForEntity(uri, EventInfo, EventInfo.class);
@@ -115,7 +117,9 @@ class EventInfoIntegrationTest {
 	public void deleteEventInfo_ValidEventInfoId_Success() throws Exception {
 		EventInfo EventInfo = eventInfoRepo.save(new EventInfo("BTS Concert", null, "Testing", "Testing", "Testing", "Testing"));
 		URI uri = new URI(baseUrl + port + "/eventInfo/" + EventInfo.getId().longValue());
-		users.save(new User("admin", encoder.encode("goodpassword"), "ROLE_ADMIN", "admin@gmail.com", "123456789", "SMU building", "12345678"));
+		User admin = new User("admin", encoder.encode("goodpassword"), "admin@gmail.com", "SMU building", "12345678");
+		admin.setAdmin();
+		users.save(admin);
 		
 		//restTemplate.withBasicAuth("admin", "goodpassword").delete(uri);
 		ResponseEntity<Void> result = restTemplate.withBasicAuth("admin", "goodpassword")
@@ -130,7 +134,9 @@ class EventInfoIntegrationTest {
 	@Test
 	public void deleteEventInfo_InvalidEventInfoId_Failure() throws Exception {
 		URI uri = new URI(baseUrl + port + "/eventInfo/1");
-		users.save(new User("admin", encoder.encode("goodpassword"), "ROLE_ADMIN", "admin@gmail.com", "123456789", "SMU building", "12345678"));
+		User admin = new User("admin", encoder.encode("goodpassword"), "admin@gmail.com", "SMU building", "12345678");
+		admin.setAdmin();
+		users.save(admin);
 		
 		ResponseEntity<Void> result = restTemplate.withBasicAuth("admin", "goodpassword")
 										.exchange(uri, HttpMethod.DELETE, null, Void.class);
@@ -143,7 +149,9 @@ class EventInfoIntegrationTest {
 		EventInfo EventInfo = eventInfoRepo.save(new EventInfo("BTS Concert", null, "Testing", "Testing", "Testing", "Testing"));
 		URI uri = new URI(baseUrl + port + "/eventInfo/" + EventInfo.getId().longValue());
 		EventInfo newEventInfo = new EventInfo("New Concert", null, "Testing", "Testing", "Testing", "Testing");
-		users.save(new User("admin", encoder.encode("goodpassword"), "ROLE_ADMIN", "admin@gmail.com", "123456789", "SMU building", "12345678"));
+		User admin = new User("admin", encoder.encode("goodpassword"), "admin@gmail.com", "SMU building", "12345678");
+		admin.setAdmin();
+		users.save(admin);
 		
 		ResponseEntity<EventInfo> result = restTemplate.withBasicAuth("admin", "goodpassword")
 										.exchange(uri, HttpMethod.PUT, new HttpEntity<>(newEventInfo), EventInfo.class);
@@ -156,7 +164,9 @@ class EventInfoIntegrationTest {
 	public void updateEventInfo_InvalidEventInfoId_Failure() throws Exception {
 		URI uri = new URI(baseUrl + port + "/eventInfo/1");
 		EventInfo newEventInfoInfo = new EventInfo("BTS Concert", null, "Testing", "Testing", "Testing", "Testing");
-		users.save(new User("admin", encoder.encode("goodpassword"), "ROLE_ADMIN", "admin@gmail.com", "123456789", "SMU building", "12345678"));
+		User admin = new User("admin", encoder.encode("goodpassword"), "admin@gmail.com", "SMU building", "12345678");
+		admin.setAdmin();
+		users.save(admin);
 		
 		ResponseEntity<EventInfo> result = restTemplate.withBasicAuth("admin", "goodpassword")
 										.exchange(uri, HttpMethod.PUT, new HttpEntity<>(newEventInfoInfo), EventInfo.class);

@@ -54,10 +54,6 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "transaction_id", nullable = true)
     private Transaction transaction;
-    
-    // @ManyToOne
-    // @JoinColumn(name = "user_id", nullable = true)
-    // private User user;
 
     
 

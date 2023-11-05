@@ -67,7 +67,6 @@ Authorization: Basic Janaaaaa goodpassword
 ### show specific ticket
 GET http://localhost:8080/tickets/1
 
-<<<<<<< HEAD
 ###
 GET http://localhost:8080/checkout
 Authorization: Basic Janaaaaa goodpassword
@@ -83,5 +82,3 @@ Authorization: Basic Nicholas bye123
 {
     
 }
-=======
->>>>>>> df23fdc5e6dbe7d7e4dbb58a8194b7cde240cf8d

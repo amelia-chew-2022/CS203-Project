@@ -53,6 +53,8 @@ public class SecurityConfig {
             .antMatchers(HttpMethod.GET, "/tickets/*/*/buy").hasAnyRole("USER", "ADMIN")
             .antMatchers(HttpMethod.GET, "/home").permitAll()
             .antMatchers(HttpMethod.GET, "/eventInfo/*").permitAll()
+            .antMatchers(HttpMethod.DELETE, "/eventInfo/*").hasRole("ADMIN")
+            .antMatchers(HttpMethod.POST, "/eventInfo").hasRole("ADMIN")
             .antMatchers(HttpMethod.GET, "/Transactions/*").permitAll()
             .antMatchers(HttpMethod.GET, "/checkout").hasRole("USER")
             .and()
