@@ -110,7 +110,7 @@ const EventInfo1 = (props) => {
         const fetchData = async () => {
             try {
                 // Use the `id` parameter from the URL to fetch event information
-                const response = await axios.get(`http://52.77.214.206:8080/eventInfo/${id}`);
+                const response = await axios.get(`http://localhost:8080/eventInfo/${id}`);
                 console.log('Response from server:', response);
 
                 setEventInfo(response.data);
