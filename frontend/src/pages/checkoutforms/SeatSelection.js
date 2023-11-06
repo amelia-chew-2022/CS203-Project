@@ -17,7 +17,7 @@ export default function SeatSelection() {
 
   useEffect(() => {
     axios
-      .get("http://52.77.214.206:8080/tickets")
+      .get("http://localhost:8080/tickets")
       .then((res) => {
         const data = res.data;
         // Ensure that data is correctly structured as a 2D array with 6 rows
@@ -46,7 +46,7 @@ export default function SeatSelection() {
     // Send a PUT request to update the seat's 'available' property in the database
     axios
       .put(
-        `http://52.77.214.206:8080/tickets/updateAvailability/${buttons[rowIndex][colIndex].id}`,
+        `http://localhost:8080/tickets/updateAvailability/${buttons[rowIndex][colIndex].id}`,
         updatedTicketData,
 
         {
@@ -93,7 +93,7 @@ export default function SeatSelection() {
     try {
       // Send a POST request to the backend to add the transaction
       const response = await axios.post(
-        "http://52.77.214.206:8080/Transactions",
+        "http://localhost:8080/Transactions",
         transactionData,
         {
           headers: { "Content-Type": "application/json" },
