@@ -55,7 +55,7 @@ const breadcrumbs = [
         </Link>
     </Link>,
     <Typography key="3" color="text.primary">
-        VIBES
+        Event Info
     </Typography>,
 ];
 
@@ -110,7 +110,7 @@ const EventInfo1 = (props) => {
         const fetchData = async () => {
             try {
                 // Use the `id` parameter from the URL to fetch event information
-                const response = await axios.get(`http://localhost:8080/eventInfo/${id}`);
+                const response = await axios.get(`http://52.77.214.206:8080/eventInfo/${id}`);
                 console.log('Response from server:', response);
 
                 setEventInfo(response.data);
@@ -192,7 +192,7 @@ const EventInfo1 = (props) => {
                 </Typography>
 
                 <Typography variant="h3" sx={{ fontWeight: "bold", color: "#fff" }}>
-                    {eventInfo.name}
+                    {eventInfo.eventName}
                 </Typography>
             </Container>
             </Box>
@@ -238,7 +238,7 @@ const EventInfo1 = (props) => {
                                 onClick={() => scrollToSection(section6Ref)}
                             />
                         </Tabs>
-                        <Link to="/checkout">
+                        <Link to="/seatSelection">
                             <Button variant="contained" size="large">Buy Tickets</Button>
                         </Link>
                     </Toolbar>

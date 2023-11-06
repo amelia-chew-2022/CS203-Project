@@ -113,7 +113,7 @@ Content-Type: application/json
 }
 
 ###
-Get http://localhost:8080/getTickets/2
+Get http://localhost:8080/getTickets/6
 
 ###
 Post http://localhost:8080/auth/users
@@ -122,7 +122,7 @@ Content-Type: application/json
 {
     "username": "Janaaaaa",
     "password": "goodpassword",
-    "email": "jana@gmail.com",
+    "email": "blessed.me.luck@gmail.com",
     "address": "SMU building",
     "phone_num": "32165498"
 }
@@ -136,3 +136,24 @@ Content-Type: application/json
     "password": "goodpassword"
 }
 
+###
+POST http://localhost:8080/register
+Content-Type: application/json
+
+{
+    "username": "Janaaaaa",
+    "password": "goodpassword",
+    "email": "blessed.e.luck@gmail.com",
+    "address": "SMU building",
+    "phone_num": "32165498"
+}
+
+###
+
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+    "username": "Shawn",
+    "password": "hello123"
+}

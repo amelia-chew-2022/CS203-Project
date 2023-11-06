@@ -21,5 +21,8 @@ public interface UserService {
      * @param id
      */
     void deleteUser(Long id);
-
+    boolean emailExists(String email);
+    boolean usernameExists (String username);
+    User registerNewUserAccount(User newUser);
+    User authenticate(String email, String password);
 }

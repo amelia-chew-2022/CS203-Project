@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = "http://localhost:8080"; 
+const API_URL = "http://52.77.214.206:8080"; 
 
 class UserService {
 

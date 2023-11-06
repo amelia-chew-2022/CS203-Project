@@ -30,9 +30,6 @@ public class TicketServiceImpl implements TicketService {
         return tickets.findAllTicketsByTransactionId(transactionId);
     }
 
-
-    
-
     @Override
     public Ticket getTicket(Long id) {
         return tickets.findById(id).orElse(null);

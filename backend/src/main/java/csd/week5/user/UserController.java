@@ -12,13 +12,18 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import org.springframework.beans.factory.annotation.Autowired; 
-import org.springframework.security.access.prepost.PreAuthorize; 
-import org.springframework.security.authentication.AuthenticationManager; 
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken; 
-import org.springframework.security.core.Authentication; 
-import org.springframework.security.core.userdetails.UsernameNotFoundException; 
-import org.springframework.web.bind.annotation.*; 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
+import csd.week5.automateEmail.EmailService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 
@@ -30,12 +35,19 @@ public class UserController {
     @Autowired
     private JwtService jwtService;
     @Autowired
-    private AuthenticationManager authenticationManager; 
+    private AuthenticationManager authenticationManager;
+
+    private EmailService emailService;
 
     public UserController(UserService userService, JwtService jwtService, AuthenticationManager authenticationManager) {
         this.userService = userService;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
+    }
+
+    public UserController(UserService userService, EmailService emailService) {
+        this.userService = userService;
+        this.emailService = emailService;
     }
 
     @GetMapping("/users")
@@ -52,18 +64,45 @@ public class UserController {
     @GetMapping("/users/{id}")
     public User findUserById(@PathVariable Long id) {
         return userService.getUser(id)
-            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-    }
-    
-    @PostMapping("/generateToken") 
-    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) { 
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())); 
-        if (authentication.isAuthenticated()) { 
-            return jwtService.generateToken(authRequest.getUsername()); 
-        } else { 
-            throw new UsernameNotFoundException("invalid user request !"); 
-        } 
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
     }
 
+    @PostMapping("/generateToken")
+    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+        if (authentication.isAuthenticated()) {
+            return jwtService.generateToken(authRequest.getUsername());
+        } else {
+            throw new UsernameNotFoundException("invalid user request !");
+        }
+    }
 
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@Valid @RequestBody User registrationDto) {
+
+        if (userService.emailExists(registrationDto.getEmail())) {
+            return new ResponseEntity<>("Email is already in use!", HttpStatus.BAD_REQUEST);
+        }
+
+        if (userService.usernameExists(registrationDto.getUsername())) {
+            return new ResponseEntity<>("Username is already in use!", HttpStatus.BAD_REQUEST);
+        }
+
+        User newUser = userService.registerNewUserAccount(registrationDto);
+        String email = newUser.getEmail();
+        String username = newUser.getUsername();
+        emailService.sendRegisterEmail(email, username);
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@Valid @RequestBody User loginDto) {
+        User user = userService.authenticate(loginDto.getUsername(), loginDto.getPassword());
+        if (user != null) {
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED);
+        }
+    }
 }

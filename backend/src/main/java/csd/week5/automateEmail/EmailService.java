@@ -12,14 +12,22 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    public void sendTemplatedEmail(String to, String subject, String template, String username) {
+    public void sendRegisterEmail(String email, String username) {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
+
+        String subject = "Thank You for registration, ${username}!";
+        String template = "Dear ${username},\n\n" +
+                          "Thank you for registering with our service. We are excited to have you on board.\n\n" +
+                          "Should you need any assistance, feel free to contact our support team.\n\n" +
+                          "Warm regards,\n" +
+                          "The Team";
+        message.setTo(email);
         message.setSubject(replaceTemplateVariables(subject, username));
         message.setText(replaceTemplateVariables(template, username));
 
         mailSender.send(message);
     }
+
 
     private String replaceTemplateVariables(String template, String username) {
         return template.replace("${username}", username);

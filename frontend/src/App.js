@@ -24,7 +24,7 @@ class App extends Component {
                     {/* <Route path="/eventinfo" element={<EventInfo/>}/> */}
                     <Route path = "/error" element = {<Error/>}/>
                     <Route path = "/eventinfo/notfound" element = {<EventInfoError/>}/>
-                    <Route path="/checkout/:id" element={<Checkout/>}/>
+                    <Route path="/checkout/:transactionId" element={<Checkout />} />
                     <Route path="/" element={<Navigate to="/home" />} />
                     <Route path="/seatSelection" element={<SeatSelection/>}/>
                     <Route path = "/logout" element = {<Logout/>}></Route>
