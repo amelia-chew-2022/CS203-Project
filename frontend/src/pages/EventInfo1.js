@@ -238,7 +238,7 @@ const EventInfo1 = (props) => {
                                 onClick={() => scrollToSection(section6Ref)}
                             />
                         </Tabs>
-                        <Link to="/checkout/:id">
+                        <Link to="/seatSelection">
                             <Button variant="contained" size="large">Buy Tickets</Button>
                         </Link>
                     </Toolbar>

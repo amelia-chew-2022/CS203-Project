@@ -8,6 +8,7 @@ import Grid from "@mui/material/Grid";
 import { useNavigate } from "react-router-dom";
 import NavBar from "../../components/navigation/NavBar";
 import Footer from "../../components/footer/Footer";
+import CssBaseline from "@mui/material/CssBaseline";
 
 export default function SeatSelection() {
   const [buttons, setButtons] = useState([]);
@@ -62,6 +63,12 @@ export default function SeatSelection() {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const updateSelectedSeats = async () => {
+    // Check if no seats are selected
+  if (selectedSeats.length === 0) {
+    alert("Please select at least one seat before continuing.");
+    return; // Exit the function early if no seats are selected
+  }
+
     let totalPrice = 0; // Temporary variable to hold the calculation
     let transactionId = 0;
     // Loop through selected seats to calculate the total price
@@ -86,7 +93,7 @@ export default function SeatSelection() {
     try {
       // Send a POST request to the backend to add the transaction
       const response = await axios.post(
-        "http://localhost:8080/transactions",
+        "http://localhost:8080/Transactions",
         transactionData,
         {
           headers: { "Content-Type": "application/json" },
@@ -101,6 +108,7 @@ export default function SeatSelection() {
         // Now update each selected seat with the created transaction ID
         selectedSeats.forEach((seat) => {
           handleUpdateClick(seat.row, seat.col, transactionId);
+
         });
         navigate(`/checkout/${transactionId}`);
       } else {
@@ -147,8 +155,11 @@ export default function SeatSelection() {
   };
 
   return (
-    <>
-      <NavBar></NavBar>
+    <React.Fragment>
+    <div id="back-to-top-anchor" />
+
+    <CssBaseline />
+    <NavBar></NavBar>
       <div
         style={{
           display: "flex",
@@ -157,7 +168,7 @@ export default function SeatSelection() {
         }}
       >
         {/* Image on the left */}
-        <div style={{ marginRight: "20px" }}>
+        <div style={{ marginRight: "20px",marginTop: "20px" }}>
           {/* <FieldsColumn> */}
           <img src={vibes} alt="img" width="flex" height="110" />
           {/* </FieldsColumn> */}
@@ -209,6 +220,7 @@ export default function SeatSelection() {
         style={{
           backgroundColor: "#222222",
           display: "flex",
+        
           justifyContent: "center",
           alignItems: "center",
           minHeight: "10vh", // Use minHeight to cover the entire viewport height
@@ -247,8 +259,9 @@ export default function SeatSelection() {
                       width: "60px",
                       height: "60px",
                       backgroundColor: isSeatSelected(rowIndex, colIndex)
-                        ? "red" // Change the background color when selected
-                        : "green", // Default background color
+                        ? "green" // Change the background color when selected
+                        : "#5522CC", // Default background color
+                      borderRadius: "20px 20px 0 0", // Half-circle on top
                     }}
                     onClick={() => handleButtonClick(rowIndex, colIndex)}
                     disabled={!seat.available} // Adjust based on your logic
@@ -288,7 +301,7 @@ export default function SeatSelection() {
             style={{
               width: "20px",
               height: "20px",
-              backgroundColor: "#626262",
+              backgroundColor: "#5522CC",
               marginRight: "5px",
             }}
           ></div>
@@ -301,7 +314,7 @@ export default function SeatSelection() {
             style={{
               width: "20px",
               height: "20px",
-              backgroundColor: "#222222",
+              backgroundColor: "#5522CC",
               marginRight: "5px",
             }}
           ></div>
@@ -352,7 +365,8 @@ export default function SeatSelection() {
           </Button>
         </div>
         <Footer/>
-      </div>
-    </>
+      </div> 
+   
+      </React.Fragment>
   );
 }

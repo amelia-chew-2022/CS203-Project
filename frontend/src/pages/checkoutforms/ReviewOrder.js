@@ -5,6 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 
 // import {selectedSeats} from '../../components/seatselect/ButtonGrid';
 
@@ -35,19 +36,19 @@ const products = [
   { name: "Shipping", desc: "", price: "Free" },
 ];
 
-const addresses = ["1 MUI Drive", "Reactville", "Anytown", "99999", "USA"];
+const addresses = ["Random St 1", " #01-123", "", "521123", "Singapore"];
 const payments = [
   { name: "Card type", detail: "Visa" },
-  { name: "Card holder", detail: "Mr John Smith" },
-  { name: "Card number", detail: "xxxx-xxxx-xxxx-1234" },
-  { name: "Expiry date", detail: "04/2024" },
+  { name: "Card holder", detail: "Mr John Doe" },
+  { name: "Card number", detail: "xxxx-xxxx-xxxx-1256" },
+  { name: "Expiry date", detail: "12/2023" },
 ];
 
 export default function Review({ transactionId }) {
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
-    axios.get(`/tickets/${transactionId}`)
+    axios.get(`http://localhost:8080/getTickets/${transactionId}`)
          .then((response) => {
              // assuming your state is named `tickets`
              setTickets(response.data);
@@ -57,20 +58,36 @@ export default function Review({ transactionId }) {
              console.error("Error fetching tickets:", error);
          });
 }, [transactionId]);
+
+// Calculate the sum of all unit_numbers
+const totalPrice = tickets.reduce((total, ticket) => {
+  return total + (ticket.unit_price || 0);
+}, 0);
   
 
 
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Order summary
-      </Typography>
-      <List disablePadding>
+    <Typography variant="h6" gutterBottom>
+      Order summary
+    </Typography>
+    <List disablePadding>
+      {tickets.map((ticket, index) => (
+        <ListItem key={index} sx={{ py: 1, px: 0 }}>
+          <ListItemText
+            primary={`Ticket ${ticket.ticket_number}`}
+            secondary={`Seat Number: ${ticket.seat_number}`}
+          />
+          <ListItemSecondaryAction>
+            <Typography variant="body2">{`Price: $${ticket.unit_price}`}</Typography>
+          </ListItemSecondaryAction>
+        </ListItem>
+      ))}
        
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            $34.06
+           ${totalPrice}
           </Typography>
         </ListItem>
       </List>
@@ -79,7 +96,7 @@ export default function Review({ transactionId }) {
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
             Shipping
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
+          <Typography gutterBottom>John Doe</Typography>
           <Typography gutterBottom>{addresses.join(", ")}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
