@@ -83,6 +83,10 @@ const Login = () => {
         } catch (error) {
             alert(error.message); // For a better UX, consider using a dialog or snackbar instead of alert
         }
+
+        let authHeader = window.btoa(username + ':' + password);
+        let user = { 'username': username, 'authHeader': authHeader };
+
     };
 
     return (
