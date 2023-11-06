@@ -67,12 +67,6 @@ Content-Type: application/json
     "phone_num": "32165498"
 }
 
-
-
-### user buys ticket
-# PUT http://localhost:8080/tickets/1/4/buy
-# Authorization: Basic Janaaaaa goodpassword
-
 ### show specific ticket
 GET http://localhost:8080/tickets/1
 
@@ -134,15 +128,6 @@ Content-Type: application/json
     "email": "blessed.me.luck@gmail.com",
     "address": "SMU building",
     "phone_num": "32165498"
-}
-
-###
-POST http://localhost:8080/generateToken
-Content-Type: application/json
-
-{
-    "username": "Janaaaaa",
-    "password": "goodpassword"
 }
 
 ###
