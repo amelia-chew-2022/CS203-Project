@@ -32,5 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 
-books.mv.db
-books.trace.db
+data/*

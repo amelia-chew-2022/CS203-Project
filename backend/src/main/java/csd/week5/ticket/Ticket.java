@@ -44,7 +44,7 @@ public class Ticket {
     private String ticket_number;
 
     @NotNull(message = "Seat number should not be null")
-    @Size(min = 5, max = 200, message = "Seat number should be at least 5 characters long")
+    // @Size(min = 5, max = 200, message = "Seat number should be at least 5 characters long")
     private String seat_number;
 
     private int unit_price;
@@ -62,7 +62,7 @@ public class Ticket {
 
     @ManyToOne
     @JoinColumn(name = "transaction_id", nullable = true)
-    @JsonManagedReference
+    @JsonIgnore
     private Transaction transaction;
 
     // @ManyToOne

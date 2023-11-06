@@ -28,7 +28,7 @@ import csd.week5.automateEmail.EmailService;
 @CrossOrigin(origins = "http://localhost:3000")
 
 @RestController
-@RequestMapping("/auth")
+//@RequestMapping("/auth")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -39,14 +39,10 @@ public class UserController {
 
     private EmailService emailService;
 
-    public UserController(UserService userService, JwtService jwtService, AuthenticationManager authenticationManager) {
+    public UserController(UserService userService, JwtService jwtService, AuthenticationManager authenticationManager, EmailService emailService) {
         this.userService = userService;
         this.jwtService = jwtService;
         this.authenticationManager = authenticationManager;
-    }
-
-    public UserController(UserService userService, EmailService emailService) {
-        this.userService = userService;
         this.emailService = emailService;
     }
 

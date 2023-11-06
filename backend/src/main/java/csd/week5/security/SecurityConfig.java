@@ -64,7 +64,7 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeRequests(authorize -> authorize
-                        .antMatchers("/auth/**").permitAll()
+                        .antMatchers("/users", "/generateToken").permitAll()
                         .antMatchers(HttpMethod.GET, "/tickets").permitAll()
                         .antMatchers(HttpMethod.POST, "/tickets", "/tickets/").hasRole("ADMIN")
                         .antMatchers(HttpMethod.PUT, "/tickets/*").hasRole("ADMIN")

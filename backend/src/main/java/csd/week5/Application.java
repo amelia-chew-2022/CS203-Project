@@ -24,8 +24,7 @@ public class Application {
 
                 // JPA book repository init
                 TicketRepository tickets = ctx.getBean(TicketRepository.class);
-                System.out.println("[Add ticket]: "
-                                + tickets.save(new Ticket("Vibes", "ABC001", "A1", 50)).getTitle());
+                System.out.println("[Add ticket]: " + tickets.save(new Ticket("Vibes", "ABC001", "A1", 50)).getTitle());
                 tickets.save(new Ticket("Vibes", "ABC002", "A2", 50)).getTitle();
                 tickets.save(new Ticket("Vibes", "ABC003", "A3", 50)).getTitle();
                 tickets.save(new Ticket("Vibes", "ABC004", "A4", 50)).getTitle();
