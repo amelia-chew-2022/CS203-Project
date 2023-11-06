@@ -71,7 +71,11 @@ const Login = () => {
             if (response.ok) {
                 const userData = await response.json();
                 console.log(userData);
-                localStorage.setItem('user', JSON.stringify(userData));
+                // Your new code snippet
+                console.log("Data to send to the server:", userData);
+                let authHeader = window.btoa(username + ':' + password);
+                let user = { 'username': username, 'authHeader': authHeader };
+                localStorage.setItem('user', JSON.stringify(user));
                 navigate('/'); // Redirect to the home page after login
             } else {
                 throw new Error('Invalid credentials');
