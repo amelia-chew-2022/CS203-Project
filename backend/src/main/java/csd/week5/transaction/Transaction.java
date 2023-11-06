@@ -48,7 +48,7 @@ public class Transaction {
 
     private LocalDateTime localDateTime = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "transaction", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "transaction")
     //@JsonBackReference
     @JsonIgnore
     private List<Ticket> ticketList;
