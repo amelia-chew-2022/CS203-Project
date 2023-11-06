@@ -130,5 +130,24 @@ Content-Type: application/json
     "phone_num": "32165498"
 }
 
+###
+POST http://localhost:8080/register
+Content-Type: application/json
 
+{
+    "username": "Janaaaaa",
+    "password": "goodpassword",
+    "email": "blessed.e.luck@gmail.com",
+    "address": "SMU building",
+    "phone_num": "32165498"
+}
+
+###
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+    "email": "shawn@gmail.com",
+    "password": "hello123"
+}
 

@@ -19,5 +19,7 @@ public interface UserService {
      * @param id
      */
     void deleteUser(Long id);
-
+    boolean emailExists(String email);
+    User registerNewUserAccount(User newUser);
+    User authenticate(String email, String password);
 }

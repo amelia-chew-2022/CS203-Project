@@ -19,60 +19,65 @@ function onChange(value) {
 }
 
 const Login = () => {
+    const navigate = useNavigate();
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [recaptchaToken, setRecaptchaToken] = React.useState('');
     const [usernameError, setUsernameError] = React.useState(false);
     const [passwordError, setPasswordError] = React.useState(false);
-    const [isCaptchaVerified, setCaptchaVerified] = React.useState(false);
-    const navigate = useNavigate();
 
     const handleUsernameChange = (event) => {
-        const usernameValue = event.target.value;
-        setUsername(usernameValue);
-        setUsernameError(usernameValue === '');
+        setUsername(event.target.value);
+        setUsernameError(event.target.value === '');
     };
 
     const handlePasswordChange = (event) => {
-        const passwordValue = event.target.value;
-        setPassword(passwordValue);
-        setPasswordError(passwordValue === '');
+        setPassword(event.target.value);
+        setPasswordError(event.target.value === '');
     };
 
     const handleCaptchaChange = (value) => {
-        console.log("Captcha value:", value);
-        setCaptchaVerified(true);
+        setRecaptchaToken(value);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-
-        if (!isCaptchaVerified) {
-            console.log("Please complete the ReCAPTCHA");
-            return;
-        }
 
         if (username === '' || password === '') {
             setUsernameError(username === '');
             setPasswordError(password === '');
-        } else {
-            event.preventDefault();
+            return;
+        }
 
-            const captchaValue = '<ReCAPTCHA Value>'; // Replace with the actual ReCAPTCHA value
+        if (!recaptchaToken) {
+            alert("Please complete the ReCAPTCHA");
+            return;
+        }
+        console.log(username);
+        console.log(password);
+        try {
+            const response = await fetch('http://localhost:8080/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: username,
+                    password: password,
+                    recaptchaToken: recaptchaToken,
+                }),
+            });
 
-            const data = {
-                username: username,
-                password: password,
-                captchaValue: captchaValue, // Include the ReCAPTCHA value
-            };
-
-            // Now you can send the data to your server, including the ReCAPTCHA value
-            // Make sure you send this data to your server for verification
-            console.log("Data to send to the server:", data);
-
-            let authHeader = window.btoa(username + ':' + password);
-            let user = { 'username': username, 'authHeader': authHeader };
-            localStorage.setItem('user', JSON.stringify(user));
-            navigate('/');
+            if (response.ok) {
+                const userData = await response.json();
+                console.log(userData);
+                localStorage.setItem('user', JSON.stringify(userData));
+                navigate('/'); // Redirect to the home page after login
+            } else {
+                throw new Error('Invalid credentials');
+            }
+        } catch (error) {
+            alert(error.message); // For a better UX, consider using a dialog or snackbar instead of alert
         }
     };
 

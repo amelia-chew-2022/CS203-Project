@@ -55,7 +55,7 @@ public class User implements UserDetails {
     @Email
     private String email;
 
-    @NotNull(message = "Address should not be null")
+    // @NotNull(message = "Address should not be null")
     @Size(min = 8, message = "Address should be at least 8 characters")
     private String address;
 

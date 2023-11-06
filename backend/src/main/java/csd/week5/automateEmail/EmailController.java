@@ -25,15 +25,8 @@ public class EmailController {
         // Assume User is a POJO with a username, email, etc.
 
         String username = user.getUsername();
-        String recipient = user.getEmail();
-        String subject = "Thank You for registration, ${username}!";
-        String template = "Dear ${username},\n\n" +
-                          "Thank you for registering with our service. We are excited to have you on board.\n\n" +
-                          "Should you need any assistance, feel free to contact our support team.\n\n" +
-                          "Warm regards,\n" +
-                          "The Team";
-
-        emailService.sendTemplatedEmail(recipient, subject, template, username);
+        String email = user.getEmail();
+        emailService.sendRegisterEmail(email, username);
 
         return ResponseEntity.ok("User registered successfully and welcome email sent.");
     }
