@@ -81,6 +81,7 @@ function Verification({ onVerificationSuccess }) {
                 className="verification"
                 textData={verificationText}
                 glitchParams={param}
+                style={{ userSelect: "none" }}
               />
             </span>
           </p>
