@@ -143,11 +143,12 @@ Content-Type: application/json
 }
 
 ###
+
 POST http://localhost:8080/login
 Content-Type: application/json
 
 {
-    "email": "shawn@gmail.com",
+    "username": "Shawn",
     "password": "hello123"
 }
 

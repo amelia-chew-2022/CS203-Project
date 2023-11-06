@@ -91,12 +91,16 @@ public class UserServiceImpl implements UserService {
     public boolean emailExists(String email) { 
         return userRepository.findByEmail(email).isPresent(); 
     } 
+
+    public boolean usernameExists(String username){
+        return userRepository.findByUsername(username).isPresent();
+    }
  
    @Override 
-    public User authenticate(String email, String password) { 
+    public User authenticate(String username, String password) { 
  
-        if(userRepository.findByEmail(email).isPresent()){ 
-            User user = userRepository.findByEmail(email).get(); 
+        if(userRepository.findByUsername(username).isPresent()){ 
+            User user = userRepository.findByUsername(username).get(); 
             if(encoder.matches(password, user.getPassword())) {
                 return user;
             }

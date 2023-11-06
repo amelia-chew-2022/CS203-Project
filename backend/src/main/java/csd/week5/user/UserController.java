@@ -46,7 +46,12 @@ public class UserController {
  
             if (userService.emailExists(registrationDto.getEmail())) { 
                 return new ResponseEntity<>("Email is already in use!", HttpStatus.BAD_REQUEST); 
-            } 
+            }
+
+            if (userService.usernameExists(registrationDto.getUsername())) { 
+                return new ResponseEntity<>("Username is already in use!", HttpStatus.BAD_REQUEST); 
+            }
+
             User newUser = userService.registerNewUserAccount(registrationDto); 
             String email = newUser.getEmail();
             String username = newUser.getUsername();
@@ -56,12 +61,11 @@ public class UserController {
      
     @PostMapping("/login") 
     public ResponseEntity<?> loginUser(@Valid @RequestBody User loginDto) { 
-        User user = userService.authenticate(loginDto.getEmail(), loginDto.getPassword()); 
+        User user = userService.authenticate(loginDto.getUsername(), loginDto.getPassword()); 
         if (user != null) { 
             return new ResponseEntity<>(user, HttpStatus.OK); 
         } else { 
             return new ResponseEntity<>("Invalid credentials", HttpStatus.UNAUTHORIZED); 
         } 
     } 
-    
 }

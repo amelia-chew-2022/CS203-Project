@@ -41,8 +41,8 @@ public class User implements UserDetails {
 
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
-    // @NotNull(message = "Username should not be null")
-    // @Size(min = 5, max = 20, message = "Username should be between 5 and 20 characters")
+    @NotNull(message = "Username should not be null")
+    @Size(min = 5, max = 20, message = "Username should be between 5 and 20 characters")
     private String username;
 
     @NotNull(message = "Password should not be null")
@@ -51,7 +51,7 @@ public class User implements UserDetails {
 
     private String authorities;
 
-    @NotNull(message = "Email should not be null")
+    // @NotNull(message = "Email should not be null")
     @Email
     private String email;
 
