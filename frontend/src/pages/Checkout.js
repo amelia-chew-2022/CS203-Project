@@ -47,7 +47,7 @@ function TimerComponent({ transaction }) {
   return (
     <div>
       {/* Your JSX goes here */}
-      <p>This is a subcomponent!</p>
+      {/* <p>This is a subcomponent!</p> */}
       <CountdownTimer initialCount={10} currTransaction={transaction}></CountdownTimer>
     </div>
   );
