@@ -108,7 +108,7 @@ const EventInfo = (props) => {
     // useEffect(() => {
     //     const fetchData = async () => {
     //       try {
-    //         const response = await axios.get('http://localhost:8080/eventInfo/id');
+    //         const response = await axios.get('http://52.77.214.206:8080/eventInfo/id');
     //         setEventInfo(response.data);
     //       } catch (error) {
     //         // Handle any errors that occurred during the request

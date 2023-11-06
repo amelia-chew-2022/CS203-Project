@@ -56,7 +56,7 @@ const Login = () => {
         console.log(username);
         console.log(password);
         try {
-            const response = await fetch('http://localhost:8080/login', {
+            const response = await fetch('http://52.77.214.206:8080/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -48,7 +48,7 @@ export default function Review({ transactionId }) {
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/getTickets/${transactionId}`)
+    axios.get(`http://52.77.214.206:8080/getTickets/${transactionId}`)
          .then((response) => {
              // assuming your state is named `tickets`
              setTickets(response.data);
