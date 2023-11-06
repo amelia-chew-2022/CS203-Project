@@ -22,6 +22,15 @@ const Home = () => {
         }
     }
 
+// const userString = localStorage.getItem("user");
+// const user = userString ? JSON.parse(userString) : null;
+
+// if (true) {
+//   // You can now use `user` object
+//   console.log(user.id); // Example
+// }
+
+
     return (
         <Fragment>
             <CssBaseline />
@@ -131,8 +140,6 @@ const Home = () => {
             </div>
 
             <EventCard/>
-
-            <Cards/>
 
             <Footer/>
         </Fragment>

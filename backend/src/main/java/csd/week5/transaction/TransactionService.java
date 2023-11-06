@@ -1,6 +1,8 @@
 package csd.week5.transaction;
 
 import java.util.List;
+import java.util.Optional;
+
 import csd.week5.user.User;
 
 import csd.week5.ticket.Ticket;
@@ -25,7 +27,8 @@ public interface TransactionService {
     void handleTimeoutTransactions();
 
     void checkTimeoutTransactions();
-
+    // Transaction updateTransaction(Long id, Transaction newTransactionInfo);
+    Optional<Transaction> geTransaction(long id);
     /**
      * Change method's signature: do not return a value for delete operation
      * 

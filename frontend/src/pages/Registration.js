@@ -75,11 +75,12 @@ function Registration() {
 
     // Form is valid, submit the data
     try {
-      const response = await axios.post("http://52.77.214.206:8080/register", formData, {
+      const response = await axios.post("http://localhost:8080/register", formData, {
         headers: { "Content-Type": "application/json" },
       });
       console.log('User created successfully:', response.data);
-      localStorage.setItem("user", response.data);
+      localStorage.setItem("user", JSON.stringify(response.data));
+
       navigate('/home'); // Navigate to home page or dashboard after registration
     } catch (error) {
       setOpen(true); // Open the Dialog upon error

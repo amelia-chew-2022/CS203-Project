@@ -42,6 +42,18 @@ function handleClick(event) {
   event.preventDefault();
   console.info("You clicked a breadcrumb.");
 }
+
+function TimerComponent({ transaction }) {
+  return (
+    <div>
+      {/* Your JSX goes here */}
+      {/* <p>This is a subcomponent!</p> */}
+      <CountdownTimer initialCount={30} currTransaction={transaction}></CountdownTimer>
+    </div>
+  );
+}
+
+
 function MySubComponent() {
   // You can use hooks and other logic here
   return (
@@ -78,23 +90,45 @@ const breadcrumbs = [
   </Typography>,
 ];
 
-export default function Checkout() {
-  let { transactionId } = useParams();
-  const [activeStep, setActiveStep] = React.useState(0);
-   // Add a state variable to track if the order has been confirmed
-   const [orderConfirmed, setOrderConfirmed] = useState(false);
 
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
+
+export default function Checkout() {
+  // Other state and hooks
+  let { transactionId } = useParams();
+  const [orderConfirmed, setOrderConfirmed] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
+  const [isVerified, setIsVerified] = useState(false); // State to track if verification was successful
+
+  const handleNext = async () => {
+    if (activeStep === steps.length - 1 && isVerified) {
+      // If it's the last step and the user is verified, place the order
+      try {
+        // Perform your API call here
+        const response = await axios.put(`http://localhost:8080/successfulTransaction/${transactionId}`, {
+          transactionId: transactionId,
+        });
+        
+
+        // Log the response or handle success
+        console.log(response.data);
+
+        // If successful, proceed to the next step
+        setActiveStep(activeStep + 1);
+      } catch (error) {
+        // Handle any errors here
+        console.error('Order placement failed:', error);
+      }
+    } else {
+      // If it's not the last step, just go to the next step
+      setActiveStep(activeStep + 1);
+    }
   };
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
 
-  // Add a new state to track if the verification has been passed
-  const [isVerified, setIsVerified] = useState(false);
-
+  // Verification success handler
   const handleVerificationSuccess = (status) => {
     setIsVerified(status);
   };
@@ -110,7 +144,8 @@ export default function Checkout() {
       // Handle the API response, e.g., show a success message
       console.log("Transaction confirmed:", response.data);
 
-      localStorage.clear();
+      // localStorage.clear();
+      localStorage.removeItem('countdownCount');
       // Set the orderConfirmed state to true
       setOrderConfirmed(true);
     } catch (error) {
@@ -223,7 +258,7 @@ export default function Checkout() {
                     }
                   }}
                   sx={{ mt: 3, ml: 1 }}
-                  disabled={activeStep === 0 && !isVerified} // Disable if on the verification step and not verified
+                  disabled={activeStep === 0 && !isVerified} // Keep your existing disabled condition
                 >
                   {activeStep === steps.length - 1 ? "Place order" : "Next"}
 
@@ -241,4 +276,3 @@ export default function Checkout() {
   );
   
 }
-

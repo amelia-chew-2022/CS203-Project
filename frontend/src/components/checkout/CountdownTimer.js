@@ -23,7 +23,11 @@ const CountdownTimer = ({ initialCount, currTransaction }) => {
                  // Handle errors
                 console.error('Error deleting transaction:', error);
             });
-        localStorage.clear();
+        // localStorage.clear();
+        localStorage.removeItem('countdownCount');
+        setTimeout(() => {
+            setTimerEnded(false); // Hide the alert after a delay
+          }, 5000); // Adjust the duration (in milliseconds) as needed
         // clearInterval(intervalId);
 
         return;
@@ -53,6 +57,13 @@ const CountdownTimer = ({ initialCount, currTransaction }) => {
       <Typography variant="h5" sx={{ marginTop: 2 }}>
         {count} seconds
       </Typography>
+
+      {/* Alert for timer ended notification */}
+      {timerEnded && (
+        <Alert severity="info" onClose={() => setTimerEnded(false)}>
+          Timer has ended. You will be redirected to the home page.
+        </Alert>
+      )}
 
     {/* TODO: add snackbar if time */}
       {/* Snackbar for timer ended notification */}

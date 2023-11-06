@@ -4,6 +4,10 @@ import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -21,7 +25,8 @@ public class TransactionServiceImpl implements TransactionService {
     private UserRepository userRepository;
     private TicketRepository tickets;
 
-    public TransactionServiceImpl(TransactionRepository Transactions, UserRepository userRepository, TicketRepository tickets) {
+    public TransactionServiceImpl(TransactionRepository Transactions, UserRepository userRepository,
+            TicketRepository tickets) {
         this.Transactions = Transactions;
         this.userRepository = userRepository;
         this.tickets = tickets;
@@ -43,30 +48,32 @@ public class TransactionServiceImpl implements TransactionService {
         return Transactions.findById(id).orElse(null);
     }
 
-
-
-   /*  @Override
-    public Transaction addTransaction(Transaction Transaction, Ticket[] ticketList) {
+    /*
+     * @Override
+     * public Transaction addTransaction(Transaction Transaction, Ticket[]
+     * ticketList) {
+     * // create transaction
+     * Transaction transaction = Transactions.save(Transaction);
+     * long userID = transaction.getUser().getId();
+     * 
+     * // update selected tickets in the array: availability and transaction_id
+     * for (Ticket ticket : ticketList) {
+     * ticket.setAvailable(false);
+     * // change transaction to transaction_id if we changed the foreign key in
+     * // Ticket.java
+     * ticket.setTransaction(transaction);
+     * 
+     * }
+     * 
+     * return transaction;
+     * }
+     */
+    
+     @Override
+    public Transaction addTransaction(Transaction Transaction) {
         // create transaction
         Transaction transaction = Transactions.save(Transaction);
-        long userID = transaction.getUser().getId();
-
-        // update selected tickets in the array: availability and transaction_id
-        for (Ticket ticket : ticketList) {
-            ticket.setAvailable(false);
-            // change transaction to transaction_id if we changed the foreign key in
-            // Ticket.java
-            ticket.setTransaction(transaction);
-
-        }
-
-        return transaction;
-    } */
-
-     public Transaction addTransaction(Transaction Transaction) {
-        // create transaction
-        Transaction transaction = Transactions.save(Transaction);
-        //long userID = transaction.getUser().getId();
+        // long userID = transaction.getUser().getId();
 
         return transaction;
     }
@@ -76,12 +83,11 @@ public class TransactionServiceImpl implements TransactionService {
         double total_price = transactionRequest.getTotal_price(); // ensure this is a double
         Long user_id = transactionRequest.getUser_id(); // use Long instead of int
         User user = userRepository.findById(user_id) // findById expects a Long
-                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
-    
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+
         Transaction transaction = new Transaction(total_price, user); // Assuming such a constructor exists
         return Transactions.save(transaction);
     }
-    
 
     // confirms that the transaction is completed and the seats selected are final
     // and paid for
@@ -96,14 +102,19 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     // @Override
-    // public Transaction updateTransaction(Long id, Transaction newTransactionInfo)
-    // {
-    // return Transactions.findById(id).map(Transaction -> {
-    // Transaction.setTitle(newTransactionInfo.getId());
-    // return Transactions.save(Transaction);
-    // }).orElse(null);
+    // public Transaction updateTransaction(Long id, Transaction newTransactionInfo) {
+
+    //     return Transactions.findById(id).map(transaction -> {
+    //         transaction.setTotal_price(newTransactionInfo.getTotal_price());
+    //         transaction.setCompleted(newTransactionInfo.isCompleted());
+    //         transaction.setUser(newTransactionInfo.getUser());
+    //     }).orElse(null);
 
     // }
+    @Override
+    public Optional<Transaction> geTransaction(long id){
+        return Transactions.findById(id);
+    }
 
     public boolean isTransactionExpired(Transaction transaction) {
         LocalDateTime localDateTime = LocalDateTime.now();
@@ -132,8 +143,6 @@ public class TransactionServiceImpl implements TransactionService {
         Transaction transaction = Transactions.findById(id).orElse(null);
         // List<Ticket> ticketList = tickets.findAllTicketsByTransaction(transaction);
         List<Ticket> ticketList = tickets.findAllTicketsByTransactionId(transaction.getId());
-
-        
 
         // revert availability and transaction_id attributes
         for (Ticket ticket : ticketList) {

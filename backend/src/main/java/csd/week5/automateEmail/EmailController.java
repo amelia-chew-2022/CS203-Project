@@ -41,20 +41,9 @@ public class EmailController {
 
     String username = user.getUsername();
     String recipient = user.getEmail();
-    StringBuilder purchaseDetails = new StringBuilder();
-    purchaseDetails.append("Ticket Seat       Price       \n");
-    
-    double total = transaction.getTotal_price();
-    for(Ticket ticket : tickets){
-        String ticketSeat = ticket.getSeat_number();
-        String ticketPrice = Integer.toString(ticket.getUnit_price());
-        total += ticket.getUnit_price();
-        purchaseDetails.append(ticketSeat + "       " + ticketPrice + "\n");
-    }
+   
 
-    purchaseDetails.append("               " + String.format("%.2f",total) + "\n");
-
-    emailService.sendPurchaseConfirmationEmail(recipient,transactionId, username, purchaseDetails);
+    emailService.sendPurchaseConfirmationEmail(recipient,transactionId, username, tickets);
 
     return ResponseEntity.ok("Purchase confirmation email sent to " + username);
 }

@@ -17,7 +17,7 @@ export default function SeatSelection() {
 
   useEffect(() => {
     axios
-      .get("http://52.77.214.206:8080/tickets")
+      .get("http://localhost:8080/tickets")
       .then((res) => {
         const data = res.data;
         // Ensure that data is correctly structured as a 2D array with 6 rows
@@ -46,7 +46,7 @@ export default function SeatSelection() {
     // Send a PUT request to update the seat's 'available' property in the database
     axios
       .put(
-        `http://52.77.214.206:8080/tickets/updateAvailability/${buttons[rowIndex][colIndex].id}`,
+        `http://localhost:8080/tickets/updateAvailability/${buttons[rowIndex][colIndex].id}`,
         updatedTicketData,
 
         {
@@ -83,17 +83,26 @@ export default function SeatSelection() {
     /// Assuming `selectedSeats` is an array that contains the selected seat details
     // and `currentUser` is an object that contains the ID of the currently logged in user.
 
+const userString = localStorage.getItem("user");
+const user = userString ? JSON.parse(userString) : null;
+
+if (user) {
+  // You can now use `user` object
+  console.log(user.id); // Example
+}
+
     // Create a transaction object
     const transactionData = {
       total_price: totalPrice,
-      user_id: 2,
+      user_id: 3,
     };
+
 
     // console.log(transactionData);
     try {
       // Send a POST request to the backend to add the transaction
       const response = await axios.post(
-        "http://52.77.214.206:8080/Transactions",
+        "http://localhost:8080/Transactions",
         transactionData,
         {
           headers: { "Content-Type": "application/json" },
@@ -104,11 +113,11 @@ export default function SeatSelection() {
       if (response.status === 201) {
         // Set the transactionId with the one from the response
          transactionId = response.data.id;
+         localStorage.setItem("transaction", JSON.stringify(response.data));
 
         // Now update each selected seat with the created transaction ID
         selectedSeats.forEach((seat) => {
           handleUpdateClick(seat.row, seat.col, transactionId);
-
         });
         navigate(`/checkout/${transactionId}`);
       } else {

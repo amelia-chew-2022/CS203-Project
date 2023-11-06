@@ -48,7 +48,7 @@ export default function Review({ transactionId }) {
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://52.77.214.206:8080/getTickets/${transactionId}`)
+    axios.get(`http://localhost:8080/getTickets/${transactionId}`)
          .then((response) => {
              // assuming your state is named `tickets`
              setTickets(response.data);
@@ -63,8 +63,23 @@ export default function Review({ transactionId }) {
 const totalPrice = tickets.reduce((total, ticket) => {
   return total + (ticket.unit_price || 0);
 }, 0);
-  
 
+const handlePlaceOrder = async () => {
+  try {
+    const response = await axios.post('http://localhost:8080/placeOrder', {
+      transactionId: transactionId,
+      tickets: tickets,
+      // Include other data as necessary
+    });
+    // Handle the response if the order was successful
+    console.log('Order placed successfully:', response.data);
+    // Redirect or update UI as necessary
+  } catch (error) {
+    console.error('Error placing order:', error);
+    // Handle errors, e.g. show a notification to the user
+  }
+};
+  
 
   return (
     <React.Fragment>
