@@ -15,6 +15,8 @@ import '../../assets/hallyupopfest.png';
 import '../../assets/roc.png';
 import '../../assets/taylorswift.png';
 import '../../assets/vibes.png';
+import Twice from '../../assets/twice.png';
+import CardMedia from '@mui/material/CardMedia';
 
 function EventCard() {
     const dateStyle = {
@@ -81,7 +83,7 @@ function EventCard() {
                         justifyContent: "center",
                         marginTop: "2rem",
                         marginBottom: "2rem",
-                    }} 
+                    }}
                     key={rowIndex}
                     className="row"
                 >
@@ -89,7 +91,12 @@ function EventCard() {
                         <Link to={`/eventinfo1/${eventInfo.id}`}>
                             <Button>
                                 <Card sx={{ width: 400, height: 300 }}>
-                                <ImageDisplay imagePath="/src/assets/taylorswift.png" />
+                                    <CardMedia
+                                        component="img"
+                                        height="175"
+                                        image={Twice}
+                                        alt="Twice"
+                                    />
                                     <CardContent>
                                         <Typography sx={dateStyle}>
                                             {eventInfo.date}
