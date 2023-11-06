@@ -67,6 +67,16 @@ public class TransactionController {
     // return Transaction;
     // }
 
+    @PutMapping("Transactions/{id}")
+    public Transaction completeTransaction(@PathVariable Long id) {
+        Transaction transaction = TransactionService.confirmTransaction(id);
+        if (transaction == null) {
+            throw new TransactionNotFoundException(id);
+        }
+
+        return transaction;
+    }
+
     @DeleteMapping("/Transactions/{id}")
     public void deleteTransaction(@PathVariable Long id) {
         try {

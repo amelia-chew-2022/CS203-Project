@@ -19,6 +19,8 @@ import { Link } from "react-router-dom";
 import Verification from "./checkoutforms/Verification";
 import { useParams } from "react-router-dom";
 import SeatSelection from "./checkoutforms/SeatSelection";
+import CountdownTimer from "../components/checkout/CountdownTimer";
+import axios from 'axios';
 
 const steps = ["Verification", "Payment Details", "Order Summary"];
 
@@ -40,6 +42,18 @@ function handleClick(event) {
   event.preventDefault();
   console.info("You clicked a breadcrumb.");
 }
+
+function TimerComponent({ transaction }) {
+  return (
+    <div>
+      {/* Your JSX goes here */}
+      <p>This is a subcomponent!</p>
+      <CountdownTimer initialCount={10} currTransaction={transaction}></CountdownTimer>
+    </div>
+  );
+}
+
+
 function MySubComponent() {
   // You can use hooks and other logic here
   return (
@@ -79,6 +93,8 @@ const breadcrumbs = [
 export default function Checkout() {
   let { transactionId } = useParams();
   const [activeStep, setActiveStep] = React.useState(0);
+   // Add a state variable to track if the order has been confirmed
+   const [orderConfirmed, setOrderConfirmed] = useState(false);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -94,11 +110,54 @@ export default function Checkout() {
   const handleVerificationSuccess = (status) => {
     setIsVerified(status);
   };
+
+  // Function to confirm and mark the transaction as completed
+  const confirmOrder = async () => {
+    try {
+      // Make an API call to confirm and mark the transaction as completed
+      const response = await axios.put(
+        `http://localhost:8080/Transactions/${transactionId}`
+      );
+
+      // Handle the API response, e.g., show a success message
+      console.log("Transaction confirmed:", response.data);
+
+      localStorage.clear();
+      // Set the orderConfirmed state to true
+      setOrderConfirmed(true);
+    } catch (error) {
+      // Handle errors, e.g., show an error message
+      console.error('Error confirming transaction:', error);
+    }
+  };
+
   return (
     <React.Fragment>
-      <CssBaseline />
+      {/* Display the order confirmation page if orderConfirmed is true */}
+      {orderConfirmed ? (
+        <React.Fragment>
+          <Typography variant="h5" gutterBottom>
+            Thank you for your order.
+          </Typography>
+          <Typography variant="subtitle1">
+            Your order number is #2001539. We have emailed your order
+            confirmation, and will send you an update when your order has
+            shipped.
+          </Typography>
+          <React.Fragment>
+            <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+              <Button variant="contained" href="/home" sx={{ mt: 3, ml: 1 }}>
+                Back to Home
+              </Button>
+            </Box>
+          </React.Fragment>
+        </React.Fragment>
+      ) : (
+        <div>
+          <CssBaseline />
       <NavBar></NavBar>
-      
+      <TimerComponent transaction={transactionId}></TimerComponent>
+
       {/* breadcrumbs  */}
       <div
         style={{
@@ -132,6 +191,7 @@ export default function Checkout() {
           </Stepper>
           {activeStep === steps.length ? (
             <React.Fragment>
+              <NavBar></NavBar>
               <Typography variant="h5" gutterBottom>
                 Thank you for your order.
               </Typography>
@@ -149,6 +209,7 @@ export default function Checkout() {
                   </Button>
                 </Box>
               </React.Fragment>
+              <Footer></Footer>
             </React.Fragment>
           ) : (
             <React.Fragment>
@@ -166,18 +227,30 @@ export default function Checkout() {
 
                 <Button
                   variant="contained"
-                  onClick={handleNext}
+                  onClick={() => {
+                    if (activeStep === steps.length - 1) {
+                      confirmOrder(); // Call the confirmOrder function on the last step
+                    } else {
+                      handleNext(); // Continue to the next step
+                    }
+                  }}
                   sx={{ mt: 3, ml: 1 }}
                   disabled={activeStep === 0 && !isVerified} // Disable if on the verification step and not verified
                 >
                   {activeStep === steps.length - 1 ? "Place order" : "Next"}
+
+
                 </Button>
               </Box>
             </React.Fragment>
-          )}
-        </Paper>
-      </Container>
-      <Footer></Footer>
-    </React.Fragment>
+            )}
+            </Paper>
+          </Container>
+          <Footer></Footer>
+        </div>
+        )}
+      </React.Fragment>
   );
+  
 }
+
