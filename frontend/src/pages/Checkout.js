@@ -144,7 +144,8 @@ export default function Checkout() {
       // Handle the API response, e.g., show a success message
       console.log("Transaction confirmed:", response.data);
 
-      localStorage.clear();
+      // localStorage.clear();
+      localStorage.removeItem('countdownCount');
       // Set the orderConfirmed state to true
       setOrderConfirmed(true);
     } catch (error) {

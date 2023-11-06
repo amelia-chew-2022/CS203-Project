@@ -110,7 +110,7 @@ const EventInfo1 = (props) => {
         const fetchData = async () => {
             try {
                 // Use the `id` parameter from the URL to fetch event information
-                const response = await axios.get(`http://52.77.214.206:8080/eventInfo/${id}`);
+                const response = await axios.get(`http://localhost:8080/eventInfo/${id}`);
                 console.log('Response from server:', response);
 
                 setEventInfo(response.data);
@@ -185,7 +185,7 @@ const EventInfo1 = (props) => {
             {/* image */}
             <Box sx={{ backgroundColor: "#000" }}>
             <Container sx={{ backgroundColor: "000" }}>
-                <img src={eventInfo.imageURL} alt="Vibes" width="100%" />
+                <img src={Vibes} alt="Vibes" width="100%" />
 
                 <Typography variant="h4" gutterBottom sx={{ color: "#fff" }}>
                     {eventInfo.date} / {eventInfo.location}
