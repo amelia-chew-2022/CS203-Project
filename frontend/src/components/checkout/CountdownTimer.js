@@ -23,7 +23,8 @@ const CountdownTimer = ({ initialCount, currTransaction }) => {
                  // Handle errors
                 console.error('Error deleting transaction:', error);
             });
-        localStorage.clear();
+        // localStorage.clear();
+        localStorage.removeItem('countdownCount');
         setTimeout(() => {
             setTimerEnded(false); // Hide the alert after a delay
           }, 5000); // Adjust the duration (in milliseconds) as needed

@@ -132,8 +132,6 @@ const Home = () => {
 
             <EventCard/>
 
-            <Cards/>
-
             <Footer/>
         </Fragment>
     );
