@@ -71,7 +71,7 @@ const Login = () => {
             if (response.ok) {
                 const userData = await response.json();
                 console.log(userData);
-                localStorage.setItem('user', JSON.stringify(userData));
+                localStorage.setItem("user", JSON.stringify(response.data));
                 navigate('/'); // Redirect to the home page after login
             } else {
                 throw new Error('Invalid credentials');
@@ -79,6 +79,10 @@ const Login = () => {
         } catch (error) {
             alert(error.message); // For a better UX, consider using a dialog or snackbar instead of alert
         }
+
+        let authHeader = window.btoa(username + ':' + password);
+        let user = { 'username': username, 'authHeader': authHeader };
+
     };
 
     return (

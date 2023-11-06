@@ -152,3 +152,6 @@ Content-Type: application/json
     "password": "hello123"
 }
 
+###
+PUT http://localhost:8080/successfulTransaction/4
+

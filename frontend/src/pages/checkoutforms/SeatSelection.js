@@ -83,10 +83,18 @@ export default function SeatSelection() {
     /// Assuming `selectedSeats` is an array that contains the selected seat details
     // and `currentUser` is an object that contains the ID of the currently logged in user.
 
+const userString = localStorage.getItem("user");
+const user = userString ? JSON.parse(userString) : null;
+
+if (user) {
+  // You can now use `user` object
+  console.log(user.id); // Example
+}
+
     // Create a transaction object
     const transactionData = {
       total_price: totalPrice,
-      user_id: 2,
+      user_id: user.id,
     };
 
     // console.log(transactionData);
@@ -104,11 +112,11 @@ export default function SeatSelection() {
       if (response.status === 201) {
         // Set the transactionId with the one from the response
          transactionId = response.data.id;
+         localStorage.setItem("transaction", JSON.stringify(response.data));
 
         // Now update each selected seat with the created transaction ID
         selectedSeats.forEach((seat) => {
           handleUpdateClick(seat.row, seat.col, transactionId);
-
         });
         navigate(`/checkout/${transactionId}`);
       } else {
