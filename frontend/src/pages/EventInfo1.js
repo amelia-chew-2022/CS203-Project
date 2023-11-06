@@ -185,7 +185,7 @@ const EventInfo1 = (props) => {
             {/* image */}
             <Box sx={{ backgroundColor: "#000" }}>
             <Container sx={{ backgroundColor: "000" }}>
-                <img src={eventInfo.imageURL} alt="Vibes" width="100%" />
+                <img src={Vibes} alt="Vibes" width="100%" />
 
                 <Typography variant="h4" gutterBottom sx={{ color: "#fff" }}>
                     {eventInfo.date} / {eventInfo.location}

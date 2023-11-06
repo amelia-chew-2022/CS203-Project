@@ -14,8 +14,8 @@ import '../../assets/p1harmony.png';
 import '../../assets/hallyupopfest.png';
 import '../../assets/roc.png';
 import '../../assets/taylorswift.png';
-import '../../assets/vibes.png';
-import Twice from '../../assets/twice.png';
+import '../../assets/twice.png';
+import Vibes from '../../assets/vibes.png';
 import CardMedia from '@mui/material/CardMedia';
 
 function EventCard() {
@@ -94,8 +94,8 @@ function EventCard() {
                                     <CardMedia
                                         component="img"
                                         height="175"
-                                        image={Twice}
-                                        alt="Twice"
+                                        image={Vibes}
+                                        alt="Vibes"
                                     />
                                     <CardContent>
                                         <Typography sx={dateStyle}>
