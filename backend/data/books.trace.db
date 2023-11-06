@@ -511,3 +511,81 @@ insert into ticket (id, available, seat_number, ticket_number, title, transactio
 2023-11-05 15:25:54 jdbc[3]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TICKET" not found; SQL statement:
 insert into ticket (id, available, seat_number, ticket_number, title, transaction_id, unit_price) values (default, ?, ?, ?, ?, ?, ?) [42102-214]
+2023-11-06 14:53:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table EventInfo (id bigint not null auto_increment, date varchar(255) not null, eventDetail longblob, eventName varchar(255) not null, imageURL varchar(255), location varchar(255), ticketPricing varchar(255), primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table EventInfo (id bigint not null auto_increment, date varchar(255) not null, eventDetail longblob, eventName varchar(255) not null, imageURL varchar(255), location varchar(255), ticketPricing varchar(255), primary key (id)) engine=MyISAM [42001-214]
+2023-11-06 14:53:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Ticket (id bigint not null auto_increment, available bit, seat_number varchar(200) not null, ticket_number varchar(255), title varchar(200) not null, unit_price integer not null, transaction_id bigint, primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table Ticket (id bigint not null auto_increment, available bit, seat_number varchar(200) not null, ticket_number varchar(255), title varchar(200) not null, unit_price integer not null, transaction_id bigint, primary key (id)) engine=MyISAM [42001-214]
+2023-11-06 14:53:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Transaction (id bigint not null auto_increment, completed bit not null, localDateTime datetime, total_price double precision not null, user_id bigint, primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table Transaction (id bigint not null auto_increment, completed bit not null, localDateTime datetime, total_price double precision not null, user_id bigint, primary key (id)) engine=MyISAM [42001-214]
+2023-11-06 14:53:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table User (id bigint not null auto_increment, address varchar(255) not null, authorities varchar(255), email varchar(255) not null, password varchar(255) not null, phone_num varchar(255), username varchar(255), primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table User (id bigint not null auto_increment, address varchar(255) not null, authorities varchar(255), email varchar(255) not null, password varchar(255) not null, phone_num varchar(255), username varchar(255), primary key (id)) engine=MyISAM [42001-214]
+2023-11-06 14:53:19 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TICKET" not found; SQL statement:
+alter table Ticket add constraint FK46rrn5q06gmgxd2oqi1danlpq foreign key (transaction_id) references Transaction (id) [42102-214]
+2023-11-06 14:53:20 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TRANSACTION" not found; SQL statement:
+alter table Transaction add constraint FKrq0lpy3mpjvjkeyrp4u3gr7bq foreign key (user_id) references User (id) [42102-214]
+2023-11-06 15:26:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table EventInfo (id bigint not null auto_increment, date varchar(255) not null, eventDetail longblob, eventName varchar(255) not null, imageURL varchar(255), location varchar(255), ticketPricing varchar(255), primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table EventInfo (id bigint not null auto_increment, date varchar(255) not null, eventDetail longblob, eventName varchar(255) not null, imageURL varchar(255), location varchar(255), ticketPricing varchar(255), primary key (id)) engine=MyISAM [42001-214]
+2023-11-06 15:26:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Ticket (id bigint not null auto_increment, available bit, seat_number varchar(200) not null, ticket_number varchar(255), title varchar(200) not null, unit_price integer not null, transaction_id bigint, primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table Ticket (id bigint not null auto_increment, available bit, seat_number varchar(200) not null, ticket_number varchar(255), title varchar(200) not null, unit_price integer not null, transaction_id bigint, primary key (id)) engine=MyISAM [42001-214]
+2023-11-06 15:26:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Transaction (id bigint not null auto_increment, completed bit not null, localDateTime datetime, total_price double precision not null, user_id bigint, primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table Transaction (id bigint not null auto_increment, completed bit not null, localDateTime datetime, total_price double precision not null, user_id bigint, primary key (id)) engine=MyISAM [42001-214]
+2023-11-06 15:26:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table User (id bigint not null auto_increment, address varchar(255) not null, authorities varchar(255), email varchar(255) not null, password varchar(255) not null, phone_num varchar(255), username varchar(255), primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table User (id bigint not null auto_increment, address varchar(255) not null, authorities varchar(255), email varchar(255) not null, password varchar(255) not null, phone_num varchar(255), username varchar(255), primary key (id)) engine=MyISAM [42001-214]
+2023-11-06 15:26:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TICKET" not found; SQL statement:
+alter table Ticket add constraint FK46rrn5q06gmgxd2oqi1danlpq foreign key (transaction_id) references Transaction (id) [42102-214]
+2023-11-06 15:26:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TRANSACTION" not found; SQL statement:
+alter table Transaction add constraint FKrq0lpy3mpjvjkeyrp4u3gr7bq foreign key (user_id) references User (id) [42102-214]
+2023-11-06 16:01:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table EventInfo (id bigint not null auto_increment, date varchar(255) not null, eventDetail longblob, eventName varchar(255) not null, imageURL varchar(255), location varchar(255), ticketPricing varchar(255), primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table EventInfo (id bigint not null auto_increment, date varchar(255) not null, eventDetail longblob, eventName varchar(255) not null, imageURL varchar(255), location varchar(255), ticketPricing varchar(255), primary key (id)) engine=MyISAM [42001-214]
+2023-11-06 16:01:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Ticket (id bigint not null auto_increment, available bit, seat_number varchar(200) not null, ticket_number varchar(255), title varchar(200) not null, unit_price integer not null, transaction_id bigint, primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table Ticket (id bigint not null auto_increment, available bit, seat_number varchar(200) not null, ticket_number varchar(255), title varchar(200) not null, unit_price integer not null, transaction_id bigint, primary key (id)) engine=MyISAM [42001-214]
+2023-11-06 16:01:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Transaction (id bigint not null auto_increment, completed bit not null, localDateTime datetime, total_price double precision not null, user_id bigint, primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table Transaction (id bigint not null auto_increment, completed bit not null, localDateTime datetime, total_price double precision not null, user_id bigint, primary key (id)) engine=MyISAM [42001-214]
+2023-11-06 16:01:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table User (id bigint not null auto_increment, address varchar(255) not null, authorities varchar(255), email varchar(255) not null, password varchar(255) not null, phone_num varchar(255), username varchar(255), primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table User (id bigint not null auto_increment, address varchar(255) not null, authorities varchar(255), email varchar(255) not null, password varchar(255) not null, phone_num varchar(255), username varchar(255), primary key (id)) engine=MyISAM [42001-214]
+2023-11-06 16:01:41 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TICKET" not found; SQL statement:
+alter table Ticket add constraint FK46rrn5q06gmgxd2oqi1danlpq foreign key (transaction_id) references Transaction (id) [42102-214]
+2023-11-06 16:01:42 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TRANSACTION" not found; SQL statement:
+alter table Transaction add constraint FKrq0lpy3mpjvjkeyrp4u3gr7bq foreign key (user_id) references User (id) [42102-214]
+2023-11-06 16:01:43 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TICKET" not found (this database is empty); SQL statement:
+insert into Ticket (available, seat_number, ticket_number, title, transaction_id, unit_price) values (?, ?, ?, ?, ?, ?) [42104-214]
+2023-11-06 16:03:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table EventInfo (id bigint not null auto_increment, date varchar(255) not null, eventDetail longblob, eventName varchar(255) not null, imageURL varchar(255), location varchar(255), ticketPricing varchar(255), primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table EventInfo (id bigint not null auto_increment, date varchar(255) not null, eventDetail longblob, eventName varchar(255) not null, imageURL varchar(255), location varchar(255), ticketPricing varchar(255), primary key (id)) engine=MyISAM [42001-214]
+2023-11-06 16:03:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Ticket (id bigint not null auto_increment, available bit, seat_number varchar(200) not null, ticket_number varchar(255), title varchar(200) not null, unit_price integer not null, transaction_id bigint, primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table Ticket (id bigint not null auto_increment, available bit, seat_number varchar(200) not null, ticket_number varchar(255), title varchar(200) not null, unit_price integer not null, transaction_id bigint, primary key (id)) engine=MyISAM [42001-214]
+2023-11-06 16:03:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table Transaction (id bigint not null auto_increment, completed bit not null, localDateTime datetime, total_price double precision not null, user_id bigint, primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table Transaction (id bigint not null auto_increment, completed bit not null, localDateTime datetime, total_price double precision not null, user_id bigint, primary key (id)) engine=MyISAM [42001-214]
+2023-11-06 16:03:26 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "create table User (id bigint not null auto_increment, address varchar(255) not null, authorities varchar(255), email varchar(255) not null, password varchar(255) not null, phone_num varchar(255), username varchar(255), primary key (id)) engine[*]=MyISAM"; expected "identifier"; SQL statement:
+create table User (id bigint not null auto_increment, address varchar(255) not null, authorities varchar(255), email varchar(255) not null, password varchar(255) not null, phone_num varchar(255), username varchar(255), primary key (id)) engine=MyISAM [42001-214]
+2023-11-06 16:03:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TICKET" not found; SQL statement:
+alter table Ticket add constraint FK46rrn5q06gmgxd2oqi1danlpq foreign key (transaction_id) references Transaction (id) [42102-214]
+2023-11-06 16:03:27 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TRANSACTION" not found; SQL statement:
+alter table Transaction add constraint FKrq0lpy3mpjvjkeyrp4u3gr7bq foreign key (user_id) references User (id) [42102-214]
+2023-11-06 16:03:29 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TICKET" not found (this database is empty); SQL statement:
+insert into Ticket (available, seat_number, ticket_number, title, transaction_id, unit_price) values (?, ?, ?, ?, ?, ?) [42104-214]

@@ -12,6 +12,8 @@ public interface UserService {
 
     User updateUsers(Long id, User user);
 
+    User getUserByUsername(String username);
+
 
     /**
      * Change method's signature: do not return a value for delete operation

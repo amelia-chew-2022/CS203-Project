@@ -11,13 +11,11 @@ POST http://localhost:8080/tickets
 Content-Type: application/json
 Authorization: Basic Shawn hello123
 
-GET 
-
 {
     "title": "Lee Youngji",
-    "ticket_number": "789",
-    "seat_number": "1cxCV6",
-    "unit_price": "150"
+    "ticket_number": "78955611",
+    "seat_number": "1cxCV6afasfsa",
+    "unit_price" : 150
 }
 
 ### update ticket
@@ -29,27 +27,27 @@ Authorization: Basic Nicholas bye123
     "title": "TXT Concert",
     "ticket_number": "789",
     "seat_number": "1cxCV6",
-    "unit_price": "150"
+    "unit_price": 150
 }
 
 ### show all users
-GET http://localhost:8080/users
+GET http://localhost:8080/auth/users
 
 ### add user
-POST http://localhost:8080/users
+POST http://localhost:8080/auth/users
 Content-Type: application/json
 
 {
     "username": "zhirong",
     "password": "1234567898",
     "authorities": "ROLE_USER",
-    "email": "jana@gmail.com",
+    "email": "zhirong@gmail.com",
     "address": "asdesdsaddsaads",
     "phone_num": "32165498"
 }
 
 ### add user
-POST http://localhost:8080/users
+POST http://localhost:8080/auth/users
 Content-Type: application/json
 
 {
@@ -63,12 +61,11 @@ Content-Type: application/json
 
 
 ### user buys ticket
-PUT http://localhost:8080/tickets/1/4/buy
-Authorization: Basic Janaaaaa goodpassword
+# PUT http://localhost:8080/tickets/1/4/buy
+# Authorization: Basic Janaaaaa goodpassword
 
 ### show specific ticket
 GET http://localhost:8080/tickets/1
-
 
 ###
 GET http://localhost:8080/users/2
@@ -79,7 +76,7 @@ Content-Type: application/json
 }
 
 ### 
-POST http://localhost:8080/transactions
+POST http://localhost:8080/Transactions
 Content-Type: application/json
 
 {
@@ -90,14 +87,14 @@ Content-Type: application/json
 ### user buys ticket
 PUT http://localhost:8080/tickets/updateAvailability/4
 Content-Type: application/json
-Authorization: Basic Nicholas bye123
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKYW5hYWFhYSIsImlhdCI6MTY5OTI3MTQ0MCwiZXhwIjoxNjk5MjczMjQwfQ.NGDMmplY3hga7-XcSZjcIRhS1q5VmWppbxn8We4aQ-4
 
 {
-    "available" : true,
+    "available" : true
 }
 
 ###
-Post http://localhost:8080/transactions
+Post http://localhost:8080/Transactions
 Content-Type: application/json
 
 {
@@ -119,7 +116,7 @@ Content-Type: application/json
 Get http://localhost:8080/getTickets/2
 
 ###
-Post http://localhost:8080/registration
+Post http://localhost:8080/auth/users
 Content-Type: application/json
 
 {
@@ -130,5 +127,12 @@ Content-Type: application/json
     "phone_num": "32165498"
 }
 
+###
+POST http://localhost:8080/auth/generateToken
+Content-Type: application/json
 
+{
+    "username": "Janaaaaa",
+    "password": "goodpassword"
+}
 
