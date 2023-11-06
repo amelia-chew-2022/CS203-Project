@@ -42,18 +42,6 @@ function handleClick(event) {
   event.preventDefault();
   console.info("You clicked a breadcrumb.");
 }
-
-function TimerComponent({ transaction }) {
-  return (
-    <div>
-      {/* Your JSX goes here */}
-      {/* <p>This is a subcomponent!</p> */}
-      <CountdownTimer initialCount={10} currTransaction={transaction}></CountdownTimer>
-    </div>
-  );
-}
-
-
 function MySubComponent() {
   // You can use hooks and other logic here
   return (
