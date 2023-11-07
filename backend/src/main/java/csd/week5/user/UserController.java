@@ -30,6 +30,7 @@ import csd.week5.automateEmail.EmailService;
 @RestController
 //@RequestMapping("/auth")
 public class UserController {
+    
     @Autowired
     private UserService userService;
     @Autowired
