@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 function onChange(value) {
     console.log("Captcha value:", value);
@@ -53,10 +54,9 @@ const Login = () => {
             alert("Please complete the ReCAPTCHA");
             return;
         }
-        console.log(username);
-        console.log(password);
+
         try {
-            const response = await fetch('http://localhost:8080/login', {
+            const response = await fetch('http://localhost:8080/generateToken', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -69,26 +69,28 @@ const Login = () => {
             });
 
             if (response.ok) {
-                const userData = await response.json();
-                console.log(userData);
-                // Your new code snippet
-                console.log("Data to send to the server:", userData);
-                let authHeader = window.btoa(username + ':' + password);
-                let user = { 'username': username, 'authHeader': authHeader };
-                localStorage.setItem('user', JSON.stringify(user));
-                navigate('/'); // Redirect to the home page after login
-            } else {
+                const jwtToken = await response.text();
+              
+                if (jwtToken) {
+                  // Store the JWT in local storage
+                  localStorage.setItem('jwt', jwtToken);
+              
+                  // Optionally, you can decode the JWT and extract user information.
+                  // Import 'jwt-decode' or 'jsonwebtoken' as shown earlier in this conversation
+                  const decodedToken = jwtDecode(jwtToken);
+                  console.log("User data from JWT:", decodedToken);
+              
+                  navigate('/'); // Redirect to the home page after login
+                } else {
+                  throw new Error('No JWT found in the response');
+                }
+              } else {
                 throw new Error('Invalid credentials');
-            }
+              }
         } catch (error) {
-            alert(error.message); // For a better UX, consider using a dialog or snackbar instead of alert
+            alert(error.message);
         }
-
-        let authHeader = window.btoa(username + ':' + password);
-        let user = { 'username': username, 'authHeader': authHeader };
-
-    };
-
+    }
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
