@@ -3,8 +3,6 @@ package csd.week5.eventInfo;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
-import csd.week5.user.*;
-
 @Service
 public class EventInfoServiceImpl implements EventInfoService {
 

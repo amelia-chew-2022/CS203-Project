@@ -1,13 +1,8 @@
 package csd.week5.transaction;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -15,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import csd.week5.ticket.*;
-// import csd.week5.ticket.TicketRepository;
 import csd.week5.user.*;
 
 @Service
@@ -37,7 +31,6 @@ public class TransactionServiceImpl implements TransactionService {
         return Transactions.findAll();
     }
 
-    // i assumed JPA automatically created this findAllByStatus method
     @Override
     public List<Transaction> listActiveTransactions() {
         return Transactions.findAllByCompleted(false);
@@ -47,33 +40,11 @@ public class TransactionServiceImpl implements TransactionService {
     public Transaction getTransaction(Long id) {
         return Transactions.findById(id).orElse(null);
     }
-
-    /*
-     * @Override
-     * public Transaction addTransaction(Transaction Transaction, Ticket[]
-     * ticketList) {
-     * // create transaction
-     * Transaction transaction = Transactions.save(Transaction);
-     * long userID = transaction.getUser().getId();
-     * 
-     * // update selected tickets in the array: availability and transaction_id
-     * for (Ticket ticket : ticketList) {
-     * ticket.setAvailable(false);
-     * // change transaction to transaction_id if we changed the foreign key in
-     * // Ticket.java
-     * ticket.setTransaction(transaction);
-     * 
-     * }
-     * 
-     * return transaction;
-     * }
-     */
     
      @Override
     public Transaction addTransaction(Transaction Transaction) {
         // create transaction
         Transaction transaction = Transactions.save(Transaction);
-        // long userID = transaction.getUser().getId();
 
         return transaction;
     }
@@ -85,7 +56,7 @@ public class TransactionServiceImpl implements TransactionService {
         User user = userRepository.findById(user_id) // findById expects a Long
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
 
-        Transaction transaction = new Transaction(total_price, user); // Assuming such a constructor exists
+        Transaction transaction = new Transaction(total_price, user);
         return Transactions.save(transaction);
     }
 
@@ -93,24 +64,12 @@ public class TransactionServiceImpl implements TransactionService {
     // and paid for
     @Override
     public Transaction confirmTransaction(Long id) {
-        // not sure if i have to still check if transaction time has expired in this
-        // method or not, since the transaction validity is periodically checked
         return Transactions.findById(id).map(Transaction -> {
             Transaction.setCompleted(true);
             return Transactions.save(Transaction);
         }).orElse(null);
     }
 
-    // @Override
-    // public Transaction updateTransaction(Long id, Transaction newTransactionInfo) {
-
-    //     return Transactions.findById(id).map(transaction -> {
-    //         transaction.setTotal_price(newTransactionInfo.getTotal_price());
-    //         transaction.setCompleted(newTransactionInfo.isCompleted());
-    //         transaction.setUser(newTransactionInfo.getUser());
-    //     }).orElse(null);
-
-    // }
     @Override
     public Optional<Transaction> geTransaction(long id){
         return Transactions.findById(id);

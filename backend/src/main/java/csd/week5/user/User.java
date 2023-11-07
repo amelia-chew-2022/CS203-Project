@@ -19,7 +19,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.*;
-import csd.week5.ticket.*;
 import csd.week5.transaction.Transaction;
 
 @Entity
@@ -51,16 +50,12 @@ public class User implements UserDetails {
 
     private String authorities;
 
-    // @NotNull(message = "Email should not be null")
     @Email
     private String email;
 
-    // @NotNull(message = "Address should not be null")
     @Size(min = 8, message = "Address should be at least 8 characters")
     private String address;
 
-    // @NotNull(message = "Phone number should not be null")
-    // @Size(min = 8, message = "Phone number should be at least 8 characters")
     private String phone_num;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)

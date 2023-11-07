@@ -2,18 +2,10 @@ package csd.week5.user;
  
 import java.util.List; 
 import java.util.Optional; 
- 
-import javax.validation.Valid; 
-import javax.validation.constraints.Email; 
-import javax.validation.constraints.NotNull; 
-import javax.validation.constraints.Size; 
- 
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder; 
-import org.springframework.stereotype.Service; 
-import org.springframework.web.bind.annotation.RequestBody; 
- 
-import csd.week5.user.*; 
- 
+import org.springframework.stereotype.Service;
+
 @Service 
 public class UserServiceImpl implements UserService { 
  

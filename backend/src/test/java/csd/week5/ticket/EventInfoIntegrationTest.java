@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.net.URI;
 import java.util.Optional;
-import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -17,12 +16,9 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import csd.week5.eventInfo.EventInfoRepository;
 import csd.week5.eventInfo.EventInfo;
-import csd.week5.eventInfo.EventInfoRepository;
 import csd.week5.user.User;
 import csd.week5.user.*;
 
@@ -120,8 +116,7 @@ class EventInfoIntegrationTest {
 		User admin = new User("admin", encoder.encode("goodpassword"), "admin@gmail.com", "SMU building", "12345678");
 		admin.setAdmin();
 		users.save(admin);
-		
-		//restTemplate.withBasicAuth("admin", "goodpassword").delete(uri);
+
 		ResponseEntity<Void> result = restTemplate.withBasicAuth("admin", "goodpassword")
 										.exchange(uri, HttpMethod.DELETE, null, Void.class);
 		

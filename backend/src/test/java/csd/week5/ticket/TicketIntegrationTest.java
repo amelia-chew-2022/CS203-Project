@@ -17,11 +17,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import csd.week5.ticket.Ticket;
-import csd.week5.ticket.TicketRepository;
 import csd.week5.user.User;
 import csd.week5.user.UserRepository;
 
@@ -120,7 +115,6 @@ class TicketIntegrationTest {
 		admin.setAdmin();
 		users.save(admin);
 		
-		//restTemplate.withBasicAuth("admin", "goodpassword").delete(uri);
 		ResponseEntity<Void> result = restTemplate.withBasicAuth("admin", "goodpassword")
 										.exchange(uri, HttpMethod.DELETE, null, Void.class);
 		

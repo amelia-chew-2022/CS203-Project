@@ -2,9 +2,6 @@ package csd.week5.ticket;
 import csd.week5.eventInfo.EventInfo;
 import csd.week5.eventInfo.EventInfoRepository;
 import csd.week5.eventInfo.EventInfoServiceImpl;
-import csd.week5.user.User;
-import csd.week5.user.UserRepository;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;

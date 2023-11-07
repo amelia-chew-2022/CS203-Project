@@ -1,6 +1,5 @@
 package csd.week5;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import org.springframework.boot.SpringApplication;

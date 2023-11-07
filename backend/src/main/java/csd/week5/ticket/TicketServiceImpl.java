@@ -1,22 +1,18 @@
 package csd.week5.ticket;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.stereotype.Service;
 import csd.week5.transaction.*;
-import csd.week5.user.*;
 
 @Service
 public class TicketServiceImpl implements TicketService {
 
     private TicketRepository tickets;
     private TransactionRepository transactionRepository;
-    // private UserRepository users;
 
     public TicketServiceImpl(TicketRepository tickets,TransactionRepository transactionRepository) {
         this.tickets = tickets;
         this.transactionRepository=transactionRepository;
-        // this.users = users;
     }
 
     @Override
@@ -55,7 +51,7 @@ public class TicketServiceImpl implements TicketService {
     /**
      * Remove a book with the given id
      * Spring Data JPA does not return a value for delete operation
-     * Cascading: removing a book will also remove all its associated reviews
+     * Cascading: removing a ticket will also remove all its associated reviews
      */
     @Override
     public void deleteTicket(Long id) {
@@ -81,21 +77,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<Ticket> listTicketsByTransaction_Id(Transaction transaction) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'listTicketsByTransaction_Id'");
     }
-
-
-    // commented our buyTicket since availability will be updated in
-    // TransactionServiceImpl with the method addTransaction
-
-    // public Ticket buyTicket(Long id, Long userID) {
-    // Ticket ticket = getTicket(id);
-    // users.findById(userID).map(user -> {
-    // ticket.setUser(user);
-    // ticket.setAvailability(false);
-    // return tickets.save(ticket);
-    // });
-    // return ticket;
 }
 

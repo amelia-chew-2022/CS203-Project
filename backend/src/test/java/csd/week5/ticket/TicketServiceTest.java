@@ -1,5 +1,4 @@
 package csd.week5.ticket;
-import csd.week5.user.User;
 import csd.week5.user.UserRepository;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

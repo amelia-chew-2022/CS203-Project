@@ -14,12 +14,6 @@ public interface UserService {
 
     User getUserByUsername(String username);
 
-
-    /**
-     * Change method's signature: do not return a value for delete operation
-     * 
-     * @param id
-     */
     void deleteUser(Long id);
     boolean emailExists(String email);
     boolean usernameExists (String username);

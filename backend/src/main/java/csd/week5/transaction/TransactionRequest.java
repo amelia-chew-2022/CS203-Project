@@ -1,16 +1,11 @@
 package csd.week5.transaction;
 
-import javax.validation.constraints.NotNull;
-
 public class TransactionRequest {
 
-    // @NotNull
     private int total_price;
 
-    // @NotNull
     private long user_id;
 
-    // Getters and setters
     public int getTotal_price() {
         return total_price;
     }

@@ -1,7 +1,5 @@
 package csd.week5.ticket;
 
-import javax.validation.constraints.NotNull;
-
 public class TicketRequest {
 
     // @NotNull

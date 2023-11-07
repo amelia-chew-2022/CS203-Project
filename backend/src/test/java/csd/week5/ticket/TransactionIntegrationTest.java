@@ -100,7 +100,6 @@ class TransactionIntegrationTest {
 		admin.setAdmin();
 		users.save(admin);
 		
-		//restTemplate.withBasicAuth("admin", "goodpassword").delete(uri);
 		ResponseEntity<Void> result = restTemplate.withBasicAuth("admin", "goodpassword")
 										.exchange(uri, HttpMethod.DELETE, null, Void.class);
 		
@@ -109,17 +108,4 @@ class TransactionIntegrationTest {
 		Optional<Transaction> emptyValue = Optional.empty();
 		assertEquals(emptyValue, transactions.findById(Transaction.getId()));
 	}
-
-	// @Test
-	// public void deleteTransaction_InvalidTransactionId_Failure() throws Exception {
-	// 	URI uri = new URI(baseUrl + port + "/Transactions/1");
-	// 	User admin = new User("admin", encoder.encode("goodpassword"), "admin@gmail.com", "SMU building", "12345678");
-	// 	admin.setAdmin();
-	// 	users.save(admin);
-		
-	// 	ResponseEntity<Void> result = restTemplate.withBasicAuth("admin", "goodpassword")
-	// 									.exchange(uri, HttpMethod.DELETE, null, Void.class);
-		
-	// 	assertEquals(404, result.getStatusCode().value());
-	// }
 }
