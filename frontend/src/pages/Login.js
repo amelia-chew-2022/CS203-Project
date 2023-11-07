@@ -76,7 +76,6 @@ const Login = () => {
                   localStorage.setItem('jwt', jwtToken);
               
                   // Optionally, you can decode the JWT and extract user information.
-                  // Import 'jwt-decode' or 'jsonwebtoken' as shown earlier in this conversation
                   const decodedToken = jwtDecode(jwtToken);
                   console.log("User data from JWT:", decodedToken);
               
