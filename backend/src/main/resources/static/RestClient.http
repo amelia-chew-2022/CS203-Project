@@ -13,12 +13,12 @@ Content-Type: application/json
 
 ### delete ticket
 DELETE https://localhost:8080/tickets/2
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTaGF3biIsImlhdCI6MTY5OTMxNjQ3NCwiZXhwIjoxNjk5MzE4Mjc0fQ.uOXDxdDBlfVqvouavdvCBJNt-DZ0q259_4Itq1MvIrU
+Authorization: Bearer eyJciOiJIUzI1NiJ9.eyJzdWIiOiJTaGF3biIsImlhdCI6MTY5OTMxOTAzMSwiZXhwIjoxNjk5MzIwODMxfQ.dzAdctq976kM04GB0O-Flv4zvjM-JmL6FhvFIaz24q0
 
 ### add ticket
 POST https://localhost:8080/tickets
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTaGF3biIsImlhdCI6MTY5OTMxNjQ3NCwiZXhwIjoxNjk5MzE4Mjc0fQ.uOXDxdDBlfVqvouavdvCBJNt-DZ0q259_4Itq1MvIrU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTaGF3biIsImlhdCI6MTY5OTMxOTAzMSwiZXhwIjoxNjk5MzIwODMxfQ.dzAdctq976kM04GB0O-Flv4zvjM-JmL6FhvFIaz24q0
 
 {
     "title": "Lee Youngji",
@@ -30,7 +30,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTaGF3biIsImlhdCI6MTY5OTMxN
 ### update ticket
 PUT https://localhost:8080/tickets/3
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTaGF3biIsImlhdCI6MTY5OTMxNjQ3NCwiZXhwIjoxNjk5MzE4Mjc0fQ.uOXDxdDBlfVqvouavdvCBJNt-DZ0q259_4Itq1MvIrU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTaGF3biIsImlhdCI6MTY5OTMxOTAzMSwiZXhwIjoxNjk5MzIwODMxfQ.dzAdctq976kM04GB0O-Flv4zvjM-JmL6FhvFIaz24q0
 
 {
     "title": "TXT Concert",
@@ -59,6 +59,14 @@ Content-Type: application/json
 ### show specific ticket
 GET https://localhost:8080/tickets/1
 
+### user buys ticket
+PUT https://localhost:8080/tickets/updateAvailability/22
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTaGF3biIsImlhdCI6MTY5OTMxOTAzMSwiZXhwIjoxNjk5MzIwODMxfQ.dzAdctq976kM04GB0O-Flv4zvjM-JmL6FhvFIaz24q0
+
+{
+    "available" : false
+}
 
 ### insert transaction into the database
 POST https://localhost:8080/Transactions
@@ -66,18 +74,48 @@ Content-Type: application/json
 
 {
     "total_price": 800,
-    "user_id": 3
+    "user_id": 1
 }
 
-### user buys ticket
-PUT https://localhost:8080/tickets/updateAvailability/22
+### admin can add new event
+POST https://localhost:8080/eventInfo
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTaGF3biIsImlhdCI6MTY5OTMxNjQ3NCwiZXhwIjoxNjk5MzE4Mjc0fQ.uOXDxdDBlfVqvouavdvCBJNt-DZ0q259_4Itq1MvIrU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTaGF3biIsImlhdCI6MTY5OTMxOTAzMSwiZXhwIjoxNjk5MzIwODMxfQ.dzAdctq976kM04GB0O-Flv4zvjM-JmL6FhvFIaz24q0
 
 {
-    "available" : false
+    "eventName" : "blah blah boo",
+    "eventDetail" : [
+        "this is blah",
+        "this is boo"
+    ],
+
+    "date" : "7 November 2023",
+    "location" : "SMU BUILDING",
+    "ticketPricing" : "Ticket Price: 1 million dollar",
+    "imageURL" : "fake image"
 }
 
+###
+PUT https://localhost:8080/eventInfo/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTaGF3biIsImlhdCI6MTY5OTMxOTAzMSwiZXhwIjoxNjk5MzIwODMxfQ.dzAdctq976kM04GB0O-Flv4zvjM-JmL6FhvFIaz24q0
+
+{
+    "eventName" : "blah blah boo",
+    "eventDetail" : [
+        "this is blah",
+        "this is boo"
+    ],
+
+    "date" : "7 November 2023",
+    "location" : "SMU BUILDING",
+    "ticketPricing" : "Ticket Price: 1 million dollar",
+    "imageURL" : "fake image"
+}
+
+###
+DELETE https://localhost:8080/eventInfo/8
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTaGF3biIsImlhdCI6MTY5OTMxOTAzMSwiZXhwIjoxNjk5MzIwODMxfQ.dzAdctq976kM04GB0O-Flv4zvjM-JmL6FhvFIaz24q0
 
 #####################################################
 Post https://localhost:8080/users
@@ -116,46 +154,7 @@ Content-Type: application/json
 ###
 PUT https://localhost:8080/successfulTransaction/3
 
-###
-PUT http://localhost:8080/eventInfo/2
-Content-Type: application/json
 
-{
-    "eventName" : "blah blah boo",
-    "eventDetail" : [
-        "this is blah",
-        "this is boo"
-    ],
-
-    "date" : "7 November 2023",
-    "location" : "SMU BUILDING",
-    "ticketPricing" : "Ticket Price: 1 million dollar",
-    "imageURL" : "fake image"
-}
-
-###
-DELETE http://localhost:8080/eventInfo/8
-# Authorization: Basic Shawn hello123
-# Authorization: Basic Janaaaaa goodpassword
-
-### 
-
-POST http://localhost:8080/eventInfo
-Content-Type: application/json
-# Authorization: Basic Shawn hello123
-
-{
-    "eventName" : "blah blah boo",
-    "eventDetail" : [
-        "this is blah",
-        "this is boo"
-    ],
-
-    "date" : "7 November 2023",
-    "location" : "SMU BUILDING",
-    "ticketPricing" : "Ticket Price: 1 million dollar",
-    "imageURL" : "fake image"
-}
 
 ###
 POST http://localhost:8080/tickets
