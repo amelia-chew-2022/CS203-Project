@@ -67,5 +67,5 @@ public class EventInfo {
         this.imageURL = imageURL;
     }
 
-
+    
 }

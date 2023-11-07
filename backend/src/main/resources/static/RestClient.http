@@ -155,3 +155,63 @@ Content-Type: application/json
 ###
 PUT http://localhost:8080/successfulTransaction/3
 
+###
+PUT http://localhost:8080/eventInfo/2
+Content-Type: application/json
+
+{
+    "eventName" : "blah blah boo",
+    "eventDetail" : [
+        "this is blah",
+        "this is boo"
+    ],
+
+    "date" : "7 November 2023",
+    "location" : "SMU BUILDING",
+    "ticketPricing" : "Ticket Price: 1 million dollar",
+    "imageURL" : "fake image"
+}
+
+###
+DELETE http://localhost:8080/eventInfo/8
+# Authorization: Basic Shawn hello123
+# Authorization: Basic Janaaaaa goodpassword
+
+### 
+
+POST http://localhost:8080/eventInfo
+Content-Type: application/json
+# Authorization: Basic Shawn hello123
+
+{
+    "eventName" : "blah blah boo",
+    "eventDetail" : [
+        "this is blah",
+        "this is boo"
+    ],
+
+    "date" : "7 November 2023",
+    "location" : "SMU BUILDING",
+    "ticketPricing" : "Ticket Price: 1 million dollar",
+    "imageURL" : "fake image"
+}
+
+###
+POST http://localhost:8080/tickets
+Content-Type: application/json
+Authorization: Basic Shawn hello123
+# Authorization: Basic Janaaaaa goodpassword
+
+{
+    "title" : "this is the title",
+    "ticket_number": "ZZ123",
+    "seat_number" : "12345678",
+    "unit_price" : 1000,
+    "available" : true
+}
+
+###
+GET http://localhost:8080/tickets/25
+
+
+
