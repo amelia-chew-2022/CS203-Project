@@ -36,8 +36,8 @@ function Registration() {
     const newErrors = {};
 
     // Password length check
-    if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters long';
+    if (formData.password.length < 8) {
+      newErrors.password = 'Password must be at least 7 characters long';
     }
 
     // Check if passwords match
